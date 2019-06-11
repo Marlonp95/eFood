@@ -11,9 +11,9 @@ using System.Runtime.InteropServices;
 
 namespace eFood
 {
-    public partial class Form1 : Form
+    public partial class login : Form
     {
-        public Form1()
+        public login()
         {
             InitializeComponent();
             pictureBox3.Visible = false;
@@ -64,8 +64,7 @@ namespace eFood
                 textBox2.Text = "";
                 pictureBox2.Visible = true;
                 textBox2.ForeColor = Color.White;
-                textBox2.UseSystemPasswordChar = true;
-                
+                textBox2.UseSystemPasswordChar = true;                
             }
         }
 
@@ -76,7 +75,6 @@ namespace eFood
                 textBox2.Text = "CONTRASEÑA";
                 textBox2.ForeColor = Color.DimGray;
                 textBox2.UseSystemPasswordChar = false;
-             
             } 
         }
 
