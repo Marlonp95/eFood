@@ -1,6 +1,6 @@
 ﻿namespace eFood
 {
-    partial class Form2
+    partial class Inventario
     {
         /// <summary>
         /// Required designer variable.

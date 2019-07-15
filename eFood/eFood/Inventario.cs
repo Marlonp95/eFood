@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace eFood
 {
-    public partial class Form2 : Form
+    public partial class Inventario : Form
     {
-        public Form2()
+        public Inventario()
         {
             InitializeComponent();
         }

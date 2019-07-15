@@ -121,12 +121,12 @@ namespace eFood
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<Form1>();
+            AbrirFormulario<Mantenimientos>();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<Form2>();
+            AbrirFormulario<Inventario>();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -148,7 +148,12 @@ namespace eFood
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            AbrirFormulario<Form2>();
+            AbrirFormulario<Inventario>();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario<Facturacion>();
         }
 
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
