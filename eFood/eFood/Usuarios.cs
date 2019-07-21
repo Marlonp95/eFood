@@ -10,20 +10,24 @@ using System.Windows.Forms;
 
 namespace eFood
 {
-    public partial class Facturacion : Form
+    public partial class Usuarios : Form
     {
-        public Facturacion()
+        public Usuarios()
         {
             InitializeComponent();
         }
 
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button14_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Desea Cerrar Facturacion", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            if (MessageBox.Show("Desea Cerrar", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
                 this.Close();
             }
         }
     }
-    
 }
