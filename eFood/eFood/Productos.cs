@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace eFood
 {
-    public partial class Form1 : Form
+    public partial class Productos : Form
     {
-        public Form1()
+        public Productos()
         {
             InitializeComponent();
         }
@@ -20,6 +20,14 @@ namespace eFood
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Desea Cerrar", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
     }
 }
