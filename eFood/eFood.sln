@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eFood", "eFood\eFood.csproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EFE8A5D8-1B58-4184-855B-2DEB41CC40F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "utilidad", "utilidad\utilidad.csproj", "{66064CB1-15AF-4A9C-85BE-4B10DDCA8596}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{67ED9B58-3938-40C7-AE3D-41FC497DC327}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67ED9B58-3938-40C7-AE3D-41FC497DC327}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67ED9B58-3938-40C7-AE3D-41FC497DC327}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66064CB1-15AF-4A9C-85BE-4B10DDCA8596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66064CB1-15AF-4A9C-85BE-4B10DDCA8596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66064CB1-15AF-4A9C-85BE-4B10DDCA8596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66064CB1-15AF-4A9C-85BE-4B10DDCA8596}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

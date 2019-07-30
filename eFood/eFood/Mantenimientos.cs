@@ -43,7 +43,7 @@ namespace eFood
 
             private void button6_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Desea Cerrar Facturacion", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            if (MessageBox.Show("Desea Cerrar ", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
                 this.Close();
             }
@@ -67,6 +67,11 @@ namespace eFood
         private void button2_Click(object sender, EventArgs e)
         {
             AbrirFormulario<Productos>();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario<Suplidores>();
         }
     }
 }

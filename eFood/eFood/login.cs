@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using utilidad;
+using System.Data;
 
 namespace eFood
 {
@@ -17,10 +19,7 @@ namespace eFood
         {
             InitializeComponent();
             pictureBox3.Visible = false;
-
             pictureBox2.Visible = false;
-
-
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -40,47 +39,47 @@ namespace eFood
 
         private void textBox1_Enter(object sender, EventArgs e)
         {
-            if(textBox1.Text == "USUARIO")
+            if(txtnom.Text == "USUARIO")
             {
-                textBox1.Text = "";
-                textBox1.ForeColor = Color.White;
+                txtnom.Text = "";
+                txtnom.ForeColor = Color.White;
             }
         }
 
         private void textBox1_Leave(object sender, EventArgs e)
         {
-            if(textBox1.Text =="")
+            if(txtnom.Text =="")
             {
-                textBox1.Text = "USUARIO";
-                textBox1.ForeColor = Color.DimGray;
+                txtnom.Text = "USUARIO";
+                txtnom.ForeColor = Color.DimGray;
             }
         }
 
         private void textBox2_Enter(object sender, EventArgs e)
         {
-            if (textBox2.Text == "CONTRASEÑA")
+            if (txtpass.Text == "CONTRASEÑA")
             {
                
-                textBox2.Text = "";
+                txtpass.Text = "";
                 pictureBox2.Visible = true;
-                textBox2.ForeColor = Color.White;
-                textBox2.UseSystemPasswordChar = true;                
+                txtpass.ForeColor = Color.White;
+                txtpass.UseSystemPasswordChar = true;                
             }
         }
 
         private void textBox2_Leave(object sender, EventArgs e)
         {
-            if (textBox2.Text == "")
+            if (txtpass.Text == "")
             {
-                textBox2.Text = "CONTRASEÑA";
-                textBox2.ForeColor = Color.DimGray;
-                textBox2.UseSystemPasswordChar = false;
+                txtpass.Text = "CONTRASEÑA";
+                txtpass.ForeColor = Color.DimGray;
+                txtpass.UseSystemPasswordChar = false;
             } 
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            textBox2.UseSystemPasswordChar = false;
+            txtpass.UseSystemPasswordChar = false;
             pictureBox2.Visible =false;
             pictureBox3.Visible = true;
             }
@@ -88,9 +87,36 @@ namespace eFood
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             pictureBox3.Visible = false;
-            textBox2.UseSystemPasswordChar = true;
+            txtpass.UseSystemPasswordChar = true;
             pictureBox2.Visible = true;
           
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string cmd = string.Format("Select * FROM usuarios where cuenta='{0}' AND password='{1}'", txtnom.Text.Trim(), txtpass.Text.Trim());
+
+                DataSet ds = utilidad.utilidades.ejecuta(cmd);
+                string cuenta = ds.Tables[0].Rows[0]["cuenta"].ToString().Trim();
+                string pass = ds.Tables[0].Rows[0]["password"].ToString().Trim();
+
+                if(cuenta == txtnom.Text.Trim()&& pass == txtpass.Text.Trim())
+                {
+                    MessageBox.Show("Ah iniciado Sesion Exitosamente");
+                    contenedor obj = new contenedor();
+                    Hide();
+                    obj.Show();
+
+                    
+                }
+            }
+
+            catch (Exception error)
+            {
+                MessageBox.Show("Error BD" + error.Message);
+            }
         }
     }
 }

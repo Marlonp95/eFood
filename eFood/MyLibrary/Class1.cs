@@ -4,9 +4,10 @@ using System.IO;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.SqlClient;
-namespace eFood
+
+namespace MyLibrary
 {
-    class Utilidades
+    public class utilidades
     {
         public static string A_Encriptar(string cad)
         {
@@ -44,6 +45,5 @@ namespace eFood
             }
             return ds;
         }
-        
-        }
+    }
 }

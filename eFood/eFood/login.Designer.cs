@@ -36,10 +36,10 @@
             this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
             this.lineShape2 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtnom = new System.Windows.Forms.TextBox();
+            this.txtpass = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.butniniciar = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -138,33 +138,33 @@
             this.lineShape1.Y1 = 287;
             this.lineShape1.Y2 = 287;
             // 
-            // textBox1
+            // txtnom
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(59)))), ((int)(((byte)(104)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.Gray;
-            this.textBox1.Location = new System.Drawing.Point(27, 258);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(309, 24);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "USUARIO";
-            this.textBox1.Enter += new System.EventHandler(this.textBox1_Enter);
-            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
+            this.txtnom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(59)))), ((int)(((byte)(104)))));
+            this.txtnom.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtnom.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtnom.ForeColor = System.Drawing.Color.Gray;
+            this.txtnom.Location = new System.Drawing.Point(27, 258);
+            this.txtnom.Name = "txtnom";
+            this.txtnom.Size = new System.Drawing.Size(309, 24);
+            this.txtnom.TabIndex = 1;
+            this.txtnom.Text = "USUARIO";
+            this.txtnom.Enter += new System.EventHandler(this.textBox1_Enter);
+            this.txtnom.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
-            // textBox2
+            // txtpass
             // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(59)))), ((int)(((byte)(104)))));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.ForeColor = System.Drawing.Color.Gray;
-            this.textBox2.Location = new System.Drawing.Point(28, 354);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(309, 24);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.Text = "CONTRASEÑA";
-            this.textBox2.Enter += new System.EventHandler(this.textBox2_Enter);
-            this.textBox2.Leave += new System.EventHandler(this.textBox2_Leave);
+            this.txtpass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(59)))), ((int)(((byte)(104)))));
+            this.txtpass.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtpass.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtpass.ForeColor = System.Drawing.Color.Gray;
+            this.txtpass.Location = new System.Drawing.Point(28, 354);
+            this.txtpass.Name = "txtpass";
+            this.txtpass.Size = new System.Drawing.Size(309, 24);
+            this.txtpass.TabIndex = 2;
+            this.txtpass.Text = "CONTRASEÑA";
+            this.txtpass.Enter += new System.EventHandler(this.textBox2_Enter);
+            this.txtpass.Leave += new System.EventHandler(this.textBox2_Leave);
             // 
             // linkLabel1
             // 
@@ -178,21 +178,22 @@
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "¿AH OLVIDADO SU CONTRASEÑA?";
             // 
-            // button1
+            // butniniciar
             // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(59)))), ((int)(((byte)(50)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(70)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.SystemColors.Control;
-            this.button1.Location = new System.Drawing.Point(27, 429);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(309, 36);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "ACCEDER";
-            this.button1.UseVisualStyleBackColor = false;
+            this.butniniciar.BackColor = System.Drawing.Color.Transparent;
+            this.butniniciar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.butniniciar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(59)))), ((int)(((byte)(50)))));
+            this.butniniciar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(70)))));
+            this.butniniciar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.butniniciar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.butniniciar.ForeColor = System.Drawing.SystemColors.Control;
+            this.butniniciar.Location = new System.Drawing.Point(27, 429);
+            this.butniniciar.Name = "butniniciar";
+            this.butniniciar.Size = new System.Drawing.Size(309, 36);
+            this.butniniciar.TabIndex = 3;
+            this.butniniciar.Text = "ACCEDER";
+            this.butniniciar.UseVisualStyleBackColor = false;
+            this.butniniciar.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox3
             // 
@@ -233,10 +234,10 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.butniniciar);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtpass);
+            this.Controls.Add(this.txtnom);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.shapeContainer1);
@@ -266,11 +267,11 @@
         private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape2;
         private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtnom;
+        private System.Windows.Forms.TextBox txtpass;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button butniniciar;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
