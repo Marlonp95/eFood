@@ -54,6 +54,16 @@
     <Compile Include="contenedor.Designer.cs">
       <DependentUpon>contenedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="efoodDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="efoodDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -132,6 +142,28 @@
     <EmbeddedResource Include="Usuarios.resx">
       <DependentUpon>Usuarios.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="efoodDataSet.xsc">
+      <DependentUpon>efoodDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet.xss">
+      <DependentUpon>efoodDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet1.xsc">
+      <DependentUpon>efoodDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet1.xss">
+      <DependentUpon>efoodDataSet1.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
