@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Productos));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dataprueba = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.txtdescripcion = new System.Windows.Forms.RichTextBox();
             this.combounidad = new System.Windows.Forms.ComboBox();
@@ -66,8 +67,8 @@
             this.tipo_productoTableAdapter = new eFood.efoodDataSetTableAdapters.tipo_productoTableAdapter();
             this.efoodDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.unidadTableAdapter = new eFood.efoodDataSet1TableAdapters.unidadTableAdapter();
-            this.dataprueba = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataprueba)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.unidadBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -76,7 +77,6 @@
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.efoodDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataprueba)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -98,9 +98,17 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1089, 505);
+            this.panel1.Size = new System.Drawing.Size(1089, 545);
             this.panel1.TabIndex = 123;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // dataprueba
+            // 
+            this.dataprueba.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataprueba.Location = new System.Drawing.Point(12, 330);
+            this.dataprueba.Name = "dataprueba";
+            this.dataprueba.Size = new System.Drawing.Size(1065, 200);
+            this.dataprueba.TabIndex = 151;
             // 
             // label5
             // 
@@ -108,15 +116,15 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(12, 241);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(136, 24);
+            this.label5.Size = new System.Drawing.Size(131, 24);
             this.label5.TabIndex = 150;
-            this.label5.Text = "DESCRIPCION\r\n";
+            this.label5.Text = "REFERENCIA";
             // 
             // txtdescripcion
             // 
             this.txtdescripcion.Location = new System.Drawing.Point(12, 268);
             this.txtdescripcion.Name = "txtdescripcion";
-            this.txtdescripcion.Size = new System.Drawing.Size(490, 69);
+            this.txtdescripcion.Size = new System.Drawing.Size(595, 43);
             this.txtdescripcion.TabIndex = 149;
             this.txtdescripcion.Text = "";
             this.txtdescripcion.TextChanged += new System.EventHandler(this.txtdescripcion_TextChanged);
@@ -131,6 +139,7 @@
             this.combounidad.Name = "combounidad";
             this.combounidad.Size = new System.Drawing.Size(205, 28);
             this.combounidad.TabIndex = 148;
+            this.combounidad.Tag = "no vacio";
             this.combounidad.ValueMember = "unidad";
             // 
             // unidadBindingSource
@@ -150,6 +159,7 @@
             this.txtreorden.Name = "txtreorden";
             this.txtreorden.Size = new System.Drawing.Size(205, 26);
             this.txtreorden.TabIndex = 147;
+            this.txtreorden.Tag = "no vacio";
             // 
             // txtcantidad
             // 
@@ -158,6 +168,7 @@
             this.txtcantidad.Name = "txtcantidad";
             this.txtcantidad.Size = new System.Drawing.Size(205, 26);
             this.txtcantidad.TabIndex = 146;
+            this.txtcantidad.Tag = "no vacio";
             // 
             // panel2
             // 
@@ -225,6 +236,7 @@
             this.combotipo.Name = "combotipo";
             this.combotipo.Size = new System.Drawing.Size(205, 28);
             this.combotipo.TabIndex = 145;
+            this.combotipo.Tag = "no vacio";
             this.combotipo.ValueMember = "nombre_tipo";
             // 
             // tipoproductoBindingSource
@@ -244,6 +256,7 @@
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker2.TabIndex = 144;
+            this.dateTimePicker2.Tag = "no vacio";
             // 
             // dateTimePicker1
             // 
@@ -251,6 +264,7 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 143;
+            this.dateTimePicker1.Tag = "no vacio";
             // 
             // txtproducto
             // 
@@ -259,6 +273,7 @@
             this.txtproducto.Name = "txtproducto";
             this.txtproducto.Size = new System.Drawing.Size(205, 26);
             this.txtproducto.TabIndex = 142;
+            this.txtproducto.Tag = "no vacio";
             // 
             // txtprecio
             // 
@@ -267,6 +282,7 @@
             this.txtprecio.Name = "txtprecio";
             this.txtprecio.Size = new System.Drawing.Size(205, 26);
             this.txtprecio.TabIndex = 141;
+            this.txtprecio.Tag = "no vacio";
             // 
             // txtcodigo
             // 
@@ -275,6 +291,7 @@
             this.txtcodigo.Name = "txtcodigo";
             this.txtcodigo.Size = new System.Drawing.Size(205, 26);
             this.txtcodigo.TabIndex = 140;
+            this.txtcodigo.Tag = "no vacio";
             // 
             // panel3
             // 
@@ -424,6 +441,7 @@
             this.button3.Text = "Eliminar";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -456,14 +474,6 @@
             // 
             this.unidadTableAdapter.ClearBeforeFill = true;
             // 
-            // dataprueba
-            // 
-            this.dataprueba.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataprueba.Location = new System.Drawing.Point(3, 374);
-            this.dataprueba.Name = "dataprueba";
-            this.dataprueba.Size = new System.Drawing.Size(1065, 159);
-            this.dataprueba.TabIndex = 151;
-            // 
             // Productos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -476,6 +486,7 @@
             this.Load += new System.EventHandler(this.Productos_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataprueba)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.unidadBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet1)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -486,7 +497,6 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.efoodDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataprueba)).EndInit();
             this.ResumeLayout(false);
 
         }

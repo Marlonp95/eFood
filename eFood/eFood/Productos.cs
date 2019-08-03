@@ -35,7 +35,32 @@ namespace eFood
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
+        {   //VALIDAR FORMULARIO
+            bool ValidaFormulario = false;
+            foreach (Control item in panel1.Controls)
+            {
+                if (item is TextBox || item is ComboBox || item is DateTimePicker)
+                {
+                    item.BackColor = Color.White ;
+                }
+                }
+            foreach (Control item in panel1.Controls)
+            {
+             
+                if (item is TextBox || item is ComboBox || item is DateTimePicker ) {
+                    if (item.Tag.ToString().ToUpper() == "NO VACIO".ToUpper() && string.IsNullOrEmpty(item.Text.Trim()))
+                    {
+                        item.BackColor = Color.Red;
+                        ValidaFormulario = true; 
+                    }
+                }
+            }
+
+            if (ValidaFormulario)
+            {
+                MessageBox.Show("Por favor Complete los campos");
+                return;
+            }
             try
             { 
                 string vSql = $"EXEC actualizaproductos '{txtcodigo.Text.Trim()}','{txtproducto.Text.Trim()}','{combotipo.SelectedValue.ToString()}'," +
@@ -89,6 +114,24 @@ namespace eFood
         private void txtdescripcion_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string vSql = $"EXEC eliminararticulos '{txtcodigo.Text.Trim()}'";
+
+                DataSet dt = new DataSet();
+                dt.ejecuta(vSql);
+                bool correcto = dt.ejecuta(vSql);
+                if (correcto) { MessageBox.Show("Se Elimino El Articulo "); traerArticulo(); }
+                else MessageBox.Show("Error Eliminando datos ");
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Error" + error.ToString());
+            }
         }
     }
 }
