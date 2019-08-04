@@ -133,5 +133,42 @@ namespace eFood
                 MessageBox.Show("Error" + error.ToString());
             }
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            txtcantidad.Clear();
+            txtcodigo.Clear();
+            txtdescripcion.Clear();
+            txtprecio.Clear();
+            txtreorden.Clear();
+            txtcodigo.Focus();
+        }
+
+        private void txtbuscar_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtbuscar.Text.Trim())==false)
+            {
+                try
+                {
+                    string vSql = $"SELECT * From productos Where productos Like ('%"+txtbuscar.Text.Trim()+"%') ";
+
+                    DataSet dt = new DataSet();
+                    dt.ejecuta(vSql);
+                    bool correcto = dt.ejecuta(vSql);
+                    if (correcto) {traerArticulo();}
+                    dataprueba.DataSource = dt.Tables[0];
+                }
+                catch(Exception error)
+                {
+                    MessageBox.Show("Error Al Consultar " + error.Message);
+                }
+            }
+
+        }
     }
 }

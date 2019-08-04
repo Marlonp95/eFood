@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using utilidad;
 
 namespace eFood
 {
@@ -21,6 +22,12 @@ namespace eFood
         {
 
         }
+         public void traerUsuario()
+        {
+            DataTable dt = new DataTable();
+            dt.ejecuta("Select * from usuarios");
+            datacliente.DataSource = dt;
+        }
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -28,6 +35,16 @@ namespace eFood
             {
                 this.Close();
             }
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Usuarios_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
