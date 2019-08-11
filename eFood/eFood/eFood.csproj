@@ -64,6 +64,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>efoodDataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="efoodDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="efoodDataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="efoodDataSet4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet4.xsd</DependentUpon>
+    </Compile>
     <Compile Include="empleados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +187,39 @@
     </None>
     <None Include="efoodDataSet1.xss">
       <DependentUpon>efoodDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet2.xsc">
+      <DependentUpon>efoodDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet2.xss">
+      <DependentUpon>efoodDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet3.xsc">
+      <DependentUpon>efoodDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet3.xss">
+      <DependentUpon>efoodDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet4.xsc">
+      <DependentUpon>efoodDataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet4.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet4.xss">
+      <DependentUpon>efoodDataSet4.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

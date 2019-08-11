@@ -37,6 +37,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panelFormulario = new System.Windows.Forms.Panel();
+            this.button7 = new System.Windows.Forms.Button();
             this.panelFormulario.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,6 +151,7 @@
             // 
             // panelFormulario
             // 
+            this.panelFormulario.Controls.Add(this.button7);
             this.panelFormulario.Controls.Add(this.button6);
             this.panelFormulario.Controls.Add(this.label1);
             this.panelFormulario.Controls.Add(this.button5);
@@ -163,6 +165,23 @@
             this.panelFormulario.Size = new System.Drawing.Size(1117, 525);
             this.panelFormulario.TabIndex = 12;
             this.panelFormulario.Paint += new System.Windows.Forms.PaintEventHandler(this.panelFormulario_Paint);
+            // 
+            // button7
+            // 
+            this.button7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(91)))), ((int)(((byte)(140)))));
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Palatino Linotype", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
+            this.button7.Location = new System.Drawing.Point(205, 282);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(118, 134);
+            this.button7.TabIndex = 12;
+            this.button7.Text = "Usuarios";
+            this.button7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Mantenimientos
             // 
@@ -189,5 +208,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Panel panelFormulario;
+        private System.Windows.Forms.Button button7;
     }
 }

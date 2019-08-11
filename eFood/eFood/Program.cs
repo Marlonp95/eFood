@@ -16,7 +16,7 @@ namespace eFood
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new login());
+            Application.Run(new empleados());
         }
     }
 }

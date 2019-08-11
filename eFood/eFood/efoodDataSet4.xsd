@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="efoodDataSet4" targetNamespace="http://tempuri.org/efoodDataSet4.xsd" xmlns:mstns="http://tempuri.org/efoodDataSet4.xsd" xmlns="http://tempuri.org/efoodDataSet4.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="efoodConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="efoodConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.eFood.Properties.Settings.GlobalReference.Default.efoodConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="tipo_pagoTableAdapter" GeneratorDataComponentClassName="tipo_pagoTableAdapter" Name="tipo_pago" UserDataComponentName="tipo_pagoTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="efoodConnectionString (Settings)" DbObjectName="efood.dbo.tipo_pago" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT tipo_pago FROM dbo.tipo_pago</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="tipo_pago" DataSetColumn="tipo_pago" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="efoodDataSet4" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="efoodDataSet4" msprop:Generator_UserDSName="efoodDataSet4">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="tipo_pago" msprop:Generator_TableClassName="tipo_pagoDataTable" msprop:Generator_TableVarName="tabletipo_pago" msprop:Generator_TablePropName="tipo_pago" msprop:Generator_RowDeletingName="tipo_pagoRowDeleting" msprop:Generator_RowChangingName="tipo_pagoRowChanging" msprop:Generator_RowEvHandlerName="tipo_pagoRowChangeEventHandler" msprop:Generator_RowDeletedName="tipo_pagoRowDeleted" msprop:Generator_UserTableName="tipo_pago" msprop:Generator_RowChangedName="tipo_pagoRowChanged" msprop:Generator_RowEvArgName="tipo_pagoRowChangeEvent" msprop:Generator_RowClassName="tipo_pagoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="tipo_pago" msprop:Generator_ColumnVarNameInTable="columntipo_pago" msprop:Generator_ColumnPropNameInRow="tipo_pago" msprop:Generator_ColumnPropNameInTable="tipo_pagoColumn" msprop:Generator_UserColumnName="tipo_pago">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

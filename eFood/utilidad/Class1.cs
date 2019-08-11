@@ -118,7 +118,16 @@ namespace utilidad
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             return existe;
         }
+        public static bool DsTieneDatos(DataSet Ds)
+        {
+            try
+            {
+                if (Ds.Tables[0].Rows.Count > 0) return true;
+            }
+            catch { }
+            return false;
 
+        }
 
 
     }

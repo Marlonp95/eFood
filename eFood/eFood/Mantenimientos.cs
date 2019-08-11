@@ -73,5 +73,10 @@ namespace eFood
         {
             AbrirFormulario<Suplidores>();
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario<empleados>();
+        }
     }
 }

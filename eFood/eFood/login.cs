@@ -96,7 +96,7 @@ namespace eFood
         {
             try
             {
-                string cmd = string.Format("Select *  FROM usuarios where cuenta='{0}' AND password='{1}'", txtnom.Text.Trim(), txtpass.Text.Trim());
+                string cmd = string.Format("Select *  FROM usuarios where usuario='{0}' AND password='{1}'", txtnom.Text.Trim(), txtpass.Text.Trim());
 
                 DataSet ds = new DataSet();
                
