@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(empleados));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txturl = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.txtsalario = new System.Windows.Forms.TextBox();
             this.dataempleado = new System.Windows.Forms.DataGridView();
             this.txtficha = new System.Windows.Forms.TextBox();
@@ -77,6 +79,7 @@
             this.cargoTableAdapter = new eFood.efoodDataSet2TableAdapters.cargoTableAdapter();
             this.departamentoTableAdapter = new eFood.efoodDataSet3TableAdapters.departamentoTableAdapter();
             this.tipo_pagoTableAdapter = new eFood.efoodDataSet4TableAdapters.tipo_pagoTableAdapter();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataempleado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -93,6 +96,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txturl);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.txtsalario);
             this.panel1.Controls.Add(this.dataempleado);
             this.panel1.Controls.Add(this.txtficha);
@@ -118,6 +123,33 @@
             this.panel1.Size = new System.Drawing.Size(1073, 537);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // txturl
+            // 
+            this.txturl.Location = new System.Drawing.Point(861, 233);
+            this.txturl.Name = "txturl";
+            this.txturl.Size = new System.Drawing.Size(132, 20);
+            this.txturl.TabIndex = 161;
+            this.txturl.Tag = "no vacio";
+            this.txturl.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(91)))), ((int)(((byte)(140)))));
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.Location = new System.Drawing.Point(861, 148);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(132, 43);
+            this.button1.TabIndex = 160;
+            this.button1.Text = "Agregar";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtsalario
             // 
@@ -147,7 +179,7 @@
             // txtficha
             // 
             this.txtficha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtficha.Location = new System.Drawing.Point(916, 153);
+            this.txtficha.Location = new System.Drawing.Point(916, 199);
             this.txtficha.Name = "txtficha";
             this.txtficha.Size = new System.Drawing.Size(77, 26);
             this.txtficha.TabIndex = 153;
@@ -160,7 +192,7 @@
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.label12.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label12.Location = new System.Drawing.Point(858, 159);
+            this.label12.Location = new System.Drawing.Point(858, 205);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(52, 16);
             this.label12.TabIndex = 23;
@@ -171,6 +203,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(861, 24);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(132, 117);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 152;
             this.pictureBox1.TabStop = false;
             // 
@@ -547,6 +580,7 @@
             this.button7.Text = "Nuevo";
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // btnAGREGAR
             // 
@@ -595,6 +629,10 @@
             // tipo_pagoTableAdapter
             // 
             this.tipo_pagoTableAdapter.ClearBeforeFill = true;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // empleados
             // 
@@ -674,5 +712,8 @@
         private efoodDataSet4 efoodDataSet4;
         private System.Windows.Forms.BindingSource tipopagoBindingSource;
         private efoodDataSet4TableAdapters.tipo_pagoTableAdapter tipo_pagoTableAdapter;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox txturl;
     }
 }

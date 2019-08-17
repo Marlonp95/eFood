@@ -53,7 +53,7 @@ namespace eFood
             }
             try
             {
-                string vSql = $"EXEC actualizapersona '{txtcodigo.Text.Trim()}','{txtnombre.Text.Trim()}','{txtapellido.Text.Trim()}','{txtapellido2.Text.Trim()}','{txtdireccion.Text.Trim()}','{txtdocumento.Text.Trim()}'";
+                string vSql = $"EXEC actualizapersona '{txtcodigo.Text.Trim()}','{txtnombre.Text.Trim()}','{txtapellido.Text.Trim()}','{txtapellido2.Text.Trim()}','{txtdireccion.Text.Trim()}','{txtdocumento.Text.Trim()}','{txturl.Text.Trim()}'";
                 DataSet dt = new DataSet();
                 dt.ejecuta(vSql);
                 bool correcto = dt.ejecuta(vSql);
@@ -148,7 +148,6 @@ namespace eFood
                 if (utilidades.DsTieneDatos(dt))
                 {
                     txtcodigo.Text = dt.Tables[0].Rows[0]["id_persona"].ToString();
-                    // fechaentrada.Text = dt.Tables[0].Rows[0]["fecha_entrda"].ToString();
                     combocargo.SelectedValue = dt.Tables[0].Rows[0]["id_cargo"].ToString();
                     combodepartamento.SelectedValue = dt.Tables[0].Rows[0]["id_departamento"].ToString();
                     combopago.SelectedValue = dt.Tables[0].Rows[0]["id_pago"].ToString();
@@ -157,18 +156,17 @@ namespace eFood
                 }
                 else
                 {
-                    if (MessageBox.Show("Debe Crear EMPLEADO", "EMOLEADO NO ENCONTRADO", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-                    {
-                        MessageBox.Show("CREAR EMPLEADO");
-                    }
+                    MessageBox.Show("EMPLEADO NO ENCONTRADO");
                 }
             }
             catch (Exception error)
             {
                 MessageBox.Show("Error" + error.Message);
             }
+
             try
             {
+                string url;
                 if (string.IsNullOrEmpty(txtficha.Text)) return;
 
                 string vSql = $"SELECT * From persona Where id_persona Like ('%" + txtcodigo.Text.Trim() + "%') ";
@@ -182,13 +180,12 @@ namespace eFood
                     txtapellido2.Text = dt.Tables[0].Rows[0]["apellido2"].ToString();
                     txtdireccion.Text = dt.Tables[0].Rows[0]["direccion"].ToString();             
                     txtdocumento.Text = dt.Tables[0].Rows[0]["documento"].ToString();
+                    url = dt.Tables[0].Rows[0]["foto"].ToString();
+                    pictureBox1.Image = Image.FromFile(url);
                 }
                 else
-                {
-                    if (MessageBox.Show("Debe Crear EMPLEADO", "EMOLEADO NO ENCONTRADO", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-                    {
-                        MessageBox.Show("CREAR EMPLEADO");
-                    }
+                { 
+                        MessageBox.Show("CREAR EMPLEADO");          
                 }
             }
             catch (Exception error)
@@ -202,5 +199,43 @@ namespace eFood
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+        
+            try
+            {
+                openFileDialog1.ShowDialog();
+                if(openFileDialog1.FileName.Equals("")==false)
+                {
+                    pictureBox1.Load(openFileDialog1.FileName);
+                    txturl.Text = openFileDialog1.FileName;
+                }
+            }
+            catch(Exception error)
+            {
+                MessageBox.Show("Error Guardando Imagen"+error);
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string vSql = $"SELECT TOP 1 * FROM persona ORDER by id_persona DESC";
+            DataSet dt = new DataSet();
+            dt.ejecuta(vSql);
+            bool correcto = dt.ejecuta(vSql);
+            if (utilidades.DsTieneDatos(dt))
+            {
+                int codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_persona"]);
+                codigo++;
+                txtcodigo.Text = Convert.ToString(codigo);
+              
+            }
+            else
+            {
+                MessageBox.Show("CREAR EMPLEADO");
+            }
+        }
     }
 }
+

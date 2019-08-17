@@ -78,5 +78,10 @@ namespace eFood
         {
             AbrirFormulario<empleados>();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario<Categorias>();
+        }
     }
 }

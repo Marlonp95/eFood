@@ -64,7 +64,7 @@ namespace eFood
             try
             { 
                 string vSql = $"EXEC actualizaproductos '{txtcodigo.Text.Trim()}','{txtproducto.Text.Trim()}','{combotipo.SelectedValue.ToString()}'," +
-                                                      $"'{txtdescripcion.Text.Trim()}','{dateTimePicker2.Value.Date}','{dateTimePicker1.Value.Date}'," +
+                                                      $"'{txtdescripcion.Text.Trim()}'," +
                                                       $"'{txtcantidad.Text.Trim()}','{ txtreorden.Text.Trim()}','{combounidad.SelectedValue.ToString()}','{txtprecio.Text.Trim()}'";
                 
                 DataSet dt = new DataSet();
