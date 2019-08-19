@@ -112,9 +112,10 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(118, 134);
             this.button5.TabIndex = 9;
-            this.button5.Text = "Reportes y Estadisticas";
+            this.button5.Text = "Clientes\r\n";
             this.button5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button1
             // 

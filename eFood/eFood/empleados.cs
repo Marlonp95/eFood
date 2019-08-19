@@ -100,9 +100,24 @@ namespace eFood
                 MessageBox.Show("Error" + error.ToString());
             }
         }
-
+        int codigo;
+        int ficha;
         private void empleados_Load(object sender, EventArgs e)
         {
+            string vSql = $"select top 1 p.nombre1, p.apellido1, p.id_persona ,e.id_cargo, e.ficha from persona as p inner join empleado as e  on p.id_persona = e.id_persona ORDER by p.id_persona DESC ";
+            DataSet dt = new DataSet();
+            dt.ejecuta(vSql);
+            bool correcto = dt.ejecuta(vSql);
+            if (utilidades.DsTieneDatos(dt))
+            {
+                ficha = Convert.ToInt32(dt.Tables[0].Rows[0]["ficha"]);
+                ficha++;
+                codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_persona"]);
+                codigo++;
+                txtcodigo.Text = Convert.ToString(codigo);
+                txtficha.Text = Convert.ToString(ficha);
+
+            }
             // TODO: This line of code loads data into the 'efoodDataSet4.tipo_pago' table. You can move, or remove it, as needed.
             this.tipo_pagoTableAdapter.Fill(this.efoodDataSet4.tipo_pago);
             // TODO: This line of code loads data into the 'efoodDataSet3.departamento' table. You can move, or remove it, as needed.
@@ -220,20 +235,47 @@ namespace eFood
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string vSql = $"SELECT TOP 1 * FROM persona ORDER by id_persona DESC";
+            string vSql = $"select top 1 p.nombre1, p.apellido1, p.id_persona ,e.id_cargo, e.ficha from persona as p inner join empleado as e  on p.id_persona = e.id_persona ORDER by p.id_persona DESC ";
             DataSet dt = new DataSet();
             dt.ejecuta(vSql);
             bool correcto = dt.ejecuta(vSql);
             if (utilidades.DsTieneDatos(dt))
             {
-                int codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_persona"]);
+                ficha = Convert.ToInt32(dt.Tables[0].Rows[0]["ficha"]);
+                ficha++;
+                codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_persona"]);
                 codigo++;
                 txtcodigo.Text = Convert.ToString(codigo);
-              
+                txtficha.Text = Convert.ToString(ficha);
+
+                txtnombre.Clear();
+                txtapellido.Clear();
+                txtapellido2.Clear();
+                txtdireccion.Clear();
+                txtdocumento.Clear();
+                txtsalario.Clear();
             }
             else
             {
                 MessageBox.Show("CREAR EMPLEADO");
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            DataSet dt = new DataSet();
+            string vSql = "select p.nombre1, p.apellido1, e.ficha, e.id_cargo, e.id_departamento, e.salario from persona as p inner join empleado as e on p.id_persona=e.id_persona ";
+            if (string.IsNullOrEmpty(txtbuscar.Text.Trim()) == false)
+            {
+                vSql += " where e.ficha like ('%" + txtbuscar.Text.Trim() + "%')";
+                dt.ejecuta(vSql);
+                dataempleado.DataSource = dt.Tables[0];
+                txtbuscar.Clear();
+               
+            }
+            else
+            {
+                treaerEmpleado();
             }
         }
     }

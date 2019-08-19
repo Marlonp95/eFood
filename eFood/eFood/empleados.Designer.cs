@@ -30,7 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(empleados));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtbuscar = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.txturl = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.txtsalario = new System.Windows.Forms.TextBox();
@@ -96,6 +99,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.txtbuscar);
+            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.txturl);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.txtsalario);
@@ -120,9 +125,36 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1073, 537);
+            this.panel1.Size = new System.Drawing.Size(1073, 592);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // txtbuscar
+            // 
+            this.txtbuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtbuscar.Location = new System.Drawing.Point(64, 286);
+            this.txtbuscar.Name = "txtbuscar";
+            this.txtbuscar.Size = new System.Drawing.Size(234, 29);
+            this.txtbuscar.TabIndex = 163;
+            this.txtbuscar.Tag = "Vacio";
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(91)))), ((int)(((byte)(140)))));
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button2.Location = new System.Drawing.Point(304, 284);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(127, 31);
+            this.button2.TabIndex = 162;
+            this.button2.Text = "Buscar";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // txturl
             // 
@@ -166,10 +198,13 @@
             this.dataempleado.AllowUserToDeleteRows = false;
             this.dataempleado.AllowUserToResizeColumns = false;
             this.dataempleado.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.dataempleado.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataempleado.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataempleado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataempleado.ColumnHeadersVisible = false;
-            this.dataempleado.Location = new System.Drawing.Point(64, 280);
+            this.dataempleado.Location = new System.Drawing.Point(64, 324);
             this.dataempleado.Name = "dataempleado";
             this.dataempleado.RowHeadersVisible = false;
             this.dataempleado.Size = new System.Drawing.Size(929, 169);
@@ -200,6 +235,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(861, 24);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(132, 117);
@@ -541,7 +577,7 @@
             this.panel2.Controls.Add(this.btnAGREGAR);
             this.panel2.Controls.Add(this.button3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 455);
+            this.panel2.Location = new System.Drawing.Point(0, 510);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1073, 82);
             this.panel2.TabIndex = 1;
@@ -638,7 +674,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1073, 537);
+            this.ClientSize = new System.Drawing.Size(1073, 592);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "empleados";
@@ -715,5 +751,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox txturl;
+        private System.Windows.Forms.TextBox txtbuscar;
+        private System.Windows.Forms.Button button2;
     }
 }

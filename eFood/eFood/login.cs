@@ -34,7 +34,7 @@ namespace eFood
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            txtnom.Focus();
         }
 
         private void textBox1_Enter(object sender, EventArgs e)
@@ -91,29 +91,24 @@ namespace eFood
             pictureBox2.Visible = true;
           
         }
-
+        public static string codigo;
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                string cmd = string.Format("Select *  FROM usuarios where usuario='{0}' AND password='{1}'", txtnom.Text.Trim(), txtpass.Text.Trim());
-
+                string cmd = string.Format("Select *  FROM usuarios where usuario='{0}' AND pass='{1}'", txtnom.Text.Trim(), txtpass.Text.Trim());
                 DataSet ds = new DataSet();
-               
                 bool esta= ds.CountDataset(cmd);
-                //string cuenta = ds.Tables[0].Rows[0]["cuenta"].ToString().Trim();
-                //string pass = ds.Tables[0].Rows[0]["password"].ToString().Trim();
 
                 if (esta)
                 {
-                    MessageBox.Show("Ah iniciado Sesion Exitosamente");
+                    codigo = ds.Tables[0].Rows[0]["id_persona"].ToString().Trim();         
                     contenedor obj = new contenedor();
                     Hide();
                     obj.Show();
 
-
                 }
-                else { MessageBox.Show("usuario incorrecto"); }
+                else { MessageBox.Show(" USUARIO O CONTRASEÑA INCORRECTOS"); }
             }
 
             catch (Exception error)

@@ -96,6 +96,7 @@
             this.button7.Text = "Nuevo";
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button3
             // 
@@ -153,6 +154,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1048, 506);
             this.panel1.TabIndex = 117;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // dateTimePicker1
             // 
@@ -280,6 +282,7 @@
             this.txtcodigo.Size = new System.Drawing.Size(242, 26);
             this.txtcodigo.TabIndex = 141;
             this.txtcodigo.Tag = "NO VACIO";
+            this.txtcodigo.Validating += new System.ComponentModel.CancelEventHandler(this.txtcodigo_Validating);
             // 
             // textBox3
             // 
@@ -321,11 +324,12 @@
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.Location = new System.Drawing.Point(307, 190);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(224, 40);
+            this.button1.Size = new System.Drawing.Size(139, 40);
             this.button1.TabIndex = 137;
-            this.button1.Text = "Busqueda Empleados";
+            this.button1.Text = "Buscar\r\n";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel4
             // 

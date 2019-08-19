@@ -33,13 +33,13 @@ namespace eFood
             {
                 if (string.IsNullOrEmpty(txtcodigo.Text)) return;
 
-                string vSql = $"SELECT * From proveedor Where ficha Like ('%" + txtcodigo.Text.Trim() + "%') ";
+                string vSql = $"SELECT * From persona Where id_persona Like ('%" + txtcodigo.Text.Trim() + "%') ";
                 DataSet dt = new DataSet();
                 dt.ejecuta(vSql);
                 bool correcto = dt.ejecuta(vSql);
                 if (utilidades.DsTieneDatos(dt))
                 {
-                    txtcodigo.Text = dt.Tables[0].Rows[0]["id_proveedor"].ToString();
+                    txtcodigo.Text = dt.Tables[0].Rows[0]["id_persona"].ToString();
                 }
                 else
                 {
@@ -78,9 +78,9 @@ namespace eFood
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            txtcodigo.Text = Convert.ToString(codigo);
         }
-
+        int codigo;
         private void button4_Click(object sender, EventArgs e)
         {
             string vSql = $"SELECT TOP 1 * FROM persona ORDER by id_persona DESC";
@@ -89,7 +89,38 @@ namespace eFood
             bool correcto = dt.ejecuta(vSql);
             if (utilidades.DsTieneDatos(dt))
             {
-                int codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_persona"]);
+                codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_persona"]);
+                codigo++;
+                txtcodigo.Text = Convert.ToString(codigo);
+
+            }
+            else
+            {
+                MessageBox.Show("CREAR EMPLEADO");
+            }
+
+            txtnombre.Clear();
+            txtpellido.Clear();
+            txttel.Clear();
+            txttel2.Clear();
+            txtcorreo.Clear();
+            txtcontacto.Clear();
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+           
+        }
+
+        private void Suplidores_Load(object sender, EventArgs e)
+        {
+            string vSql = $"SELECT TOP 1 * FROM persona ORDER by id_persona DESC";
+            DataSet dt = new DataSet();
+            dt.ejecuta(vSql);
+            bool correcto = dt.ejecuta(vSql);
+            if (utilidades.DsTieneDatos(dt))
+            {
+                codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_persona"]);
                 codigo++;
                 txtcodigo.Text = Convert.ToString(codigo);
 

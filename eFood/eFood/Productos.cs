@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using utilidad;
+using BarcodeLib;
+using System.Drawing.Imaging;
 
 namespace eFood
 {
@@ -18,8 +20,8 @@ namespace eFood
             InitializeComponent();
         }
 
-      
-     
+
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -41,17 +43,18 @@ namespace eFood
             {
                 if (item is TextBox || item is ComboBox || item is DateTimePicker)
                 {
-                    item.BackColor = Color.White ;
+                    item.BackColor = Color.White;
                 }
-                }
+            }
             foreach (Control item in panel1.Controls)
             {
-             
-                if (item is TextBox || item is ComboBox || item is DateTimePicker ) {
+
+                if (item is TextBox || item is ComboBox || item is DateTimePicker)
+                {
                     if (item.Tag.ToString().ToUpper() == "NO VACIO".ToUpper() && string.IsNullOrEmpty(item.Text.Trim()))
                     {
                         item.BackColor = Color.Red;
-                        ValidaFormulario = true; 
+                        ValidaFormulario = true;
                     }
                 }
             }
@@ -62,11 +65,11 @@ namespace eFood
                 return;
             }
             try
-            { 
+            {
                 string vSql = $"EXEC actualizaproductos '{txtcodigo.Text.Trim()}','{txtproducto.Text.Trim()}','{combotipo.SelectedValue.ToString()}'," +
                                                       $"'{txtdescripcion.Text.Trim()}'," +
                                                       $"'{txtcantidad.Text.Trim()}','{ txtreorden.Text.Trim()}','{combounidad.SelectedValue.ToString()}','{txtprecio.Text.Trim()}'";
-                
+
                 DataSet dt = new DataSet();
                 dt.ejecuta(vSql);
                 bool correcto = dt.ejecuta(vSql);
@@ -77,7 +80,7 @@ namespace eFood
             {
                 MessageBox.Show("Error" + error.ToString());
             }
-            
+
         }
 
         private void Productos_Load(object sender, EventArgs e)
@@ -89,10 +92,25 @@ namespace eFood
             traerArticulo();
 
         }
+        int codigo;
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
+            string vSql = $"SELECT TOP 1 * FROM productos ORDER by id_productos DESC";
+            DataSet dt = new DataSet();
+            dt.ejecuta(vSql);
+            bool correcto = dt.ejecuta(vSql);
+            if (utilidades.DsTieneDatos(dt))
+            {
+                codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_productos"]);
+                codigo++;
+                txtcodigo.Text = Convert.ToString(codigo);
 
+            }
+            else
+            {
+                MessageBox.Show("CREAR EMPLEADO");
+            }
         }
 
         private void tipoproductoBindingSource_CurrentChanged(object sender, EventArgs e)
@@ -100,7 +118,8 @@ namespace eFood
 
         }
 
-        public void traerArticulo() {
+        public void traerArticulo()
+        {
             DataTable dt = new DataTable();
             dt.ejecuta("Select * from productos");
             dataprueba.DataSource = dt;
@@ -151,24 +170,91 @@ namespace eFood
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(txtbuscar.Text.Trim())==false)
+            if (string.IsNullOrEmpty(txtbuscar.Text.Trim()) == false)
             {
-                try
-                {
-                    string vSql = $"SELECT * From productos Where productos Like ('%"+txtbuscar.Text.Trim()+"%') ";
-
                     DataSet dt = new DataSet();
+                    string vSql = "Select * From productos ";
+                    if (string.IsNullOrEmpty(txtbuscar.Text.Trim()) == false) ;
+                    vSql += "Where productos like ('%" + txtbuscar.Text.Trim() + "%')";
                     dt.ejecuta(vSql);
-                    bool correcto = dt.ejecuta(vSql);
-                    if (correcto) {traerArticulo();}
                     dataprueba.DataSource = dt.Tables[0];
-                }
-                catch(Exception error)
-                {
-                    MessageBox.Show("Error Al Consultar " + error.Message);
-                }
+            }
+            else
+            {
+                traerArticulo();
             }
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string vSql = $"SELECT * From productos Where id_productos Like('%" + txtcodigo.Text.Trim() + "%') ";
+                DataSet dt = new DataSet();
+                dt.ejecuta(vSql);
+                bool correcto = dt.ejecuta(vSql);
+                if (correcto)
+                {
+
+                    string codigobarras = dt.Tables[0].Rows[0]["id_productos"].ToString() + "-" + dt.Tables[0].Rows[0]["productos"].ToString().Trim();
+                    BarcodeLib.Barcode Codigo = new BarcodeLib.Barcode();
+                    Codigo.IncludeLabel = false;
+                    panelresultado.BackgroundImage = Codigo.Encode(BarcodeLib.TYPE.CODE128, codigobarras.ToString(), Color.Black, Color.White, 300, 100);
+                    button5.Enabled = true;
+                }
+
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("error" + error);
+            }
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Image imgFinal = (Image)panelresultado.BackgroundImage.Clone();
+
+            SaveFileDialog CajaDeDiaologoGuardar = new SaveFileDialog();
+            CajaDeDiaologoGuardar.AddExtension = true;
+            CajaDeDiaologoGuardar.Filter = "Image PNG (*.png)|*.png";
+            CajaDeDiaologoGuardar.ShowDialog();
+            if (!string.IsNullOrEmpty(CajaDeDiaologoGuardar.FileName))
+            {
+                imgFinal.Save(CajaDeDiaologoGuardar.FileName, ImageFormat.Png);
+            }
+            imgFinal.Dispose();
+        }
+
+        private void txtcodigo_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(txtcodigo.Text)) return;
+
+                string vSql = $"SELECT * From productos Where id_productos Like ('%" + txtcodigo.Text.Trim() + "%') ";
+                DataSet dt = new DataSet();
+                dt.ejecuta(vSql);
+                bool correcto = dt.ejecuta(vSql);
+                if (utilidades.DsTieneDatos(dt))
+                {
+                    txtcodigo.Text = dt.Tables[0].Rows[0]["id_productos"].ToString();
+                    txtproducto.Text = dt.Tables[0].Rows[0]["productos"].ToString();
+                    txtreorden.Text = dt.Tables[0].Rows[0]["reorden"].ToString();
+                    txtcantidad.Text = dt.Tables[0].Rows[0]["cantidad"].ToString();
+                    combounidad.SelectedValue = dt.Tables[0].Rows[0]["unidad"].ToString();
+                    txtprecio.Text = dt.Tables[0].Rows[0]["precio_comercial"].ToString();
+                }
+                else
+                {
+                    MessageBox.Show("PRODUCTO NO ENCONTRADO");
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Error" + error.Message);
+            }
         }
     }
 }
