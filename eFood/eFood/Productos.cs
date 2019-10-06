@@ -94,24 +94,24 @@ namespace eFood
         }
         int codigo;
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            string vSql = $"SELECT TOP 1 * FROM productos ORDER by id_productos DESC";
-            DataSet dt = new DataSet();
-            dt.ejecuta(vSql);
-            bool correcto = dt.ejecuta(vSql);
-            if (utilidades.DsTieneDatos(dt))
-            {
-                codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_productos"]);
-                codigo++;
-                txtcodigo.Text = Convert.ToString(codigo);
+        //private void panel1_Paint(object sender, PaintEventArgs e)
+        //{
+        //    string vSql = $"SELECT TOP 1 * FROM productos ORDER by id_productos DESC";
+        //    DataSet dt = new DataSet();
+        //    dt.ejecuta(vSql);
+        //    bool correcto = dt.ejecuta(vSql);
+        //    if (utilidades.DsTieneDatos(dt))
+        //    {
+        //        codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_productos"]);
+        //        codigo++;
+        //        txtcodigo.Text = Convert.ToString(codigo);
 
-            }
-            else
-            {
-                MessageBox.Show("CREAR EMPLEADO");
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("CREAR EMPLEADO");
+        //    }
+        //}
 
         private void tipoproductoBindingSource_CurrentChanged(object sender, EventArgs e)
         {
@@ -155,6 +155,21 @@ namespace eFood
 
         private void button7_Click(object sender, EventArgs e)
         {
+            string vSql = $"SELECT TOP 1 * FROM productos ORDER by id_productos DESC";
+            DataSet dt = new DataSet();
+            dt.ejecuta(vSql);
+            bool correcto = dt.ejecuta(vSql);
+            if (utilidades.DsTieneDatos(dt))
+            {
+                codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_productos"]);
+                codigo++;
+                txtcodigo.Text = Convert.ToString(codigo);
+
+            }
+            else
+            {
+                MessageBox.Show("CREAR EMPLEADO");
+            }
             txtcantidad.Clear();
             txtcodigo.Clear();
             txtdescripcion.Clear();
@@ -174,10 +189,12 @@ namespace eFood
             {
                     DataSet dt = new DataSet();
                     string vSql = "Select * From productos ";
-                    if (string.IsNullOrEmpty(txtbuscar.Text.Trim()) == false) ;
+                if (string.IsNullOrEmpty(txtbuscar.Text.Trim()) == false)
+                {
                     vSql += "Where productos like ('%" + txtbuscar.Text.Trim() + "%')";
                     dt.ejecuta(vSql);
                     dataprueba.DataSource = dt.Tables[0];
+                }
             }
             else
             {
@@ -194,14 +211,17 @@ namespace eFood
                 DataSet dt = new DataSet();
                 dt.ejecuta(vSql);
                 bool correcto = dt.ejecuta(vSql);
-                if (correcto)
+                if (utilidades.DsTieneDatos(dt))
                 {
-
                     string codigobarras = dt.Tables[0].Rows[0]["id_productos"].ToString() + "-" + dt.Tables[0].Rows[0]["productos"].ToString().Trim();
                     BarcodeLib.Barcode Codigo = new BarcodeLib.Barcode();
                     Codigo.IncludeLabel = false;
                     panelresultado.BackgroundImage = Codigo.Encode(BarcodeLib.TYPE.CODE128, codigobarras.ToString(), Color.Black, Color.White, 300, 100);
                     button5.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("ERROR");
                 }
 
             }

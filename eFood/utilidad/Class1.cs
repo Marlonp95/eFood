@@ -4,6 +4,7 @@ using System.IO;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace utilidad
 {
@@ -126,9 +127,90 @@ namespace utilidad
             }
             catch { }
             return false;
+        }
+        public enum Effect { roll, Slide, Center, Blend }
+        public static void Animate(System.Windows.Forms.Control ctl, Effect effect, int msec, int angle)
+        {
+            try
+            {
+                int flags = effmap[(int)effect];
+                if (ctl.Visible)
+                {
 
+                    flags |= 0x10000; angle += 180;
+                }
+                else
+                {
+                    if (ctl.TopLevelControl == ctl) { flags |= 0x20000; }
+                    else if (effect == Effect.Blend) throw new ArgumentException();
+
+                }
+
+                flags |= dirmap[(angle % 360) / 45];
+
+
+                bool ok = AnimateWindow(ctl.Handle, msec, flags);
+
+
+                if (!ok) throw new Exception("Animacion Fallida");
+                ctl.Visible = !ctl.Visible;
+            }
+            catch { }
+
+        }
+        ///<summary>
+        ///Efecto Fade.Debe llamar este metodo desde un stick de un control Timer
+        ///</summary>
+        public static void Effect_F(System.Windows.Forms.Form form, System.Windows.Forms.Timer timer1, int intervalo)
+        {
+
+            timer1.Interval = intervalo;
+            if (form.Opacity <= 25)
+            {
+
+                form.Opacity += .10;
+            }
+
+            if (form.Opacity > 25) { form.Opacity += .20; }
+            if (form.Opacity > 50) { form.Opacity += .30; }
+
+            if (form.Opacity > 75)
+            {
+                form.Opacity += .10; if (form.Opacity == 1)
+                {
+                    timer1.Stop();
+                }
+            }
         }
 
 
+        private static int[] dirmap = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        private static int[] effmap = { 0, 0x40000, 0x10, 0x80000 };
+
+        [DllImport("user32.dll")]
+        private static extern bool AnimateWindow(IntPtr handle, int msec, int flags);
+
+
+
+
+        //posicion en pantalla
+        public static void Position(bool mover, System.Windows.Forms.Form form, int px, int py)
+        {
+            //px coordenada en X
+            //py coordenada en Y
+            //Mover deshabilitar y habilitar el movimiento del objeto
+            //posiciones capturados en 'objeto'_Down
+            if (mover == true) { form.Location = form.PointToScreen(new System.Drawing.Point(System.Windows.Forms.Control.MousePosition.X - px - form.Location.X, System.Windows.Forms.Control.MousePosition.Y - py - form.Location.Y)); }
+        }
+        public static void TextBox_Let_Opac_Temp(System.Windows.Forms.TextBox tex, string TextoDescrip)
+        {
+
+            tex.Text = TextoDescrip;
+
+        }
+
     }
+
+
+
 }

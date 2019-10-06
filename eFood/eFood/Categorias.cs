@@ -16,5 +16,13 @@ namespace eFood
         {
             InitializeComponent();
         }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Desea Cerrar", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            {
+                this.Close();
+            }
+        }
     }
 }
