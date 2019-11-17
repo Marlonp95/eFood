@@ -28,8 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(contenedor));
             this.MenuVertical = new System.Windows.Forms.Panel();
+            this.lbfecha = new System.Windows.Forms.Label();
+            this.lbhora = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -46,6 +49,7 @@
             this.btnMaximizar = new System.Windows.Forms.PictureBox();
             this.btnCerrar = new System.Windows.Forms.PictureBox();
             this.panelContenedor = new System.Windows.Forms.Panel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.MenuVertical.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelFormulario.SuspendLayout();
@@ -61,6 +65,8 @@
             // MenuVertical
             // 
             this.MenuVertical.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(91)))), ((int)(((byte)(140)))));
+            this.MenuVertical.Controls.Add(this.lbfecha);
+            this.MenuVertical.Controls.Add(this.lbhora);
             this.MenuVertical.Controls.Add(this.button7);
             this.MenuVertical.Controls.Add(this.button6);
             this.MenuVertical.Controls.Add(this.button5);
@@ -74,6 +80,30 @@
             this.MenuVertical.Name = "MenuVertical";
             this.MenuVertical.Size = new System.Drawing.Size(205, 700);
             this.MenuVertical.TabIndex = 1;
+            // 
+            // lbfecha
+            // 
+            this.lbfecha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbfecha.AutoSize = true;
+            this.lbfecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbfecha.ForeColor = System.Drawing.Color.Black;
+            this.lbfecha.Location = new System.Drawing.Point(98, 667);
+            this.lbfecha.Name = "lbfecha";
+            this.lbfecha.Size = new System.Drawing.Size(88, 24);
+            this.lbfecha.TabIndex = 8;
+            this.lbfecha.Text = "00:00:00";
+            // 
+            // lbhora
+            // 
+            this.lbhora.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbhora.AutoSize = true;
+            this.lbhora.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbhora.ForeColor = System.Drawing.Color.Black;
+            this.lbhora.Location = new System.Drawing.Point(3, 667);
+            this.lbhora.Name = "lbhora";
+            this.lbhora.Size = new System.Drawing.Size(88, 24);
+            this.lbhora.TabIndex = 4;
+            this.lbhora.Text = "00:00:00";
             // 
             // button7
             // 
@@ -105,6 +135,7 @@
             this.button6.Text = "Recepcio Almacen";
             this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -132,9 +163,10 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(202, 37);
             this.button4.TabIndex = 5;
-            this.button4.Text = "Porciones";
+            this.button4.Text = "Estadisticas";
             this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -285,6 +317,11 @@
             this.panelContenedor.TabIndex = 0;
             this.panelContenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // contenedor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -332,5 +369,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label lbhora;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lbfecha;
     }
 }

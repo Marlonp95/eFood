@@ -118,7 +118,7 @@ namespace eFood
 
         }
 
-        public void traerArticulo()
+        public void traerArticulo() 
         {
             DataTable dt = new DataTable();
             dt.ejecuta("Select * from productos");
@@ -274,6 +274,30 @@ namespace eFood
             catch (Exception error)
             {
                 MessageBox.Show("Error" + error.Message);
+            }
+            try
+            {
+                string vSql = $"SELECT * From productos Where id_productos Like('%" + txtcodigo.Text.Trim() + "%') ";
+                DataSet dt = new DataSet();
+                dt.ejecuta(vSql);
+                bool correcto = dt.ejecuta(vSql);
+                if (utilidades.DsTieneDatos(dt))
+                {
+                    string codigobarras = dt.Tables[0].Rows[0]["id_productos"].ToString() + "-" + dt.Tables[0].Rows[0]["productos"].ToString().Trim();
+                    BarcodeLib.Barcode Codigo = new BarcodeLib.Barcode();
+                    Codigo.IncludeLabel = false;
+                    panelresultado.BackgroundImage = Codigo.Encode(BarcodeLib.TYPE.CODE128, codigobarras.ToString(), Color.Black, Color.White, 290, 90);
+                    button5.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("ERROR");
+                }
+
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("error" + error);
             }
         }
     }

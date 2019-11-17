@@ -156,6 +156,22 @@ namespace eFood
             AbrirFormulario<Facturacion>();
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbhora.Text = DateTime.Now.ToString("h:mm:ss");
+            lbfecha.Text = DateTime.Now.ToShortDateString();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario<dashboard>();
+        }
+
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
         #endregion

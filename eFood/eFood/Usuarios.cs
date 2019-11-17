@@ -47,21 +47,8 @@ namespace eFood
 
         private void Usuarios_Load(object sender, EventArgs e)
         {
-            string vSql = $"SELECT TOP 1 * FROM usuarios ORDER by id_usuario DESC";
-            DataSet dt = new DataSet();
-            dt.ejecuta(vSql);
-            bool correcto = dt.ejecuta(vSql);
-            if (utilidades.DsTieneDatos(dt))
-            {
-                codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_persona"]);
-                codigo++;
-                txtcodigo.Text = Convert.ToString(codigo);
+           
 
-            }
-            else
-            {
-                MessageBox.Show("CREAR EMPLEADO");
-            }
             traerUsuario();
         }
 
@@ -172,9 +159,25 @@ namespace eFood
                 MessageBox.Show("Por favor Complete los campos");
                 return;
             }
+            string vSecuencia = $"SELECT TOP 1 * FROM usuarios ORDER by id_usuario DESC";
+            DataSet dts = new DataSet();
+            dts.ejecuta(vSecuencia);
+            bool correctos = dts.ejecuta(vSecuencia);
+            if (utilidades.DsTieneDatos(dts))
+            {
+                codigo = Convert.ToInt32(dts.Tables[0].Rows[0]["id_persona"]);
+                codigo = codigo + 1;
+                MessageBox.Show("secuencia"+codigo.ToString());
+            }
+            else
+            {
+                MessageBox.Show("CREAR EMPLEADO");
+            }
             try
             {
-                string vSql = $"EXEC actualizausuarios '{txtcodigo.Text.Trim()}','{txtusuario.Text.Trim()}','{txtpass.Text.Trim()}','{dateTimePicker1.Value.Date}','{codigopersona}','{txtficha.Text.Trim()}'";
+                string psencrip = utilidades.A_Encriptar(txtpass.Text);
+
+                string vSql = $"EXEC actualizausuarios '{codigo}','{txtusuario.Text.Trim()}','{psencrip}','{dateTimePicker1.Value.Date}','{codigopersona}','{txtficha.Text.Trim()}'";
                 DataSet dt = new DataSet();
                 dt.ejecuta(vSql);
                 bool correcto = dt.ejecuta(vSql);
@@ -185,34 +188,36 @@ namespace eFood
                 MessageBox.Show("Error" + error.ToString());
             }
         }
-        int codigopersona;
+        int codigopersona ;
         private void txtficha_Validating_1(object sender, CancelEventArgs e)
         {
             try
             {
                 if (string.IsNullOrEmpty(txtficha.Text)) return;
-                string vSql = $"select p.nombre1,p.id_persona, p.apellido1, e.id_cargo from persona as p inner join empleado as e on p.id_persona = e.id_persona ";
+                string vSql = $"select p.id_persona, p.nombre1, p.apellido1, e.id_cargo, u.usuario, u.fecha_creacion from persona as p inner join empleado as e on p.id_persona = e.id_persona left join usuarios as u on p.id_persona =u.id_persona ";
                 vSql += " where e.ficha like ('%" + txtficha.Text.Trim() + "%')";       
                 DataSet dt = new DataSet();
                 dt.ejecuta(vSql);
                 if (utilidad.utilidades.DsTieneDatos(dt))
                 {
                     codigopersona = Convert.ToInt32(dt.Tables[0].Rows[0]["id_persona"]);
-                    txtcargo.Text = dt.Tables[0].Rows[0]["id_cargo"].ToString();
-                    //txtcodigo.Text = dt.Tables[0].Rows[0]["id_usuario"].ToString();
-                    //txtusuario.Text = dt.Tables[0].Rows[0]["usuario"].ToString();
-                    txtnombre.Text = dt.Tables[0].Rows[0]["nombre1"].ToString();
+                    MessageBox.Show("codigo_persona" + codigopersona.ToString());
                     txtapellido.Text = dt.Tables[0].Rows[0]["apellido1"].ToString();
+                    txtnombre.Text = dt.Tables[0].Rows[0]["nombre1"].ToString();
+                    txtcargo.Text = dt.Tables[0].Rows[0]["id_cargo"].ToString();
+                    txtusuario.Text = dt.Tables[0].Rows[0]["usuario"].ToString();
+                    if (string.IsNullOrEmpty(txtusuario.Text)) MessageBox.Show("USUARIO NO ENCONTRADO POR FAVOR CREARLO");
+
                 }
-                else
-                {
-                    MessageBox.Show("USUARIO NO ENCONTRADO");
-                }
+               
+                
+                
+
             }
             catch (Exception error)
             {
                 MessageBox.Show("Error" + error.Message);
-            }                
+            }       
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -220,7 +225,7 @@ namespace eFood
 
             try
             {
-                string vSql = $"EXEC eliminausuarios '{txtcodigo.Text.Trim()}'";
+                string vSql = $"EXEC eliminausuarios '{txtficha.Text.Trim()}'";
 
                 DataSet dt = new DataSet();
                 dt.ejecuta(vSql);
@@ -258,21 +263,7 @@ namespace eFood
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string vSql = $"SELECT TOP 1 * FROM persona ORDER by id_persona DESC";
-            DataSet dt = new DataSet();
-            dt.ejecuta(vSql);
-            bool correcto = dt.ejecuta(vSql);
-            if (utilidades.DsTieneDatos(dt))
-            {
-                codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_persona"]);
-                codigo++;
-                txtcodigo.Text = Convert.ToString(codigo);
-
-            }
-            else
-            {
-                MessageBox.Show("CREAR EMPLEADO");
-            }
+            
             traerUsuario();
             txtapellido.Clear();
             txtficha.Clear();
@@ -282,34 +273,34 @@ namespace eFood
             txtusuario.Clear();
         }
 
-        private void txtcodigo_Validating(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(txtcodigo.Text)) return;
-                string vSql = $"select p.nombre1, p.apellido1, e.id_cargo, e.ficha ,u.usuario,u.id_usuario , u.fecha_creacion from persona as p inner join empleado as e  on p.id_persona = e.id_persona inner join usuarios as u on e.id_persona=u.id_persona";
-                vSql += " where u.id_usuario like ('%" + txtcodigo.Text.Trim() + "%')";
-                DataSet dt = new DataSet();
-                dt.ejecuta(vSql);
-                if (utilidad.utilidades.DsTieneDatos(dt))
-                {
-                    txtficha.Text = dt.Tables[0].Rows[0]["ficha"].ToString();
-                    txtcargo.Text = dt.Tables[0].Rows[0]["id_cargo"].ToString();
-                    txtcodigo.Text = dt.Tables[0].Rows[0]["id_usuario"].ToString();
-                    txtusuario.Text = dt.Tables[0].Rows[0]["usuario"].ToString();
-                    txtnombre.Text = dt.Tables[0].Rows[0]["nombre1"].ToString();
-                    txtapellido.Text = dt.Tables[0].Rows[0]["apellido1"].ToString();
-                }
-                else
-                {
-                    MessageBox.Show("USUARIO NO ENCONTRADO");
-                }
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show("Error" + error.Message);
-            }
-        }
+       // private void txtcodigo_Validating(object sender, CancelEventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (string.IsNullOrEmpty(txtcodigo.Text)) return;
+        //        string vSql = $"select p.nombre1, p.apellido1, e.id_cargo, e.ficha ,u.usuario,u.id_usuario , u.fecha_creacion from persona as p inner join empleado as e  on p.id_persona = e.id_persona inner join usuarios as u on e.id_persona=u.id_persona";
+        //        vSql += " where u.id_usuario like ('%" + txtcodigo.Text.Trim() + "%')";
+        //        DataSet dt = new DataSet();
+        //        dt.ejecuta(vSql);
+        //        if (utilidad.utilidades.DsTieneDatos(dt))
+        //        {
+        //            txtficha.Text = dt.Tables[0].Rows[0]["ficha"].ToString();
+        //            txtcargo.Text = dt.Tables[0].Rows[0]["id_cargo"].ToString();
+        //            txtcodigo.Text = dt.Tables[0].Rows[0]["id_usuario"].ToString();
+        //            txtusuario.Text = dt.Tables[0].Rows[0]["usuario"].ToString();
+        //            txtnombre.Text = dt.Tables[0].Rows[0]["nombre1"].ToString();
+        //            txtapellido.Text = dt.Tables[0].Rows[0]["apellido1"].ToString();
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("USUARIO NO ENCONTRADO");
+        //        }
+        //    }
+        //    catch (Exception error)
+        //    {
+        //        MessageBox.Show("Error" + error.Message);
+        //    }
+        
     }
 }
 
