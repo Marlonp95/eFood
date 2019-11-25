@@ -230,7 +230,7 @@ namespace eFood
                 DataSet dt = new DataSet();
                 dt.ejecuta(vSql);
                 bool correcto = dt.ejecuta(vSql);
-                if (correcto) { MessageBox.Show("Se Elimino El Empleado "); traerUsuario(); }
+                if (correcto) { MessageBox.Show("Usuario eliminado "); traerUsuario(); }
                 else MessageBox.Show("Error Eliminando datos ");
             }
             catch (Exception error)

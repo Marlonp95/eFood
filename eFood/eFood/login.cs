@@ -100,7 +100,7 @@ namespace eFood
                 string cmd = string.Format("Select *  FROM usuarios where usuario='{0}' AND pass='{1}'", txtnom.Text.Trim(), ps);
                 DataSet ds = new DataSet();
                 bool esta = ds.CountDataset(cmd);
-
+                 
                 if (esta)
                 {
                     codigo = ds.Tables[0].Rows[0]["id_persona"].ToString().Trim();         
