@@ -273,7 +273,12 @@ namespace eFood
             txtusuario.Clear();
         }
 
-       // private void txtcodigo_Validating(object sender, CancelEventArgs e)
+        private void fechacreacion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // private void txtcodigo_Validating(object sender, CancelEventArgs e)
         //{
         //    try
         //    {
@@ -300,7 +305,7 @@ namespace eFood
         //    {
         //        MessageBox.Show("Error" + error.Message);
         //    }
-        
+
     }
 }
 

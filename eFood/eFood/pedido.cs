@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using utilidad;
 
 namespace eFood
 {
@@ -23,6 +24,18 @@ namespace eFood
             {
                 this.Close();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            dt.ejecuta("Select productos, descripcion from productos where id_categoria = 1");
+            dataSeleccionProducto.DataSource = dt;
         }
     }
 }

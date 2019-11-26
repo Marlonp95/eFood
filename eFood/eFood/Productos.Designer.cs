@@ -42,7 +42,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.dataprueba = new System.Windows.Forms.DataGridView();
@@ -76,6 +75,7 @@
             this.tipo_productoTableAdapter = new eFood.efoodDataSetTableAdapters.tipo_productoTableAdapter();
             this.efoodDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.unidadTableAdapter = new eFood.efoodDataSet1TableAdapters.unidadTableAdapter();
+            this.label12 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataprueba)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.unidadBindingSource)).BeginInit();
@@ -252,18 +252,6 @@
             this.label16.TabIndex = 158;
             this.label16.Text = "Cantidad";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label12
-            // 
-            this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(91)))), ((int)(((byte)(140)))));
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label12.Location = new System.Drawing.Point(357, 299);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(160, 28);
-            this.label12.TabIndex = 155;
-            this.label12.Text = "Referencia";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label10
             // 
@@ -617,6 +605,18 @@
             // 
             this.unidadTableAdapter.ClearBeforeFill = true;
             // 
+            // label12
+            // 
+            this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(91)))), ((int)(((byte)(140)))));
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label12.Location = new System.Drawing.Point(357, 299);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(160, 28);
+            this.label12.TabIndex = 155;
+            this.label12.Text = "Referencia";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Productos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -684,12 +684,12 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtbuscar;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Panel panelresultado;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label12;
     }
 }
