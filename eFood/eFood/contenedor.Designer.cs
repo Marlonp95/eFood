@@ -227,7 +227,7 @@
             this.button2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(3, 119);
+            this.button2.Location = new System.Drawing.Point(3, 122);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(202, 37);
             this.button2.TabIndex = 9;
@@ -243,7 +243,7 @@
             this.button7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
             this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.Location = new System.Drawing.Point(3, 84);
+            this.button7.Location = new System.Drawing.Point(3, 82);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(202, 37);
             this.button7.TabIndex = 0;

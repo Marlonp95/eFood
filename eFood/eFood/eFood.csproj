@@ -135,6 +135,12 @@
     <Compile Include="mesas.Designer.cs">
       <DependentUpon>mesas.cs</DependentUpon>
     </Compile>
+    <Compile Include="pedido.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="pedido.Designer.cs">
+      <DependentUpon>pedido.cs</DependentUpon>
+    </Compile>
     <Compile Include="Productos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="mesas.resx">
       <DependentUpon>mesas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="pedido.resx">
+      <DependentUpon>pedido.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Productos.resx">
       <DependentUpon>Productos.cs</DependentUpon>
