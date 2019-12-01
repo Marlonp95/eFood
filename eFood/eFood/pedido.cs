@@ -37,5 +37,13 @@ namespace eFood
             dt.ejecuta("Select productos, descripcion from productos where id_categoria = 1");
             dataSeleccionProducto.DataSource = dt;
         }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            dataGridView2.Rows.Add(new string[] {
+                Convert.ToString(dataSeleccionProducto[0, dataSeleccionProducto.CurrentRow.Index].Value),
+                Convert.ToString(dataSeleccionProducto[1, dataSeleccionProducto.CurrentRow.Index].Value)
+            });
+        }
     }
 }

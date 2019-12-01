@@ -13,117 +13,101 @@ namespace eFood
 {
     public partial class mesas : Form
     {
-        public mesas()
+        private Control PanelPrincipal ;
+        public mesas( Control pPanel)
         {
             InitializeComponent();
+            PanelPrincipal = pPanel;
         }
-        private void AbrirFormulario<MiForm>() where MiForm : Form, new()
+       
+        public void mesa(btnMesa btn)
         {
-            Form formulario;
-            formulario = panelFormulario.Controls.OfType<MiForm>().FirstOrDefault();
-
-            if (formulario == null)
-            {
-                formulario = new MiForm();
-                formulario.TopLevel = false;
-                panelFormulario.Controls.Add(formulario);
-                panelFormulario.Tag = formulario;
-                formulario.FormBorderStyle = FormBorderStyle.None;
-                formulario.Dock = DockStyle.Fill;
-                formulario.Show();
-                formulario.BringToFront(); ;
-            }
-            else
-            {
-                formulario.BringToFront();
-            }
-        }
-
-        public void mesa(Button btn)
-        {
-                char estado;
-                string vSql = $"SELECT estado  FROM mesa where  id_mesa = " + btn.Tag.ToString();
+                string estado;
+                string vSql = $"SELECT estado  FROM mesa where  id_mesa = " + btn.IdMesa.ToString();
                 DataSet dt = new DataSet();
                 dt.ejecuta(vSql);
                 bool correcto = dt.ejecuta(vSql);
-                estado = Convert.ToChar(dt.Tables[0].Rows[0]["estado"]);
+                estado = dt.Tables[0].Rows[0]["estado"].ToString();
 
             if (utilidades.DsTieneDatos(dt))
                 {              
                     
-                    if (MessageBox.Show("Desea Abrir Mesa " + btn.Tag.ToString(), "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                    if (MessageBox.Show("Desea Abrir Mesa " + btn.IdMesa.ToString(), "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                     {
-                        vSql = $"UPDATE mesa SET estado = 'O'  WHERE  id_mesa = " +btn.Tag.ToString(); ;
+                        vSql = $"UPDATE mesa SET estado = 'O'  WHERE  id_mesa = " +btn.IdMesa.ToString(); ;
                         dt = new DataSet();
                         dt.ejecuta(vSql);
-                        btn.BackColor = Color.Red;
-                        AbrirFormulario<pedido>();
+                     
+               
                     }
             }
         }
-   
-
+  
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
-     
-
-        private void button2_Click(object sender, EventArgs e)
+        private void btnMesa_Click(object sender, EventArgs e)
         {
-            mesa(button2);
+           
         }
-
+        btnMesa btn;
+        btnUbicacion btnUbicacion;
         private void mesas_Load(object sender, EventArgs e)
         {
+            
+            Cargar_MesaxUbicacion();
+            Cargar_Ubicacion();
 
         }
-
-        private void button3_Click(object sender, EventArgs e)
+        public void Cargar_MesaxUbicacion(string pCondicion=null)
         {
-            mesa(button3);
-        }
+            DataTable dt = new DataTable();
+            dt.ejecuta($"select * from mesa {pCondicion}");
 
-        private void button4_Click(object sender, EventArgs e)
+            foreach (DataRow dr in dt.Rows)
+            {
+                btn = new btnMesa()
+                {
+                    Height = 120,
+                    Width = 120,
+                    Image = Properties.Resources.mesa1,
+                    TextAlign = ContentAlignment.BottomCenter,
+                    Name = $"Mesa_{dr["id_mesa"].ToString()}",
+                    Tag = dr["id_mesa"].ToString(),
+                    Text = dr["descripcion"].ToString(),
+                    Estado = dr["estado"].ToString(),
+                    pFormulario = PanelPrincipal,
+                    runFormulario = new pedido(),
+                };
+                contenedor.Controls.Add(btn);
+                btn.EstadosColor(btn.Estado);
+                btn.Click += btnMesa_Click;
+            }
+        }
+        public void Cargar_Ubicacion(string pCondicion = null)
         {
-            mesa(button4);
+            DataTable dt = new DataTable();
+            dt.ejecuta($"select * from ubicacion {pCondicion}");
+           
+            foreach (DataRow dr in dt.Rows)
+            {
+                btnUbicacion = new btnUbicacion()
+                {
+                    Height = 100,
+                    Width = 100,
+                    BackColor = Color.White,
+                    Image = Properties.Resources.iconfinder_Artboard_10_3915333__1_,
+                    TextAlign = ContentAlignment.BottomCenter,
+                    Name = $"Area_{dr["descripcion"].ToString()}",
+                    Tag = dr["id_ubicacion"].ToString(),
+                    Text = dr["descripcion"].ToString(),
+        
+                };
+                ContenedorUbicaciones.Controls.Add(btnUbicacion);
+               // btn.Click += btnMesa_Click;
+            }
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
-            mesa(button5);
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            mesa(button6);
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            mesa(button7);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            mesa(button8);
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            mesa(button9);
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            mesa(button10);
-        }
-
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            mesa(button16);
-        }
     }
 }

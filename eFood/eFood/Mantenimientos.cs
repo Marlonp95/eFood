@@ -32,7 +32,7 @@ namespace eFood
                 formulario.FormBorderStyle = FormBorderStyle.None;
                 formulario.Dock = DockStyle.Fill;
                 formulario.Show();
-                formulario.BringToFront(); ;
+                formulario.BringToFront(); 
             }
             else
             {

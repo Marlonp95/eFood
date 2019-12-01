@@ -174,7 +174,19 @@ namespace eFood
 
         private void button2_Click_2(object sender, EventArgs e)
         {
-            AbrirFormulario<mesas>();
+            mesas mesa = new mesas(panelFormulario);
+            mesa.TopLevel = false;
+            panelFormulario.Controls.Add(mesa);
+            panelFormulario.Tag = mesa;
+            mesa.FormBorderStyle = FormBorderStyle.None;
+            mesa.Dock = DockStyle.Fill;
+            mesa.Show();
+            mesa.BringToFront();
+        }
+
+        private void panelTitulo_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -195,7 +207,8 @@ namespace eFood
                 formulario.FormBorderStyle = FormBorderStyle.None;
                 formulario.Dock = DockStyle.Fill;
                 formulario.Show();
-                formulario.BringToFront();;
+                formulario.BringToFront();
+                
                  }
             else
                  {
@@ -203,5 +216,9 @@ namespace eFood
                  }
             #endregion
         }
+
+
+
+        
     }
 }

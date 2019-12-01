@@ -68,6 +68,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="btnMesa.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="btnMesa.Designer.cs">
+      <DependentUpon>btnMesa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="btnUbicacion.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="btnUbicacion.Designer.cs">
+      <DependentUpon>btnUbicacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CallForm.cs" />
     <Compile Include="Categorias.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -342,6 +355,46 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\1167984-32.png" />
+    <Content Include="Resources\1380569-48.png" />
+    <Content Include="Resources\2427858-48.png" />
+    <Content Include="Resources\383079-32.png" />
+    <Content Include="Resources\383079-48.png" />
+    <Content Include="Resources\iconfinder_07-prawn_4885264.png" />
+    <Content Include="Resources\iconfinder_161_Bar_barcode_code_shopping_4308531.png" />
+    <Content Include="Resources\iconfinder_1_1845739 %281%29.png" />
+    <Content Include="Resources\iconfinder_1_1845739.png" />
+    <Content Include="Resources\iconfinder_230_HalfCircle_183347.png" />
+    <Content Include="Resources\iconfinder_2_2739118 %281%29.png" />
+    <Content Include="Resources\iconfinder_2_2739118.png" />
+    <Content Include="Resources\iconfinder_aiga_bar_134140.png" />
+    <Content Include="Resources\iconfinder_aiga_cashier_bg_134179 %281%29.png" />
+    <Content Include="Resources\iconfinder_aiga_cashier_bg_134179.png" />
+    <Content Include="Resources\iconfinder_ajax-admin_3018587.png" />
+    <Content Include="Resources\iconfinder_architecture-interior-28_809102 %281%29.png" />
+    <Content Include="Resources\iconfinder_architecture-interior-28_809102 %282%29.png" />
+    <Content Include="Resources\iconfinder_architecture-interior-28_809102.png" />
+    <None Include="Resources\iconfinder_Artboard_10_3915333 %281%29.png" />
+    <Content Include="Resources\iconfinder_Artboard_50_3952951.png" />
+    <Content Include="Resources\iconfinder_b4-05_1380569.png" />
+    <Content Include="Resources\iconfinder_chart_4634998.png" />
+    <Content Include="Resources\iconfinder_food-drink-01_808990 %283%29.png" />
+    <Content Include="Resources\iconfinder_food-drink-01_808990 %284%29.png" />
+    <Content Include="Resources\iconfinder_food-drink-34_809005.png" />
+    <Content Include="Resources\iconfinder_graphic2_216258.png" />
+    <Content Include="Resources\iconfinder_healthcare_and_medical-organic-vegan-salad-healthy_food-avocado-diet-vegetarian-food-fruit_4394725.png" />
+    <Content Include="Resources\iconfinder_meat_5404327.png" />
+    <Content Include="Resources\iconfinder_minus_309051.png" />
+    <Content Include="Resources\iconfinder_miscellaneous-66_809450.png" />
+    <Content Include="Resources\iconfinder_more_126574.png" />
+    <Content Include="Resources\iconfinder_noodle-bowl-chopsticks-food-asian-ramen-spaghetti_4301481.png" />
+    <Content Include="Resources\iconfinder_plus-24_103172.png" />
+    <Content Include="Resources\iconfinder_plus_511939.png" />
+    <Content Include="Resources\iconfinder_Refrigerator_751078.png" />
+    <Content Include="Resources\iconfinder_vehicles-11_809733.png" />
+    <None Include="Resources\mesa1.png" />
+    <None Include="Resources\mesa2.png" />
+    <None Include="Resources\mesa3.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
