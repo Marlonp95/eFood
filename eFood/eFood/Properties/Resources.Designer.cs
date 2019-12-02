@@ -464,6 +464,16 @@ namespace eFood.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_loop_326543 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_loop_326543", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconfinder_meat_5404327 {
             get {
                 object obj = ResourceManager.GetObject("iconfinder_meat_5404327", resourceCulture);

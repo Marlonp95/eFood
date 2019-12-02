@@ -174,7 +174,7 @@ namespace eFood
 
         private void button2_Click_2(object sender, EventArgs e)
         {
-            mesas mesa = new mesas(panelFormulario);
+            mesas mesa = new mesas(ref panelFormulario);
             mesa.TopLevel = false;
             panelFormulario.Controls.Add(mesa);
             panelFormulario.Tag = mesa;

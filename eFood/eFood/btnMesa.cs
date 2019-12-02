@@ -17,8 +17,10 @@ namespace eFood
         public int    IdMesa { get; set; }
         public string Estado { get; set; }
         public bool RunForm { get; set; }
+        public string id_ubicacion { get; set; }
         public Control pFormulario;
         public Form runFormulario ;
+        public bool run_mesa = true;
 
         public btnMesa()
         {
@@ -27,30 +29,7 @@ namespace eFood
         }
      
 
-        public void EstadosColor(string pstatus)
-        {
-            pstatus = pstatus.ToUpper();
-            if (pstatus == "D")
-            {
-                this.BackColor = Color.White;
-                this.ForeColor = Color.Black;
-            }
-            else if (pstatus == "O")
-            {
-                this.BackColor = Color.Red;
-                this.ForeColor = Color.White;
-            }
-            else if (pstatus == "R")
-            {
-                this.BackColor = Color.SlateGray;
-                this.ForeColor = Color.White;
-            }
-            else
-            {
-                this.BackColor = Color.Yellow;
-                this.ForeColor = Color.Black;
-            }
-        }
+       
         public btnMesa(IContainer container)
         {
             container.Add(this);
@@ -58,16 +37,19 @@ namespace eFood
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (mesa(this))
+            if (run_mesa)
             {
-                CallForm callForm = new CallForm();
-                callForm.LlamarForm(ref runFormulario, ref pFormulario);
+                if (mesa(this))
+                {
+                    CallForm callForm = new CallForm();
+                    callForm.LlamarForm(ref runFormulario, ref pFormulario);
+                }
             }
         }
         public bool mesa(btnMesa btn)
         {
             string estado;
-            string vSql = $"SELECT estado  FROM mesa where  id_mesa = " + btn.Tag.ToString();
+            string vSql = $"SELECT estado  FROM mesa where  id_mesa = {btn.Tag.ToString()} ";
             DataSet dt = new DataSet();
             dt.ejecuta(vSql);
             bool correcto = dt.ejecuta(vSql);

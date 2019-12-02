@@ -13,8 +13,8 @@ namespace eFood
 {
     public partial class mesas : Form
     {
-        private Control PanelPrincipal ;
-        public mesas( Control pPanel)
+        private Panel PanelPrincipal ;
+        public mesas(ref Panel pPanel)
         {
             InitializeComponent();
             PanelPrincipal = pPanel;
@@ -51,39 +51,29 @@ namespace eFood
         {
            
         }
+
         btnMesa btn;
         btnUbicacion btnUbicacion;
+
         private void mesas_Load(object sender, EventArgs e)
         {
-            
-            Cargar_MesaxUbicacion();
+            Cargar_MxUb();
             Cargar_Ubicacion();
-
         }
-        public void Cargar_MesaxUbicacion(string pCondicion=null)
+        public void Cargar_MxUb(string pCondicion = null)
         {
             DataTable dt = new DataTable();
             dt.ejecuta($"select * from mesa {pCondicion}");
 
-            foreach (DataRow dr in dt.Rows)
+            List<btnMesa> lbtn = CallForm.Cargar_MesaxUbicacion(ref PanelPrincipal);
+            foreach (btnMesa item in lbtn)
             {
-                btn = new btnMesa()
-                {
-                    Height = 120,
-                    Width = 120,
-                    Image = Properties.Resources.mesa1,
-                    TextAlign = ContentAlignment.BottomCenter,
-                    Name = $"Mesa_{dr["id_mesa"].ToString()}",
-                    Tag = dr["id_mesa"].ToString(),
-                    Text = dr["descripcion"].ToString(),
-                    Estado = dr["estado"].ToString(),
-                    pFormulario = PanelPrincipal,
-                    runFormulario = new pedido(),
-                };
-                contenedor.Controls.Add(btn);
-                btn.EstadosColor(btn.Estado);
-                btn.Click += btnMesa_Click;
+                contenedor.Controls.Add(item);
+                CallForm.EstadosColor(item);
             }
+              
+
+            
         }
         public void Cargar_Ubicacion(string pCondicion = null)
         {
@@ -102,12 +92,50 @@ namespace eFood
                     Name = $"Area_{dr["descripcion"].ToString()}",
                     Tag = dr["id_ubicacion"].ToString(),
                     Text = dr["descripcion"].ToString(),
-        
+
+                    contenedor=contenedor,
+                    PanelPrincipal= PanelPrincipal,
+                    
+
                 };
                 ContenedorUbicaciones.Controls.Add(btnUbicacion);
-               // btn.Click += btnMesa_Click;
+               
             }
+            btnUbicacion = new btnUbicacion()
+            {
+                Height = 100,
+                Width = 100,
+                BackColor = Color.White,
+                Image = Properties.Resources.iconfinder_Artboard_10_3915333__1_,
+                TextAlign = ContentAlignment.BottomCenter,
+                contenedor = contenedor,
+                PanelPrincipal = PanelPrincipal,
+                Tag = string.Empty,
+                Text ="Todas",
+
+            };
+            ContenedorUbicaciones.Controls.Add(btnUbicacion);
+
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            contenedor.Controls.Clear();
+            Cargar_MxUb();
+        }
+
+        //private void button3_Click(object sender, EventArgs e)
+        //{
+
+        //    string vSql = $"UPDATE mesa SET estado = 'S' where  id_mesa = " + btn.Tag.ToString();
+        //    DataSet dt = new DataSet();
+        //    dt.ejecuta(vSql);
+        //    MessageBox.Show("LISTO");
+        //}
     }
 }

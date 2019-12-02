@@ -1,36 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using utilidad;
 namespace eFood
 {
-   public class CallForm
+    public class CallForm
     {
-        public void OpenForm()
-        {
-        //    Form formulario = new Form();
-        //    formulario = panelFormulario.Controls.OfType<MiForm>().FirstOrDefault();
 
-        //    if (formulario == null)
-        //    {
-        //        formulario = new MiForm();
-        //        formulario.TopLevel = false;
-        //        panelFormulario.Controls.Add(formulario);
-        //        panelFormulario.Tag = formulario;
-        //        formulario.FormBorderStyle = FormBorderStyle.None;
-        //        formulario.Dock = DockStyle.Fill;
-        //        formulario.Show();
-        //        formulario.BringToFront(); ;
-        //    }
-        //    else
-        //    {
-        //        formulario.BringToFront();
-        //    }
-        }
         public void LlamarForm(string lcNameForm)
         {
             string lcProject = Application.ProductName.ToString();
@@ -51,8 +33,8 @@ namespace eFood
             if (tForm != null)
             {
                 MyForm = Activator.CreateInstance(tForm);
-                Form Formulario_Ejecuta= ((Form)MyForm);
-               
+                Form Formulario_Ejecuta = ((Form)MyForm);
+
                 Formulario_Ejecuta.TopLevel = false;
                 PanelFormulario.Controls.Add(Formulario_Ejecuta);
                 PanelFormulario.Tag = Formulario_Ejecuta;
@@ -64,11 +46,11 @@ namespace eFood
             }
         }
 
-        public void LlamarForm( ref Form Formulario, ref Control PanelFormulario)
+        public void LlamarForm(ref Form Formulario, ref Control PanelFormulario)
         {
-      
+
             if (Formulario != null)
-            {              
+            {
 
                 Formulario.TopLevel = false;
                 PanelFormulario.Controls.Add(Formulario);
@@ -80,13 +62,94 @@ namespace eFood
 
             }
         }
-        //formulario = new MiForm();
-        //formulario.TopLevel = false;
-        //        panelFormulario.Controls.Add(formulario);
-        //        panelFormulario.Tag = formulario;
-        //        formulario.FormBorderStyle = FormBorderStyle.None;
-        //        formulario.Dock = DockStyle.Fill;
-        //        formulario.Show();
-        //        formulario.BringToFront(); 
+
+        public static List<btnMesa> Cargar_MesaxUbicacion(ref Panel PanelPrincipal, string pCondicion = null)
+        {
+            DataTable dt = new DataTable();
+            dt.ejecuta($"select * from mesa {pCondicion}");
+            btnMesa btn;
+            List<btnMesa> ListaBotones = new List<btnMesa>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                btn = new btnMesa()
+                {
+                    Height = 120,
+                    Width = 120,
+                    Image = Properties.Resources.mesa1,
+                    TextAlign = ContentAlignment.BottomCenter,
+                    Name = $"Mesa_{dr["id_mesa"].ToString()}",
+                    Tag = dr["id_mesa"].ToString(),
+                    Text = dr["descripcion"].ToString(),
+                    Estado = dr["estado"].ToString(),
+                    pFormulario = PanelPrincipal,
+                    runFormulario = new pedido(),
+                };
+                ListaBotones.Add(btn);
+                EstadosColor(btn);
+
+
+
+
+            }
+            return ListaBotones;
+        }
+
+        public static List<btnMesa> Cargar_MesaxUbicacion(ref Control PanelPrincipal, string pCondicion = null)
+        {
+            DataTable dt = new DataTable();
+            dt.ejecuta($"select * from mesa {pCondicion}");
+            btnMesa btn;
+            List<btnMesa> ListaBotones = new List<btnMesa>();
+            Control c = PanelPrincipal;
+            foreach (DataRow dr in dt.Rows)
+            {
+                btn = new btnMesa()
+                {
+                    Height = 120,
+                    Width = 120,
+                    Image = Properties.Resources.mesa1,
+                    TextAlign = ContentAlignment.BottomCenter,
+                    Name = $"Mesa_{dr["id_mesa"].ToString()}",
+                    Tag = dr["id_mesa"].ToString(),
+                    Text = dr["descripcion"].ToString(),
+                    Estado = dr["estado"].ToString(),
+                    pFormulario = PanelPrincipal,
+                    runFormulario = new pedido(),
+                };
+                ListaBotones.Add(btn);
+                EstadosColor(btn);
+
+
+
+
+            }
+            return ListaBotones;
+        }
+
+
+        public static void EstadosColor( btnMesa btn)
+        {
+           string  pstatus = btn.Estado.ToUpper();
+            if (pstatus == "D")
+            {
+                btn.BackColor = Color.White;
+                btn.ForeColor = Color.Black;
+            }
+            else if (pstatus == "O")
+            {
+                btn.BackColor = Color.Red;
+                btn.ForeColor = Color.White;
+            }
+            else if (pstatus == "R")
+            {
+                btn.BackColor = Color.SlateGray;
+                btn.ForeColor = Color.White;
+            }
+            else
+            {
+                btn.BackColor = Color.Yellow;
+                btn.ForeColor = Color.Black;
+            }
+        }
     }
 }
