@@ -46,6 +46,7 @@ namespace eFood
         bool existe = false;
         int num_fila = 0;
         int contador;
+        double total;
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -103,21 +104,54 @@ namespace eFood
                     }
                 }
             }
+            total = 0;
+            foreach (DataGridViewRow Fila in DataPedido.Rows)
+            {
+                total += Convert.ToDouble(Fila.Cells[4].Value);
+            }
+
+            lblTotal.Text = "RD$ " + total.ToString();
         }
         int cantidad;
         private void button11_Click(object sender, EventArgs e)
         {
-            
-            cantidad = Convert.ToInt32(DataPedido.Rows[0].Cells[3].Value);
+            total = 0;
+            num_fila = 0;
+            num_fila = DataPedido.CurrentRow.Index;
+            cantidad = Convert.ToInt32(DataPedido.Rows[num_fila].Cells[3].Value);
             cantidad++;
-            DataPedido.Rows[0].Cells[3].Value = Convert.ToString(cantidad);
+            DataPedido.Rows[num_fila].Cells[3].Value = Convert.ToString(cantidad);
+            DataPedido.Rows[num_fila].Cells[4].Value = Convert.ToString(Convert.ToInt32(DataPedido.Rows[num_fila].Cells[3].Value) * Convert.ToInt32((DataPedido.Rows[num_fila].Cells[5].Value)));
+
+            foreach (DataGridViewRow Fila in DataPedido.Rows)
+            {
+                total += Convert.ToDouble(Fila.Cells[4].Value);
+            }
+
+            lblTotal.Text = "RD$ " + total.ToString();
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            cantidad = Convert.ToInt32(DataPedido.Rows[0].Cells[3].Value);
-            cantidad--;
-            DataPedido.Rows[0].Cells[3].Value = Convert.ToString(cantidad);
+
+            if (MessageBox.Show("Seguro desea quitar articulo ", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            {
+                total = 0;
+                num_fila = 0;
+                num_fila = DataPedido.CurrentRow.Index;
+                cantidad = Convert.ToInt32(DataPedido.Rows[num_fila].Cells[3].Value);
+                cantidad--;
+                DataPedido.Rows[num_fila].Cells[3].Value = Convert.ToString(cantidad);
+                DataPedido.Rows[num_fila].Cells[4].Value = Convert.ToString(Convert.ToInt32(DataPedido.Rows[num_fila].Cells[3].Value) * Convert.ToInt32((DataPedido.Rows[num_fila].Cells[5].Value)));
+
+                foreach (DataGridViewRow Fila in DataPedido.Rows)
+                {
+                    total += Convert.ToDouble(Fila.Cells[4].Value);
+                }
+
+                lblTotal.Text = "RD$ " + total.ToString();
+            }
+            
         }
 
         private void button10_Click(object sender, EventArgs e)
