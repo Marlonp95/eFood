@@ -44,6 +44,7 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblmesa = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -274,6 +275,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblmesa);
             this.panel1.Controls.Add(this.lblTotal);
             this.panel1.Controls.Add(this.label11);
             this.panel1.Controls.Add(this.label9);
@@ -291,6 +293,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(492, 621);
             this.panel1.TabIndex = 20;
+            // 
+            // lblmesa
+            // 
+            this.lblmesa.AutoSize = true;
+            this.lblmesa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblmesa.Location = new System.Drawing.Point(186, 13);
+            this.lblmesa.Name = "lblmesa";
+            this.lblmesa.Size = new System.Drawing.Size(48, 13);
+            this.lblmesa.TabIndex = 166;
+            this.lblmesa.Text = "label10";
             // 
             // lblTotal
             // 
@@ -691,5 +703,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.Label lblmesa;
     }
 }

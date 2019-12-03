@@ -40,14 +40,17 @@ namespace eFood
             if (run_mesa)
             {
                 if (mesa(this))
-                {
+                {  
                     CallForm callForm = new CallForm();
                     callForm.LlamarForm(ref runFormulario, ref pFormulario);
+                  
                 }
             }
         }
+
         public bool mesa(btnMesa btn)
         {
+           
             string estado;
             string vSql = $"SELECT estado  FROM mesa where  id_mesa = {btn.Tag.ToString()} ";
             DataSet dt = new DataSet();

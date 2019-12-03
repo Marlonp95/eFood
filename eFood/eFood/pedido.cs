@@ -13,14 +13,18 @@ namespace eFood
 {
     public partial class pedido : Form
     {
-        public pedido()
+        public string mesatag { get; set; }
+
+        public pedido(string pMesaTag)
         {
+            this.mesatag = pMesaTag;
             InitializeComponent();
         }
 
 
         private void pedido_Load(object sender, EventArgs e)
         {
+            lblmesa.Text = mesatag;
             txtCantidad.Text = "1";
         }
 

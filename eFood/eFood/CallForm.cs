@@ -82,7 +82,7 @@ namespace eFood
                     Text = dr["descripcion"].ToString(),
                     Estado = dr["estado"].ToString(),
                     pFormulario = PanelPrincipal,
-                    runFormulario = new pedido(),
+                    runFormulario = new pedido(dr["id_mesa"].ToString())
                 };
                 ListaBotones.Add(btn);
                 EstadosColor(btn);
@@ -114,7 +114,7 @@ namespace eFood
                     Text = dr["descripcion"].ToString(),
                     Estado = dr["estado"].ToString(),
                     pFormulario = PanelPrincipal,
-                    runFormulario = new pedido(),
+                    runFormulario = new pedido(dr["id_mesa"].ToString()),
                 };
                 ListaBotones.Add(btn);
                 EstadosColor(btn);
