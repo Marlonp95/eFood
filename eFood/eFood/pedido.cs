@@ -13,17 +13,39 @@ namespace eFood
 {
     public partial class pedido : Form
     {
-        public string mesatag { get; set; }
 
+        int id_factura ;
+        bool correcto;
+        public string mesatag { get; set; }
+         
         public pedido(string pMesaTag)
         {
             this.mesatag = pMesaTag;
             InitializeComponent();
         }
 
+        public void traerPedido()
+        {
+            DataTable dt = new DataTable();
+            dt.ejecuta("Select * from empleado");
+            DataPedido.DataSource = dt;
+        }
 
         private void pedido_Load(object sender, EventArgs e)
         {
+            DataTable dt = new DataTable();
+            dt.ejecuta($"SELECT id_factura FROM temp_enc_factura WHERE estado ='A' and id_mesa = {mesatag} ");
+            if (dt is null)
+            {
+                id_factura++;
+            }
+            else
+            {
+                id_factura = Convert.ToInt32((dt.Rows[0]["id_factura"]));
+            }
+
+            MessageBox.Show("Factura#"+id_factura);
+          
             lblmesa.Text = mesatag;
             txtCantidad.Text = "1";
         }
@@ -165,5 +187,35 @@ namespace eFood
             dataSeleccionProducto.DataSource = dt;
         }
 
+        private void button15_Click(object sender, EventArgs e)
+        {
+            if (DataPedido.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay datos para guardar");
+
+            }
+            
+                foreach (DataGridViewRow fila in DataPedido.Rows)
+            {
+                try
+                {
+                    string vSql = $"EXEC actuaiza_temp_det_fact '{id_factura}','{fila.Cells[0].Value}','{fila.Cells[3].Value}','{fila.Cells[5].Value}','{fila.Cells[0].Value}'";
+                    DataSet dt = new DataSet();
+                    dt.ejecuta(vSql);
+                    correcto = dt.ejecuta(vSql);
+                   
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show("Error" + error.ToString());
+                }
+
+                if (correcto)
+                {
+                    MessageBox.Show("Se Guardo ");
+                }
+                else MessageBox.Show("Error Salvando datos ");
+            }
+        }
     }
 }
