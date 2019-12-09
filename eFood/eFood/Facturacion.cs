@@ -37,7 +37,7 @@ namespace eFood
                 if (correcto)
                 {
 
-                    txtvendedor.Text = dt.Tables[0].Rows[0]["nombre1"].ToString() + " " + dt.Tables[0].Rows[0]["apellido1"].ToString().Trim(); ;
+                    txtvendedor.Text = dt.Tables[0].Rows[0]["nombre1"].ToString() + " " + dt.Tables[0].Rows[0]["apellido1"].ToString().Trim(); 
                 }
             }
             catch (Exception error)

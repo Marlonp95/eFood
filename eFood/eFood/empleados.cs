@@ -278,6 +278,11 @@ namespace eFood
                 treaerEmpleado();
             }
         }
+
+        private void txtapellido2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

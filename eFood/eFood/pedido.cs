@@ -23,27 +23,64 @@ namespace eFood
             this.mesatag = pMesaTag;
             InitializeComponent();
         }
+      
+        
 
         public void traerPedido()
         {
             DataTable dt = new DataTable();
-            dt.ejecuta("Select * from empleado");
-            DataPedido.DataSource = dt;
-        }
+            dt.ejecuta($"select a.id_productos, b.productos, b.descripcion, a.cantidad, a.cantidad * b.precio_comercial importe, a.precio from temp_det_factura a inner join productos b on a.id_productos = b.id_productos inner join temp_enc_factura c on a.id_factura = c.id_mesa where c.id_mesa = {mesatag};");
 
+            foreach (DataRow Fila in dt.Rows)
+            {
+                DataPedido.Rows.Add
+                (
+                    Convert.ToString(Fila["id_productos"]),
+                    Convert.ToString(Fila["productos"]),
+                    Convert.ToString(Fila["descripcion"]),
+                    Convert.ToString(Fila["cantidad"]),
+                    Convert.ToDecimal(Fila["importe"]).ToString("F"),
+                    Convert.ToString(Fila["precio"])
+                );
+            }
+
+
+            //DataPedido.DataSource = dt;
+        }
+        string vSql;
+        DataTable dt;
         private void pedido_Load(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
-            dt.ejecuta($"SELECT id_factura FROM temp_enc_factura WHERE estado ='A' and id_mesa = {mesatag} ");
-            if (dt is null)
+            
+            try
             {
+                dt = new DataTable();
+                vSql = $"SELECT nombre1, apellido1 From persona Where id_persona= {login.codigo} ";
+                dt.ejecuta(vSql);
+                lblusuario.Text =dt.Rows[0]["nombre1"].ToString() + " " + dt.Rows[0]["apellido1"].ToString();
+
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("error" + error);
+            }
+            dt = new DataTable();
+            vSql = $"SELECT id_factura FROM temp_enc_factura WHERE estado ='A' and id_mesa = {mesatag} ";
+            dt.ejecuta(vSql);
+            correcto = dt.ejecuta(vSql);
+            
+            if (dt.Rows.Count == 0)
+            {
+                dt = new DataTable();
+                dt.ejecuta("SELECT max(id_factura) id_factura FROM temp_enc_factura");
+                id_factura = Convert.ToInt32((dt.Rows[0]["id_factura"]));
                 id_factura++;
             }
             else
             {
                 id_factura = Convert.ToInt32((dt.Rows[0]["id_factura"]));
             }
-
+            traerPedido();
             MessageBox.Show("Factura#"+id_factura);
           
             lblmesa.Text = mesatag;
@@ -112,8 +149,8 @@ namespace eFood
                     }
                     if (existe == true)
                     {
-                        DataPedido.Rows[num_fila].Cells[3].Value = Convert.ToString(Convert.ToInt32(DataPedido.Rows[num_fila].Cells[3].Value) + Convert.ToInt32(txtCantidad.Text));
-                        DataPedido.Rows[num_fila].Cells[4].Value = Convert.ToString(Convert.ToInt32(DataPedido.Rows[num_fila].Cells[3].Value) * Convert.ToInt32((DataPedido.Rows[num_fila].Cells[5].Value)));
+                        DataPedido.Rows[num_fila].Cells[3].Value = Convert.ToString(Convert.ToDecimal(DataPedido.Rows[num_fila].Cells[3].Value) + Convert.ToDecimal(txtCantidad.Text));
+                        DataPedido.Rows[num_fila].Cells[4].Value = (Convert.ToDecimal(DataPedido.Rows[num_fila].Cells[3].Value) * Convert.ToDecimal((DataPedido.Rows[num_fila].Cells[5].Value))).ToString("F");
                     }
                     else
                     {
@@ -138,16 +175,17 @@ namespace eFood
 
             lblTotal.Text = "RD$ " + total.ToString();
         }
-        int cantidad;
+        decimal cantidad;
+
         private void button11_Click(object sender, EventArgs e)
         {
             total = 0;
             num_fila = 0;
             num_fila = DataPedido.CurrentRow.Index;
-            cantidad = Convert.ToInt32(DataPedido.Rows[num_fila].Cells[3].Value);
+            cantidad = Convert.ToDecimal(DataPedido.Rows[num_fila].Cells[3].Value);
             cantidad++;
             DataPedido.Rows[num_fila].Cells[3].Value = Convert.ToString(cantidad);
-            DataPedido.Rows[num_fila].Cells[4].Value = Convert.ToString(Convert.ToInt32(DataPedido.Rows[num_fila].Cells[3].Value) * Convert.ToInt32((DataPedido.Rows[num_fila].Cells[5].Value)));
+            DataPedido.Rows[num_fila].Cells[4].Value = (Convert.ToDecimal(DataPedido.Rows[num_fila].Cells[3].Value) * Convert.ToDecimal((DataPedido.Rows[num_fila].Cells[5].Value))).ToString("F");
 
             foreach (DataGridViewRow Fila in DataPedido.Rows)
             {
@@ -165,10 +203,10 @@ namespace eFood
                 total = 0;
                 num_fila = 0;
                 num_fila = DataPedido.CurrentRow.Index;
-                cantidad = Convert.ToInt32(DataPedido.Rows[num_fila].Cells[3].Value);
+                cantidad = Convert.ToDecimal(DataPedido.Rows[num_fila].Cells[3].Value);
                 cantidad--;
                 DataPedido.Rows[num_fila].Cells[3].Value = Convert.ToString(cantidad);
-                DataPedido.Rows[num_fila].Cells[4].Value = Convert.ToString(Convert.ToInt32(DataPedido.Rows[num_fila].Cells[3].Value) * Convert.ToInt32((DataPedido.Rows[num_fila].Cells[5].Value)));
+                DataPedido.Rows[num_fila].Cells[4].Value = (Convert.ToDecimal(DataPedido.Rows[num_fila].Cells[3].Value) * Convert.ToDecimal((DataPedido.Rows[num_fila].Cells[5].Value))).ToString("F");
 
                 foreach (DataGridViewRow Fila in DataPedido.Rows)
                 {
@@ -192,7 +230,6 @@ namespace eFood
             if (DataPedido.Rows.Count == 0)
             {
                 MessageBox.Show("No hay datos para guardar");
-
             }
             
                 foreach (DataGridViewRow fila in DataPedido.Rows)

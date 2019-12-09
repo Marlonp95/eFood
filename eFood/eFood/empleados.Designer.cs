@@ -357,6 +357,7 @@
             this.txtapellido2.Size = new System.Drawing.Size(227, 26);
             this.txtapellido2.TabIndex = 144;
             this.txtapellido2.Tag = "NO VACIO";
+            this.txtapellido2.TextChanged += new System.EventHandler(this.txtapellido2_TextChanged);
             // 
             // txtapellido
             // 
