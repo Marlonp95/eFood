@@ -13,9 +13,17 @@ namespace eFood
 {
     public partial class pedido : Form
     {
-
+        DateTime fecha = DateTime.Now;
+        double itbis;
+        double porciento_ley;
+        double sub_total;
+        bool existe = false;
+        int num_fila = 0;
+        int contador;
+        double total;
         int id_factura ;
         bool correcto;
+
         public string mesatag { get; set; }
          
         public pedido(string pMesaTag)
@@ -40,18 +48,30 @@ namespace eFood
                     Convert.ToString(Fila["descripcion"]),
                     Convert.ToString(Fila["cantidad"]),
                     Convert.ToDecimal(Fila["importe"]).ToString("F"),
-                    Convert.ToString(Fila["precio"])
+                    Convert.ToString(Fila["precio"])   
                 );
             }
 
+            foreach (DataGridViewRow Rows in DataPedido.Rows)
+            {
+                total += Convert.ToDouble(Rows.Cells[4].Value);
+            }
+           
+            sub_total = total;
+            itbis = total * 0.18;
+            porciento_ley = total * 0.10;
+            lblSubTotal.Text = sub_total.ToString();
+            lblItbis.Text = itbis.ToString();
+            lblLey.Text = porciento_ley.ToString();
+            total =sub_total + itbis + porciento_ley;
+            lblTotal.Text = "RD$ " + total.ToString();
 
-            //DataPedido.DataSource = dt;
         }
         string vSql;
         DataTable dt;
         private void pedido_Load(object sender, EventArgs e)
         {
-            
+            MessageBox.Show("fecha" + fecha);
             try
             {
                 dt = new DataTable();
@@ -106,10 +126,7 @@ namespace eFood
             dt.ejecuta("SELECT id_productos, productos, descripcion, precio_comercial FROM productos WHERE id_categoria = 1");
             dataSeleccionProducto.DataSource = dt;
         }
-        bool existe = false;
-        int num_fila = 0;
-        int contador;
-        double total;
+        
 
         private void button14_Click(object sender, EventArgs e)
         {
@@ -174,6 +191,15 @@ namespace eFood
             }
 
             lblTotal.Text = "RD$ " + total.ToString();
+            sub_total     = total;
+            itbis         = total * 0.18;
+            porciento_ley = total * 0.10;
+            lblSubTotal.Text = sub_total.ToString();
+            lblItbis.Text    = itbis.ToString();
+            lblLey.Text      = porciento_ley.ToString();
+            total = sub_total+ itbis + porciento_ley;
+            lblTotal.Text = "RD$ " + total.ToString();
+
         }
         decimal cantidad;
 
@@ -191,7 +217,13 @@ namespace eFood
             {
                 total += Convert.ToDouble(Fila.Cells[4].Value);
             }
-
+            sub_total = total;
+            itbis = total * 0.18;
+            porciento_ley = total * 0.10;
+            lblSubTotal.Text = sub_total.ToString();
+            lblItbis.Text = itbis.ToString();
+            lblLey.Text = porciento_ley.ToString();
+            total = sub_total + itbis + porciento_ley;
             lblTotal.Text = "RD$ " + total.ToString();
         }
 
@@ -212,7 +244,14 @@ namespace eFood
                 {
                     total += Convert.ToDouble(Fila.Cells[4].Value);
                 }
-
+                
+                sub_total = total;
+                itbis = total * 0.18;
+                porciento_ley = total * 0.10;
+                lblSubTotal.Text = sub_total.ToString();
+                lblItbis.Text = itbis.ToString();
+                lblLey.Text = porciento_ley.ToString();
+                total = sub_total + itbis + porciento_ley;
                 lblTotal.Text = "RD$ " + total.ToString();
             }
             
@@ -227,20 +266,32 @@ namespace eFood
 
         private void button15_Click(object sender, EventArgs e)
         {
-            if (DataPedido.Rows.Count == 0)
+            //total = Convert.ToDouble(lblTotal.Text);
+            int rnc;
+            sub_total = total;
+            itbis         = total * 0.18;
+            porciento_ley = total * 0.10;
+            total  =+ itbis + porciento_ley;
+
+            dt = new DataTable();
+            vSql = $"SELECT id_factura FROM temp_enc_factura WHERE estado ='A' and id_mesa = {mesatag} ";
+            dt.ejecuta(vSql);
+            correcto = dt.ejecuta(vSql);
+
+            if (dt.Rows.Count == 0)
             {
-                MessageBox.Show("No hay datos para guardar");
-            }
-            
-                foreach (DataGridViewRow fila in DataPedido.Rows)
-            {
+                dt = new DataTable();
+                dt.ejecuta("SELECT max(id_factura) id_factura FROM temp_enc_factura");
+                id_factura = Convert.ToInt32((dt.Rows[0]["id_factura"]));
+                id_factura++;
+               
                 try
                 {
-                    string vSql = $"EXEC actuaiza_temp_det_fact '{id_factura}','{fila.Cells[0].Value}','{fila.Cells[3].Value}','{fila.Cells[5].Value}','{fila.Cells[0].Value}'";
+                    string vSql = $"EXEC actuaiza_temp_enc_fact '{id_factura}','{mesatag}','{fecha}','{6}','{login.codigo}','{null}','{itbis}','{total}','{porciento_ley}','{sub_total}','{'A'}','{null}'";
                     DataSet dt = new DataSet();
                     dt.ejecuta(vSql);
                     correcto = dt.ejecuta(vSql);
-                   
+
                 }
                 catch (Exception error)
                 {
@@ -253,6 +304,37 @@ namespace eFood
                 }
                 else MessageBox.Show("Error Salvando datos ");
             }
+            else
+            {
+                id_factura = Convert.ToInt32((dt.Rows[0]["id_factura"]));
+
+                foreach (DataGridViewRow fila in DataPedido.Rows)
+                {
+                    try
+                    {
+                        string vSql = $"EXEC actuaiza_temp_det_fact '{id_factura}','{fila.Cells[0].Value}','{fila.Cells[3].Value}','{fila.Cells[5].Value}','{fila.Cells[0].Value}'";
+                        DataSet dt = new DataSet();
+                        dt.ejecuta(vSql);
+                        correcto = dt.ejecuta(vSql);
+
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show("Error" + error.ToString());
+                    }
+
+                    if (correcto)
+                    {
+                        MessageBox.Show("Se Guardo ");
+                    }
+                    else MessageBox.Show("Error Salvando datos ");
+                }
+    }
+            if (DataPedido.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay datos para guardar");
+            }
+
         }
     }
 }

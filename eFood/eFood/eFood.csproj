@@ -32,20 +32,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BarcodeStandard, Version=2.2.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BarcodeLib.2.2.2\lib\netstandard2.0\BarcodeStandard.dll</HintPath>
+    <Reference Include="BarcodeStandard, Version=2.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BarcodeLib.2.2.3\lib\netstandard2.0\BarcodeStandard.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1358.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1400.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.Design, Version=15.3.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1358.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1400.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1358.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1400.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
@@ -54,7 +64,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Drawing.Common.4.5.1\lib\net461\System.Drawing.Common.dll</HintPath>
+      <HintPath>..\packages\System.Drawing.Common.4.7.0\lib\net461\System.Drawing.Common.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
@@ -130,6 +140,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>efoodDataSet4.xsd</DependentUpon>
     </Compile>
+    <Compile Include="efoodDataSet5.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet5.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="efoodDataSet6.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet6.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="efoodDataSet7.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet7.xsd</DependentUpon>
+    </Compile>
     <Compile Include="empleados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +178,12 @@
     </Compile>
     <Compile Include="pedido.Designer.cs">
       <DependentUpon>pedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Recetas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Recetas.Designer.cs">
+      <DependentUpon>Recetas.cs</DependentUpon>
     </Compile>
     <Compile Include="Productos.cs">
       <SubType>Form</SubType>
@@ -219,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pedido.resx">
       <DependentUpon>pedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Recetas.resx">
+      <DependentUpon>Recetas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Productos.resx">
       <DependentUpon>Productos.cs</DependentUpon>
@@ -304,6 +338,39 @@
     <None Include="efoodDataSet4.xss">
       <DependentUpon>efoodDataSet4.xsd</DependentUpon>
     </None>
+    <None Include="efoodDataSet5.xsc">
+      <DependentUpon>efoodDataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet5.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet5.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet5.xss">
+      <DependentUpon>efoodDataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet6.xsc">
+      <DependentUpon>efoodDataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet6.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet6.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet6.xss">
+      <DependentUpon>efoodDataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet7.xsc">
+      <DependentUpon>efoodDataSet7.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet7.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet7.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet7.xss">
+      <DependentUpon>efoodDataSet7.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -367,6 +434,7 @@
     <Content Include="Resources\iconfinder_230_HalfCircle_183347.png" />
     <Content Include="Resources\iconfinder_2_2739118 %281%29.png" />
     <Content Include="Resources\iconfinder_2_2739118.png" />
+    <None Include="Resources\iconfinder_67_111124.png" />
     <Content Include="Resources\iconfinder_aiga_bar_134140.png" />
     <Content Include="Resources\iconfinder_aiga_cashier_bg_134179 %281%29.png" />
     <Content Include="Resources\iconfinder_aiga_cashier_bg_134179.png" />
@@ -374,6 +442,19 @@
     <Content Include="Resources\iconfinder_architecture-interior-28_809102 %281%29.png" />
     <Content Include="Resources\iconfinder_architecture-interior-28_809102 %282%29.png" />
     <Content Include="Resources\iconfinder_architecture-interior-28_809102.png" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\iconfinder_Artboard_10_3915333 %281%29.png" />
     <Content Include="Resources\iconfinder_Artboard_50_3952951.png" />
     <Content Include="Resources\iconfinder_b4-05_1380569.png" />
@@ -396,19 +477,6 @@
     <None Include="Resources\mesa1.png" />
     <None Include="Resources\mesa2.png" />
     <None Include="Resources\mesa3.png" />
-    <Content Include="SqlServerTypes\readme.htm" />
-    <Content Include="SqlServerTypes\x64\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\msvcr120.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

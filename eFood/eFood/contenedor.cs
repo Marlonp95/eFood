@@ -189,6 +189,11 @@ namespace eFood
 
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario<Recetas>();
+        }
+
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
         #endregion

@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Productos));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -61,12 +61,10 @@
             this.tipoproductoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.efoodDataSet = new eFood.efoodDataSet();
             this.txtproducto = new System.Windows.Forms.TextBox();
-            this.txtprecio = new System.Windows.Forms.TextBox();
             this.txtcodigo = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button14 = new System.Windows.Forms.Button();
@@ -76,10 +74,17 @@
             this.tipo_productoTableAdapter = new eFood.efoodDataSetTableAdapters.tipo_productoTableAdapter();
             this.efoodDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.unidadTableAdapter = new eFood.efoodDataSet1TableAdapters.unidadTableAdapter();
+            this.comboMarca = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.efoodDataSet5 = new eFood.efoodDataSet5();
+            this.marcasBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.marcasTableAdapter = new eFood.efoodDataSet5TableAdapters.marcasTableAdapter();
+            this.efoodDataSet6 = new eFood.efoodDataSet6();
+            this.unidadBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.unidadTableAdapter1 = new eFood.efoodDataSet6TableAdapters.unidadTableAdapter();
+            this.efoodDataSet7 = new eFood.efoodDataSet7();
+            this.tipoproductoBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.tipo_productoTableAdapter1 = new eFood.efoodDataSet7TableAdapters.tipo_productoTableAdapter();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataprueba)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.unidadBindingSource)).BeginInit();
@@ -90,12 +95,17 @@
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.efoodDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.marcasBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unidadBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoproductoBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.comboMarca);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.panelresultado);
@@ -118,7 +128,6 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.combotipo);
             this.panel1.Controls.Add(this.txtproducto);
-            this.panel1.Controls.Add(this.txtprecio);
             this.panel1.Controls.Add(this.txtcodigo);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -208,7 +217,7 @@
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(144, 28);
             this.label20.TabIndex = 162;
-            this.label20.Text = "Precio";
+            this.label20.Text = "Marca";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label19
@@ -301,10 +310,10 @@
             this.dataprueba.AllowUserToDeleteRows = false;
             this.dataprueba.AllowUserToResizeColumns = false;
             this.dataprueba.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.PaleTurquoise;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.dataprueba.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.PaleTurquoise;
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.dataprueba.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dataprueba.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataprueba.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataprueba.ColumnHeadersVisible = false;
@@ -336,16 +345,16 @@
             // 
             // combounidad
             // 
-            this.combounidad.DataSource = this.unidadBindingSource;
+            this.combounidad.DataSource = this.unidadBindingSource1;
             this.combounidad.DisplayMember = "unidad";
             this.combounidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combounidad.FormattingEnabled = true;
-            this.combounidad.Location = new System.Drawing.Point(557, 100);
+            this.combounidad.Location = new System.Drawing.Point(557, 96);
             this.combounidad.Name = "combounidad";
             this.combounidad.Size = new System.Drawing.Size(205, 28);
             this.combounidad.TabIndex = 148;
             this.combounidad.Tag = "no vacio";
-            this.combounidad.ValueMember = "unidad";
+            this.combounidad.ValueMember = "id_unidad";
             // 
             // unidadBindingSource
             // 
@@ -360,7 +369,7 @@
             // txtreorden
             // 
             this.txtreorden.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtreorden.Location = new System.Drawing.Point(557, 61);
+            this.txtreorden.Location = new System.Drawing.Point(557, 57);
             this.txtreorden.Name = "txtreorden";
             this.txtreorden.Size = new System.Drawing.Size(205, 26);
             this.txtreorden.TabIndex = 147;
@@ -369,7 +378,7 @@
             // txtcantidad
             // 
             this.txtcantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtcantidad.Location = new System.Drawing.Point(557, 24);
+            this.txtcantidad.Location = new System.Drawing.Point(557, 20);
             this.txtcantidad.Name = "txtcantidad";
             this.txtcantidad.Size = new System.Drawing.Size(205, 26);
             this.txtcantidad.TabIndex = 146;
@@ -378,14 +387,13 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(91)))), ((int)(((byte)(140)))));
-            this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Controls.Add(this.label9);
             this.panel2.Controls.Add(this.label13);
             this.panel2.Location = new System.Drawing.Point(391, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(155, 206);
+            this.panel2.Size = new System.Drawing.Size(155, 185);
             this.panel2.TabIndex = 139;
             // 
             // label7
@@ -393,7 +401,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.label7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label7.Location = new System.Drawing.Point(12, 100);
+            this.label7.Location = new System.Drawing.Point(16, 94);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(58, 16);
             this.label7.TabIndex = 18;
@@ -423,7 +431,7 @@
             // 
             // combotipo
             // 
-            this.combotipo.DataSource = this.tipoproductoBindingSource;
+            this.combotipo.DataSource = this.tipoproductoBindingSource1;
             this.combotipo.DisplayMember = "nombre_tipo";
             this.combotipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.combotipo.FormattingEnabled = true;
@@ -432,7 +440,7 @@
             this.combotipo.Size = new System.Drawing.Size(205, 28);
             this.combotipo.TabIndex = 145;
             this.combotipo.Tag = "no vacio";
-            this.combotipo.ValueMember = "nombre_tipo";
+            this.combotipo.ValueMember = "id_tipo";
             // 
             // tipoproductoBindingSource
             // 
@@ -454,15 +462,6 @@
             this.txtproducto.TabIndex = 142;
             this.txtproducto.Tag = "no vacio";
             // 
-            // txtprecio
-            // 
-            this.txtprecio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtprecio.Location = new System.Drawing.Point(173, 143);
-            this.txtprecio.Name = "txtprecio";
-            this.txtprecio.Size = new System.Drawing.Size(205, 26);
-            this.txtprecio.TabIndex = 141;
-            this.txtprecio.Tag = "no vacio";
-            // 
             // txtcodigo
             // 
             this.txtcodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -478,11 +477,10 @@
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(91)))), ((int)(((byte)(140)))));
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.label4);
             this.panel3.Location = new System.Drawing.Point(12, 12);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(155, 206);
+            this.panel3.Size = new System.Drawing.Size(155, 185);
             this.panel3.TabIndex = 138;
             // 
             // label1
@@ -506,17 +504,6 @@
             this.label2.Size = new System.Drawing.Size(70, 16);
             this.label2.TabIndex = 13;
             this.label2.Text = "Producto";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Location = new System.Drawing.Point(12, 133);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 16);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Precio Unidad\r\n";
             // 
             // label4
             // 
@@ -625,45 +612,71 @@
             // 
             this.unidadTableAdapter.ClearBeforeFill = true;
             // 
+            // comboMarca
+            // 
+            this.comboMarca.DataSource = this.marcasBindingSource;
+            this.comboMarca.DisplayMember = "marca";
+            this.comboMarca.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboMarca.FormattingEnabled = true;
+            this.comboMarca.Location = new System.Drawing.Point(557, 143);
+            this.comboMarca.Name = "comboMarca";
+            this.comboMarca.Size = new System.Drawing.Size(205, 28);
+            this.comboMarca.TabIndex = 166;
+            this.comboMarca.Tag = "no vacio";
+            this.comboMarca.ValueMember = "id_marca";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
             this.label6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label6.Location = new System.Drawing.Point(12, 141);
+            this.label6.Location = new System.Drawing.Point(12, 137);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 16);
+            this.label6.Size = new System.Drawing.Size(51, 16);
             this.label6.TabIndex = 21;
-            this.label6.Text = "Factor";
+            this.label6.Text = "Marca\r\n";
             // 
-            // label8
+            // efoodDataSet5
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold);
-            this.label8.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label8.Location = new System.Drawing.Point(12, 177);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(46, 16);
-            this.label8.TabIndex = 22;
-            this.label8.Text = "ITBIS";
+            this.efoodDataSet5.DataSetName = "efoodDataSet5";
+            this.efoodDataSet5.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // textBox1
+            // marcasBindingSource
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(557, 145);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(205, 26);
-            this.textBox1.TabIndex = 166;
-            this.textBox1.Tag = "no vacio";
+            this.marcasBindingSource.DataMember = "marcas";
+            this.marcasBindingSource.DataSource = this.efoodDataSet5;
             // 
-            // textBox2
+            // marcasTableAdapter
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(557, 189);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(205, 26);
-            this.textBox2.TabIndex = 167;
-            this.textBox2.Tag = "no vacio";
+            this.marcasTableAdapter.ClearBeforeFill = true;
+            // 
+            // efoodDataSet6
+            // 
+            this.efoodDataSet6.DataSetName = "efoodDataSet6";
+            this.efoodDataSet6.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // unidadBindingSource1
+            // 
+            this.unidadBindingSource1.DataMember = "unidad";
+            this.unidadBindingSource1.DataSource = this.efoodDataSet6;
+            // 
+            // unidadTableAdapter1
+            // 
+            this.unidadTableAdapter1.ClearBeforeFill = true;
+            // 
+            // efoodDataSet7
+            // 
+            this.efoodDataSet7.DataSetName = "efoodDataSet7";
+            this.efoodDataSet7.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // tipoproductoBindingSource1
+            // 
+            this.tipoproductoBindingSource1.DataMember = "tipo_producto";
+            this.tipoproductoBindingSource1.DataSource = this.efoodDataSet7;
+            // 
+            // tipo_productoTableAdapter1
+            // 
+            this.tipo_productoTableAdapter1.ClearBeforeFill = true;
             // 
             // Productos
             // 
@@ -688,6 +701,12 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.efoodDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.marcasBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.unidadBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoproductoBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -706,12 +725,10 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox combotipo;
         private System.Windows.Forms.TextBox txtproducto;
-        private System.Windows.Forms.TextBox txtprecio;
         private System.Windows.Forms.TextBox txtcodigo;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button button1;
@@ -739,9 +756,16 @@
         private System.Windows.Forms.Panel panelresultado;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox comboMarca;
         private System.Windows.Forms.Label label6;
+        private efoodDataSet5 efoodDataSet5;
+        private System.Windows.Forms.BindingSource marcasBindingSource;
+        private efoodDataSet5TableAdapters.marcasTableAdapter marcasTableAdapter;
+        private efoodDataSet6 efoodDataSet6;
+        private System.Windows.Forms.BindingSource unidadBindingSource1;
+        private efoodDataSet6TableAdapters.unidadTableAdapter unidadTableAdapter1;
+        private efoodDataSet7 efoodDataSet7;
+        private System.Windows.Forms.BindingSource tipoproductoBindingSource1;
+        private efoodDataSet7TableAdapters.tipo_productoTableAdapter tipo_productoTableAdapter1;
     }
 }

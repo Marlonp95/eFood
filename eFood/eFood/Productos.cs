@@ -68,7 +68,7 @@ namespace eFood
             {
                 string vSql = $"EXEC actualizaproductos '{txtcodigo.Text.Trim()}','{txtproducto.Text.Trim()}','{combotipo.SelectedValue.ToString()}'," +
                                                       $"'{txtdescripcion.Text.Trim()}'," +
-                                                      $"'{txtcantidad.Text.Trim()}','{ txtreorden.Text.Trim()}','{combounidad.SelectedValue.ToString()}','{txtprecio.Text.Trim()}'";
+                                                      $"'{txtcantidad.Text.Trim()}','{ txtreorden.Text.Trim()}','{combounidad.SelectedValue.ToString()}','{comboMarca.SelectedValue.ToString()}'";
 
                 DataSet dt = new DataSet();
                 dt.ejecuta(vSql);
@@ -85,33 +85,37 @@ namespace eFood
 
         private void Productos_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'efoodDataSet7.tipo_producto' table. You can move, or remove it, as needed.
+            this.tipo_productoTableAdapter1.Fill(this.efoodDataSet7.tipo_producto);
+            // TODO: This line of code loads data into the 'efoodDataSet6.unidad' table. You can move, or remove it, as needed.
+            this.unidadTableAdapter1.Fill(this.efoodDataSet6.unidad);
+            // TODO: This line of code loads data into the 'efoodDataSet5.marcas' table. You can move, or remove it, as needed.
+            this.marcasTableAdapter.Fill(this.efoodDataSet5.marcas);
             // TODO: This line of code loads data into the 'efoodDataSet1.unidad' table. You can move, or remove it, as needed.
             this.unidadTableAdapter.Fill(this.efoodDataSet1.unidad);
             // TODO: This line of code loads data into the 'efoodDataSet.tipo_producto' table. You can move, or remove it, as needed.
             this.tipo_productoTableAdapter.Fill(this.efoodDataSet.tipo_producto);
             traerArticulo();
+            
+                string vSql = $"SELECT TOP 1 * FROM productos ORDER by id_productos DESC";
+                DataSet dt = new DataSet();
+                dt.ejecuta(vSql);
+                bool correcto = dt.ejecuta(vSql);
+                if (utilidades.DsTieneDatos(dt))
+                {
+                    codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_productos"]);
+                    codigo++;
+                    txtcodigo.Text = Convert.ToString(codigo);
 
+                }
+                else
+                {
+                    MessageBox.Show("CREAR PRODUCTO");
+                }
+            
         }
         int codigo;
 
-        //private void panel1_Paint(object sender, PaintEventArgs e)
-        //{
-        //    string vSql = $"SELECT TOP 1 * FROM productos ORDER by id_productos DESC";
-        //    DataSet dt = new DataSet();
-        //    dt.ejecuta(vSql);
-        //    bool correcto = dt.ejecuta(vSql);
-        //    if (utilidades.DsTieneDatos(dt))
-        //    {
-        //        codigo = Convert.ToInt32(dt.Tables[0].Rows[0]["id_productos"]);
-        //        codigo++;
-        //        txtcodigo.Text = Convert.ToString(codigo);
-
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("CREAR EMPLEADO");
-        //    }
-        //}
 
         private void tipoproductoBindingSource_CurrentChanged(object sender, EventArgs e)
         {
@@ -121,7 +125,7 @@ namespace eFood
         public void traerArticulo() 
         {
             DataTable dt = new DataTable();
-            dt.ejecuta("Select * from productos");
+            dt.ejecuta("Select a.id_productos, a.productos, d.descripcion,a.descripcion, a.cantidad, a.reorden, b.unidad, c.marca from productos a inner join unidad b on a.id_unidad = b.id_unidad inner join marcas c on a.id_marca = c.id_marca inner join tipo_producto d on a.id_productos = d.id_tipo");
             dataprueba.DataSource = dt;
         }
 
@@ -173,7 +177,6 @@ namespace eFood
             txtcantidad.Clear();
             txtcodigo.Clear();
             txtdescripcion.Clear();
-            txtprecio.Clear();
             txtreorden.Clear();
             txtcodigo.Focus();
         }
@@ -264,7 +267,6 @@ namespace eFood
                     txtreorden.Text = dt.Tables[0].Rows[0]["reorden"].ToString();
                     txtcantidad.Text = dt.Tables[0].Rows[0]["cantidad"].ToString();
                     combounidad.SelectedValue = dt.Tables[0].Rows[0]["unidad"].ToString();
-                    txtprecio.Text = dt.Tables[0].Rows[0]["precio_comercial"].ToString();
                 }
                 else
                 {
