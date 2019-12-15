@@ -155,6 +155,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>efoodDataSet7.xsd</DependentUpon>
     </Compile>
+    <Compile Include="efoodDataSet8.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet8.xsd</DependentUpon>
+    </Compile>
     <Compile Include="empleados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -371,6 +376,17 @@
     <None Include="efoodDataSet7.xss">
       <DependentUpon>efoodDataSet7.xsd</DependentUpon>
     </None>
+    <None Include="efoodDataSet8.xsc">
+      <DependentUpon>efoodDataSet8.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet8.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet8.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet8.xss">
+      <DependentUpon>efoodDataSet8.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -427,6 +443,8 @@
     <Content Include="Resources\2427858-48.png" />
     <Content Include="Resources\383079-32.png" />
     <Content Include="Resources\383079-48.png" />
+    <None Include="Resources\905644-32.png" />
+    <None Include="Resources\905644-321.png" />
     <Content Include="Resources\iconfinder_07-prawn_4885264.png" />
     <Content Include="Resources\iconfinder_161_Bar_barcode_code_shopping_4308531.png" />
     <Content Include="Resources\iconfinder_1_1845739 %281%29.png" />
