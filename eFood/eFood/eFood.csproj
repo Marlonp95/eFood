@@ -160,6 +160,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>efoodDataSet8.xsd</DependentUpon>
     </Compile>
+    <Compile Include="efoodDataSet9.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet9.xsd</DependentUpon>
+    </Compile>
     <Compile Include="empleados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +188,12 @@
     </Compile>
     <Compile Include="pedido.Designer.cs">
       <DependentUpon>pedido.cs</DependentUpon>
+    </Compile>
+    <Compile Include="platos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="platos.Designer.cs">
+      <DependentUpon>platos.cs</DependentUpon>
     </Compile>
     <Compile Include="Recetas.cs">
       <SubType>Form</SubType>
@@ -255,6 +266,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="pedido.resx">
       <DependentUpon>pedido.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="platos.resx">
+      <DependentUpon>platos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Recetas.resx">
       <DependentUpon>Recetas.cs</DependentUpon>
@@ -386,6 +400,17 @@
     </None>
     <None Include="efoodDataSet8.xss">
       <DependentUpon>efoodDataSet8.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet9.xsc">
+      <DependentUpon>efoodDataSet9.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet9.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet9.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet9.xss">
+      <DependentUpon>efoodDataSet9.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

@@ -27,6 +27,8 @@ namespace eFood
         int id_receta;
         private void Recetas_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'efoodDataSet9.recetas' table. You can move, or remove it, as needed.
+            this.recetasTableAdapter.Fill(this.efoodDataSet9.recetas);
             // TODO: This line of code loads data into the 'efoodDataSet8.unidad_medida' table. You can move, or remove it, as needed.
             this.unidad_medidaTableAdapter.Fill(this.efoodDataSet8.unidad_medida);
             DataTable dt = new DataTable();
@@ -203,6 +205,51 @@ namespace eFood
             {
                 MessageBox.Show(error.ToString());
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+            dt.ejecuta($"Select a.id_productos, a.productos, b.porcion, c.id_unidad, c.descripcion from productos a  INNER JOIN detalle_receta b ON A.id_productos = b.id_producto INNER JOIN unidad_medida C ON b.id_unidad = c.id_unidad where b.id_receta = {ComboBuscaRecet.SelectedValue}");
+            foreach (DataRow Fila in dt.Rows)
+            {
+                dataGridView1.Rows.Add
+                (
+                    Convert.ToString(Fila["id_productos"]),
+                    Convert.ToString(Fila["productos"]),
+                    Convert.ToString(Fila["porcion"]),
+                    Convert.ToString(Fila["id_unidad"]),
+                    Convert.ToString(Fila["descripcion"])
+                );
+
+                dt = new DataTable();
+                dt.ejecuta($"SELECT * from Recetas WHERE id_receta = {ComboBuscaRecet.SelectedValue}");
+
+                txtNombreReceta.Text = dt.Rows[0]["receta"].ToString();
+                txtComensales.Text   = dt.Rows[0]["comensales"].ToString();
+                txtPreparacion.Text  = dt.Rows[0]["tiempo"].ToString();
+                txtReceta.Text       = dt.Rows[0]["descripcion"].ToString();
+                string cat           = dt.Rows[0]["categoria"].ToString();
+
+                if (cat == "Entrada") {radioEntrada.Checked= true;}
+                if (cat == "Primer Plato")  {radioPrimer.Checked = true; }
+                if (cat == "Segundo Plato") { radioSegundo.Checked = true; }
+                if (cat == "Postre") { radioPostre.Checked = true; }
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            txtReceta.Clear();
+            txtPorcion.Clear();
+            txtDescripcion.Clear();
+            txtComensales.Clear();
+            txtDetProducto.Clear();
+            txtNombreReceta.Clear();
+            txtCodigo.Clear();
+            txtPreparacion.Clear();
+            txtCodProducto.Clear();
+            dataGridView1.Rows.Clear();
         }
     }
 }

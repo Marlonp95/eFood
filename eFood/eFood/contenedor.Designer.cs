@@ -146,7 +146,7 @@
             this.button6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button6.Image = global::eFood.Properties.Resources.iconfinder_Artboard_10_3915333__1_;
             this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.Location = new System.Drawing.Point(3, 325);
+            this.button6.Location = new System.Drawing.Point(3, 334);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(202, 37);
             this.button6.TabIndex = 7;
@@ -162,7 +162,7 @@
             this.button5.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
             this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(3, 285);
+            this.button5.Location = new System.Drawing.Point(3, 205);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(202, 37);
             this.button5.TabIndex = 6;
@@ -178,7 +178,7 @@
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(3, 245);
+            this.button4.Location = new System.Drawing.Point(3, 291);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(202, 37);
             this.button4.TabIndex = 5;
@@ -194,11 +194,11 @@
             this.button3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(3, 205);
+            this.button3.Location = new System.Drawing.Point(3, 248);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(202, 37);
             this.button3.TabIndex = 4;
-            this.button3.Text = "Productos ";
+            this.button3.Text = "Platos";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button3.UseVisualStyleBackColor = true;
             // 
