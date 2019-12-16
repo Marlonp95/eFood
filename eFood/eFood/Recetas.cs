@@ -167,7 +167,7 @@ namespace eFood
             }
             catch (Exception error)
             {
-                MessageBox.Show("Error Guardando Imagen" + error);
+                MessageBox.Show("Error Guardando Imagen");
             }
         }
 

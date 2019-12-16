@@ -125,6 +125,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>efoodDataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="efoodDataSet10.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet10.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="efoodDataSet11.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet11.xsd</DependentUpon>
+    </Compile>
     <Compile Include="efoodDataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -323,6 +333,28 @@
     </None>
     <None Include="efoodDataSet1.xss">
       <DependentUpon>efoodDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet10.xsc">
+      <DependentUpon>efoodDataSet10.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet10.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet10.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet10.xss">
+      <DependentUpon>efoodDataSet10.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet11.xsc">
+      <DependentUpon>efoodDataSet11.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet11.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet11.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet11.xss">
+      <DependentUpon>efoodDataSet11.xsd</DependentUpon>
     </None>
     <None Include="efoodDataSet2.xsc">
       <DependentUpon>efoodDataSet2.xsd</DependentUpon>

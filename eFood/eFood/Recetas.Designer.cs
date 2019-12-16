@@ -82,16 +82,17 @@
             this.label15 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
             this.ComboBuscaRecet = new System.Windows.Forms.ComboBox();
-            this.efoodDataSet9 = new eFood.efoodDataSet9();
             this.recetasBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.efoodDataSet9 = new eFood.efoodDataSet9();
             this.recetasTableAdapter = new eFood.efoodDataSet9TableAdapters.recetasTableAdapter();
             this.button8 = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.unidadmedidaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.recetasBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet9)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -613,15 +614,15 @@
             this.ComboBuscaRecet.TabIndex = 169;
             this.ComboBuscaRecet.ValueMember = "id_receta";
             // 
-            // efoodDataSet9
-            // 
-            this.efoodDataSet9.DataSetName = "efoodDataSet9";
-            this.efoodDataSet9.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // recetasBindingSource
             // 
             this.recetasBindingSource.DataMember = "recetas";
             this.recetasBindingSource.DataSource = this.efoodDataSet9;
+            // 
+            // efoodDataSet9
+            // 
+            this.efoodDataSet9.DataSetName = "efoodDataSet9";
+            this.efoodDataSet9.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // recetasTableAdapter
             // 
@@ -642,11 +643,22 @@
             this.button8.UseVisualStyleBackColor = false;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(738, 12);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(69, 20);
+            this.label16.TabIndex = 183;
+            this.label16.Text = "Imagen";
+            // 
             // Recetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1046, 605);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.ComboBuscaRecet);
             this.Controls.Add(this.button7);
@@ -697,8 +709,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.unidadmedidaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.recetasBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.efoodDataSet9)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -762,5 +774,6 @@
         private System.Windows.Forms.BindingSource recetasBindingSource;
         private efoodDataSet9TableAdapters.recetasTableAdapter recetasTableAdapter;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Label label16;
     }
 }
