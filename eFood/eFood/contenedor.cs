@@ -158,7 +158,7 @@ namespace eFood
 
         private void button6_Click(object sender, EventArgs e)
         {
-            
+            AbrirFormulario<recetario>();
         }
 
         private void timer1_Tick(object sender, EventArgs e)

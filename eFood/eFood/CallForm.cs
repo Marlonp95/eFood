@@ -140,10 +140,10 @@ namespace eFood
                 btn.BackColor = Color.Red;
                 btn.ForeColor = Color.White;
             }
-            else if (pstatus == "R")
+            else if (pstatus == "S" || pstatus == "s")
             {
-                btn.BackColor = Color.SlateGray;
-                btn.ForeColor = Color.White;
+                btn.BackColor = Color.Yellow;
+                btn.ForeColor = Color.Black;
             }
             else
             {

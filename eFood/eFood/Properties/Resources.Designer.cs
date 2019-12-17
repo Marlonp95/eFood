@@ -433,6 +433,16 @@ namespace eFood.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconfinder_book_text_103408 {
+            get {
+                object obj = ResourceManager.GetObject("iconfinder_book_text_103408", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iconfinder_chart_4634998 {
             get {
                 object obj = ResourceManager.GetObject("iconfinder_chart_4634998", resourceCulture);

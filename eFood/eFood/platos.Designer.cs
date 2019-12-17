@@ -131,7 +131,7 @@
             this.comboCategoria.DisplayMember = "descripcion";
             this.comboCategoria.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboCategoria.FormattingEnabled = true;
-            this.comboCategoria.Location = new System.Drawing.Point(12, 245);
+            this.comboCategoria.Location = new System.Drawing.Point(15, 207);
             this.comboCategoria.Name = "comboCategoria";
             this.comboCategoria.Size = new System.Drawing.Size(194, 21);
             this.comboCategoria.TabIndex = 30;
@@ -288,7 +288,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(8, 223);
+            this.label4.Location = new System.Drawing.Point(11, 185);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(76, 16);
             this.label4.TabIndex = 183;
@@ -300,9 +300,9 @@
             this.comboReceta.DisplayMember = "receta";
             this.comboReceta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboReceta.FormattingEnabled = true;
-            this.comboReceta.Location = new System.Drawing.Point(253, 245);
+            this.comboReceta.Location = new System.Drawing.Point(256, 207);
             this.comboReceta.Name = "comboReceta";
-            this.comboReceta.Size = new System.Drawing.Size(194, 21);
+            this.comboReceta.Size = new System.Drawing.Size(203, 21);
             this.comboReceta.TabIndex = 184;
             this.comboReceta.ValueMember = "id_receta";
             // 
@@ -320,7 +320,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(250, 226);
+            this.label5.Location = new System.Drawing.Point(253, 188);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 16);
             this.label5.TabIndex = 185;
@@ -484,7 +484,6 @@
             this.txtBuscar.Size = new System.Drawing.Size(158, 20);
             this.txtBuscar.TabIndex = 195;
             this.txtBuscar.Tag = "no vacio";
-            this.txtBuscar.Visible = false;
             // 
             // platos
             // 

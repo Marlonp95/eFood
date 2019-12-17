@@ -135,6 +135,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>efoodDataSet11.xsd</DependentUpon>
     </Compile>
+    <Compile Include="efoodDataSet12.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet12.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="efoodDataSet13.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet13.xsd</DependentUpon>
+    </Compile>
     <Compile Include="efoodDataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -204,6 +214,12 @@
     </Compile>
     <Compile Include="platos.Designer.cs">
       <DependentUpon>platos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="recetario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="recetario.Designer.cs">
+      <DependentUpon>recetario.cs</DependentUpon>
     </Compile>
     <Compile Include="Recetas.cs">
       <SubType>Form</SubType>
@@ -280,6 +296,9 @@
     <EmbeddedResource Include="platos.resx">
       <DependentUpon>platos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="recetario.resx">
+      <DependentUpon>recetario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Recetas.resx">
       <DependentUpon>Recetas.cs</DependentUpon>
     </EmbeddedResource>
@@ -355,6 +374,28 @@
     </None>
     <None Include="efoodDataSet11.xss">
       <DependentUpon>efoodDataSet11.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet12.xsc">
+      <DependentUpon>efoodDataSet12.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet12.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet12.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet12.xss">
+      <DependentUpon>efoodDataSet12.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet13.xsc">
+      <DependentUpon>efoodDataSet13.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet13.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet13.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet13.xss">
+      <DependentUpon>efoodDataSet13.xsd</DependentUpon>
     </None>
     <None Include="efoodDataSet2.xsc">
       <DependentUpon>efoodDataSet2.xsd</DependentUpon>
@@ -517,6 +558,7 @@
     <Content Include="Resources\iconfinder_architecture-interior-28_809102 %281%29.png" />
     <Content Include="Resources\iconfinder_architecture-interior-28_809102 %282%29.png" />
     <Content Include="Resources\iconfinder_architecture-interior-28_809102.png" />
+    <None Include="Resources\iconfinder_book_text_103408.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

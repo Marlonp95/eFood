@@ -93,10 +93,13 @@ namespace eFood
 
                 throw;
             }
+
+            traerPlatos();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            dataGridView1.Rows.Clear();
             DataTable dt = new DataTable();
             dt.ejecuta($"select a.id_plato, a.plato, a.descripcion, a.precio, a.itbis, b.receta, c.DESCRIPCION from platos a inner join recetas b on a.id_receta = b.id_receta inner join categoria c on a.id_categoria = c.ID_CATEGORIA where a.descripcion like ('%" + txtBuscar.Text.Trim() + "%')");
             foreach (DataRow Fila in dt.Rows)

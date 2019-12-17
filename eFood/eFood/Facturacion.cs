@@ -28,22 +28,26 @@ namespace eFood
 
         private void Facturacion_Load(object sender, EventArgs e)
         {
-            try
-            {
-                string vSql = $"SELECT * From persona Where id_persona=" + login.codigo;
-                DataSet dt = new DataSet();
-                dt.ejecuta(vSql);
-                bool correcto = dt.ejecuta(vSql);
-                if (correcto)
-                {
+            // TODO: This line of code loads data into the 'efoodDataSet13.mesa' table. You can move, or remove it, as needed.
+            this.mesaTableAdapter1.Fill(this.efoodDataSet13.mesa);
+            // TODO: This line of code loads data into the 'efoodDataSet12.mesa' table. You can move, or remove it, as needed.
+            //this.mesaTableAdapter.Fill(this.efoodDataSet12.mesa);
+            //try
+            //{
+            //    string vSql = $"SELECT * From persona Where id_persona=" + login.codigo;
+            //    DataSet dt = new DataSet();
+            //    dt.ejecuta(vSql);
+            //    bool correcto = dt.ejecuta(vSql);
+            //    if (correcto)
+            //    {
 
-                    txtvendedor.Text = dt.Tables[0].Rows[0]["nombre1"].ToString() + " " + dt.Tables[0].Rows[0]["apellido1"].ToString().Trim(); 
-                }
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show("error" + error);
-            }
+            //        txtvendedor.Text = dt.Tables[0].Rows[0]["nombre1"].ToString() + " " + dt.Tables[0].Rows[0]["apellido1"].ToString().Trim(); 
+            //    }
+            //}
+            //catch (Exception error)
+            //{
+            //    MessageBox.Show("error" + error);
+            //}
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -233,6 +237,16 @@ namespace eFood
         {
 
             if (TipoPago.Visible == true) utilidades.Animate(TipoPago, utilidades.Effect.roll, 100, 600);
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
 
         }
     }
