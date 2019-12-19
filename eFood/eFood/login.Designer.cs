@@ -148,7 +148,7 @@
             this.txtnom.Name = "txtnom";
             this.txtnom.Size = new System.Drawing.Size(309, 24);
             this.txtnom.TabIndex = 1;
-            this.txtnom.Text = "USUARIO";
+            this.txtnom.Text = "Marlonp95";
             this.txtnom.Enter += new System.EventHandler(this.textBox1_Enter);
             this.txtnom.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
@@ -162,7 +162,7 @@
             this.txtpass.Name = "txtpass";
             this.txtpass.Size = new System.Drawing.Size(309, 24);
             this.txtpass.TabIndex = 2;
-            this.txtpass.Text = "CONTRASEÑA";
+            this.txtpass.Text = "123123";
             this.txtpass.Enter += new System.EventHandler(this.textBox2_Enter);
             this.txtpass.Leave += new System.EventHandler(this.textBox2_Leave);
             // 

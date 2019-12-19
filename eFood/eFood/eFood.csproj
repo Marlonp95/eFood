@@ -115,6 +115,12 @@
     <Compile Include="dashboard.Designer.cs">
       <DependentUpon>dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="dividir_cuentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dividir_cuentas.Designer.cs">
+      <DependentUpon>dividir_cuentas.cs</DependentUpon>
+    </Compile>
     <Compile Include="efoodDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -144,6 +150,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>efoodDataSet13.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="efoodDataSet14.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet14.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="efoodDataSet15.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>efoodDataSet15.xsd</DependentUpon>
     </Compile>
     <Compile Include="efoodDataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -281,6 +297,9 @@
     <EmbeddedResource Include="dashboard.resx">
       <DependentUpon>dashboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dividir_cuentas.resx">
+      <DependentUpon>dividir_cuentas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="empleados.resx">
       <DependentUpon>empleados.cs</DependentUpon>
     </EmbeddedResource>
@@ -396,6 +415,28 @@
     </None>
     <None Include="efoodDataSet13.xss">
       <DependentUpon>efoodDataSet13.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet14.xsc">
+      <DependentUpon>efoodDataSet14.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet14.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet14.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet14.xss">
+      <DependentUpon>efoodDataSet14.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet15.xsc">
+      <DependentUpon>efoodDataSet15.xsd</DependentUpon>
+    </None>
+    <None Include="efoodDataSet15.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>efoodDataSet15.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="efoodDataSet15.xss">
+      <DependentUpon>efoodDataSet15.xsd</DependentUpon>
     </None>
     <None Include="efoodDataSet2.xsc">
       <DependentUpon>efoodDataSet2.xsd</DependentUpon>

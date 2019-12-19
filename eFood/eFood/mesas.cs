@@ -57,6 +57,10 @@ namespace eFood
 
         private void mesas_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'efoodDataSet15.mesa' table. You can move, or remove it, as needed.
+            this.mesaTableAdapter1.Fill(this.efoodDataSet15.mesa);
+            // TODO: This line of code loads data into the 'efoodDataSet13.mesa' table. You can move, or remove it, as needed.
+            this.mesaTableAdapter.Fill(this.efoodDataSet13.mesa);
             Cargar_MxUb();
             Cargar_Ubicacion();
         }
@@ -71,9 +75,6 @@ namespace eFood
                 contenedor.Controls.Add(item);
                 CallForm.EstadosColor(item);
             }
-              
-
-            
         }
         public void Cargar_Ubicacion(string pCondicion = null)
         {
@@ -92,11 +93,8 @@ namespace eFood
                     Name = $"Area_{dr["descripcion"].ToString()}",
                     Tag = dr["id_ubicacion"].ToString(),
                     Text = dr["descripcion"].ToString(),
-
                     contenedor=contenedor,
                     PanelPrincipal= PanelPrincipal,
-                    
-
                 };
                 ContenedorUbicaciones.Controls.Add(btnUbicacion);
                
@@ -132,6 +130,47 @@ namespace eFood
         private void button3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Desea unir Mesa " + comboOrigen.SelectedValue.ToString() + " con la mesa "+ comboDestino.SelectedValue.ToString() , "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            {
+                DialogResult vrest =  MessageBox.Show("Desea unir mesas con cuentas separadas ?", "Aviso", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                if (vrest == DialogResult.Yes)
+                {
+                    try
+                    {
+                        string vSql;
+
+                        DataTable dt = new DataTable();
+                        vSql = $"UPDATE temp_enc_factura SET id_mesa = '{comboDestino.SelectedValue}'  WHERE  id_mesa = {comboOrigen.SelectedValue}";
+                        dt = new DataTable();
+                        dt.ejecuta(vSql);
+
+
+                        dt = new DataTable();
+                        vSql = $"update mesa set estado ='D' where id_mesa = {comboOrigen.SelectedValue}";
+                        dt.ejecuta(vSql);  
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+
+                    contenedor.Controls.Clear();
+                    Cargar_MxUb();
+
+                }
+                else if(vrest== DialogResult.No)
+                {
+                    string vSql;
+                    DataTable dt = new DataTable();
+                    vSql = $"UPDATE mesa SET estado = 'O'  WHERE  id_mesa = " + btn.IdMesa.ToString(); ;
+                    dt = new DataTable();
+                    dt.ejecuta(vSql);
+                }
+            }
         }
 
         //private void button3_Click(object sender, EventArgs e)
