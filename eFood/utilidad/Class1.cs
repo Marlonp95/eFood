@@ -51,6 +51,34 @@ namespace utilidad
             }
             return vEstado;
         }
+
+
+        public static DataTable ejecuta(string sentencia)
+        {
+            DataTable dt = new DataTable();
+       
+            try
+            {
+                SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=efood;Integrated Security=True");
+                con.Open();
+
+                SqlCommand cmd = new SqlCommand(sentencia, con);
+                //cmd.ExecuteNonQuery();
+
+                SqlDataAdapter da = new SqlDataAdapter(sentencia, con);
+                da.Fill(dt);
+                con.Close();
+                con.Dispose();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al Conectar con la Base de Datos : " + ex.ToString());
+                dt = null;
+
+            }
+            return dt;
+        }
         /// <summary>
         /// Para los data table
         /// </summary>

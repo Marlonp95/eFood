@@ -45,14 +45,20 @@
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1400.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1400.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1400.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
@@ -66,6 +72,7 @@
     <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Drawing.Common.4.7.0\lib\net461\System.Drawing.Common.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -91,184 +98,116 @@
       <DependentUpon>btnUbicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="CallForm.cs" />
-    <Compile Include="Categorias.cs">
+    <Compile Include="Utils\Globals.cs" />
+    <Compile Include="Vistas\Categorias.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Categorias.Designer.cs">
+    <Compile Include="Vistas\Categorias.Designer.cs">
       <DependentUpon>Categorias.cs</DependentUpon>
     </Compile>
-    <Compile Include="clientes.cs">
+    <Compile Include="Vistas\clientes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="clientes.Designer.cs">
+    <Compile Include="Vistas\clientes.Designer.cs">
       <DependentUpon>clientes.cs</DependentUpon>
     </Compile>
-    <Compile Include="contenedor.cs">
+    <Compile Include="Vistas\contenedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="contenedor.Designer.cs">
+    <Compile Include="Vistas\contenedor.Designer.cs">
       <DependentUpon>contenedor.cs</DependentUpon>
     </Compile>
-    <Compile Include="dashboard.cs">
+    <Compile Include="Vistas\dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dashboard.Designer.cs">
+    <Compile Include="Vistas\dashboard.Designer.cs">
       <DependentUpon>dashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="dividir_cuentas.cs">
+    <Compile Include="DataFactura.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataFactura.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\dividir_cuentas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dividir_cuentas.Designer.cs">
+    <Compile Include="Vistas\dividir_cuentas.Designer.cs">
       <DependentUpon>dividir_cuentas.cs</DependentUpon>
     </Compile>
-    <Compile Include="efoodDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet10.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet10.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet11.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet11.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet12.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet12.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet13.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet13.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet14.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet14.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet15.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet15.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet2.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet2.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet3.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet3.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet4.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet4.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet5.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet5.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet6.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet6.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet7.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet7.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet8.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet8.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="efoodDataSet9.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>efoodDataSet9.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="empleados.cs">
+    <Compile Include="Vistas\empleados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="empleados.Designer.cs">
+    <Compile Include="Vistas\empleados.Designer.cs">
       <DependentUpon>empleados.cs</DependentUpon>
     </Compile>
-    <Compile Include="Facturacion.cs">
+    <Compile Include="Vistas\Facturacion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Facturacion.Designer.cs">
+    <Compile Include="Vistas\Facturacion.Designer.cs">
       <DependentUpon>Facturacion.cs</DependentUpon>
     </Compile>
-    <Compile Include="mesas.cs">
+    <Compile Include="Vistas\mesas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="mesas.Designer.cs">
+    <Compile Include="Vistas\mesas.Designer.cs">
       <DependentUpon>mesas.cs</DependentUpon>
     </Compile>
-    <Compile Include="pedido.cs">
+    <Compile Include="Vistas\pedido.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="pedido.Designer.cs">
+    <Compile Include="Vistas\pedido.Designer.cs">
       <DependentUpon>pedido.cs</DependentUpon>
     </Compile>
-    <Compile Include="platos.cs">
+    <Compile Include="Vistas\platos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="platos.Designer.cs">
+    <Compile Include="Vistas\platos.Designer.cs">
       <DependentUpon>platos.cs</DependentUpon>
     </Compile>
-    <Compile Include="recetario.cs">
+    <Compile Include="Vistas\recetario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="recetario.Designer.cs">
+    <Compile Include="Vistas\recetario.Designer.cs">
       <DependentUpon>recetario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Recetas.cs">
+    <Compile Include="Vistas\Recetas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Recetas.Designer.cs">
+    <Compile Include="Vistas\Recetas.Designer.cs">
       <DependentUpon>Recetas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Productos.cs">
+    <Compile Include="Vistas\Productos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Productos.Designer.cs">
+    <Compile Include="Vistas\Productos.Designer.cs">
       <DependentUpon>Productos.cs</DependentUpon>
     </Compile>
-    <Compile Include="Inventario.cs">
+    <Compile Include="Vistas\Inventario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Inventario.Designer.cs">
+    <Compile Include="Vistas\Inventario.Designer.cs">
       <DependentUpon>Inventario.cs</DependentUpon>
     </Compile>
-    <Compile Include="login.cs">
+    <Compile Include="Vistas\login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="login.Designer.cs">
+    <Compile Include="Vistas\login.Designer.cs">
       <DependentUpon>login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Mantenimientos.cs">
+    <Compile Include="Vistas\Mantenimientos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Mantenimientos.Designer.cs">
+    <Compile Include="Vistas\Mantenimientos.Designer.cs">
       <DependentUpon>Mantenimientos.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vistas\reporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\reporte.Designer.cs">
+      <DependentUpon>reporte.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Reporte.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -276,61 +215,70 @@
       <DependentUpon>Reporte.cs</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="Suplidores.cs">
+    <Compile Include="Vistas\secuencia_ncf.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Suplidores.Designer.cs">
+    <Compile Include="Vistas\secuencia_ncf.Designer.cs">
+      <DependentUpon>secuencia_ncf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Suplidores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Suplidores.Designer.cs">
       <DependentUpon>Suplidores.cs</DependentUpon>
     </Compile>
-    <Compile Include="Usuarios.cs">
+    <Compile Include="Vistas\Usuarios.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Usuarios.Designer.cs">
+    <Compile Include="Vistas\Usuarios.Designer.cs">
       <DependentUpon>Usuarios.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Categorias.resx">
+    <EmbeddedResource Include="Vistas\Categorias.resx">
       <DependentUpon>Categorias.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="contenedor.resx">
+    <EmbeddedResource Include="Vistas\clientes.resx">
+      <DependentUpon>clientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\contenedor.resx">
       <DependentUpon>contenedor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dashboard.resx">
+    <EmbeddedResource Include="Vistas\dashboard.resx">
       <DependentUpon>dashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dividir_cuentas.resx">
+    <EmbeddedResource Include="Vistas\dividir_cuentas.resx">
       <DependentUpon>dividir_cuentas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="empleados.resx">
+    <EmbeddedResource Include="Vistas\empleados.resx">
       <DependentUpon>empleados.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Facturacion.resx">
+    <EmbeddedResource Include="Vistas\Facturacion.resx">
       <DependentUpon>Facturacion.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="mesas.resx">
+    <EmbeddedResource Include="Vistas\mesas.resx">
       <DependentUpon>mesas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="pedido.resx">
+    <EmbeddedResource Include="Vistas\pedido.resx">
       <DependentUpon>pedido.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="platos.resx">
+    <EmbeddedResource Include="Vistas\platos.resx">
       <DependentUpon>platos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="recetario.resx">
+    <EmbeddedResource Include="Vistas\recetario.resx">
       <DependentUpon>recetario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Recetas.resx">
+    <EmbeddedResource Include="Vistas\Recetas.resx">
       <DependentUpon>Recetas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Productos.resx">
+    <EmbeddedResource Include="Vistas\Productos.resx">
       <DependentUpon>Productos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Inventario.resx">
+    <EmbeddedResource Include="Vistas\Inventario.resx">
       <DependentUpon>Inventario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="login.resx">
+    <EmbeddedResource Include="Vistas\login.resx">
       <DependentUpon>login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Mantenimientos.resx">
+    <EmbeddedResource Include="Vistas\Mantenimientos.resx">
       <DependentUpon>Mantenimientos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -343,188 +291,30 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reportes\Factura.rdlc" />
+    <EmbeddedResource Include="Vistas\reporte.resx">
+      <DependentUpon>reporte.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Report1.rdlc" />
-    <EmbeddedResource Include="Suplidores.resx">
+    <EmbeddedResource Include="Vistas\secuencia_ncf.resx">
+      <DependentUpon>secuencia_ncf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Suplidores.resx">
       <DependentUpon>Suplidores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Usuarios.resx">
+    <EmbeddedResource Include="Vistas\Usuarios.resx">
       <DependentUpon>Usuarios.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="efoodDataSet.xsc">
-      <DependentUpon>efoodDataSet.xsd</DependentUpon>
+    <None Include="DataFactura.xsc">
+      <DependentUpon>DataFactura.xsd</DependentUpon>
     </None>
-    <None Include="efoodDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet.Designer.cs</LastGenOutput>
+    <None Include="DataFactura.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet.xss">
-      <DependentUpon>efoodDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet1.xsc">
-      <DependentUpon>efoodDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
+      <LastGenOutput>DataFactura.Designer.cs</LastGenOutput>
     </None>
-    <None Include="efoodDataSet1.xss">
-      <DependentUpon>efoodDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet10.xsc">
-      <DependentUpon>efoodDataSet10.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet10.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet10.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet10.xss">
-      <DependentUpon>efoodDataSet10.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet11.xsc">
-      <DependentUpon>efoodDataSet11.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet11.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet11.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet11.xss">
-      <DependentUpon>efoodDataSet11.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet12.xsc">
-      <DependentUpon>efoodDataSet12.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet12.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet12.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet12.xss">
-      <DependentUpon>efoodDataSet12.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet13.xsc">
-      <DependentUpon>efoodDataSet13.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet13.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet13.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet13.xss">
-      <DependentUpon>efoodDataSet13.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet14.xsc">
-      <DependentUpon>efoodDataSet14.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet14.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet14.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet14.xss">
-      <DependentUpon>efoodDataSet14.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet15.xsc">
-      <DependentUpon>efoodDataSet15.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet15.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet15.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet15.xss">
-      <DependentUpon>efoodDataSet15.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet2.xsc">
-      <DependentUpon>efoodDataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet2.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet2.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet2.xss">
-      <DependentUpon>efoodDataSet2.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet3.xsc">
-      <DependentUpon>efoodDataSet3.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet3.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet3.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet3.xss">
-      <DependentUpon>efoodDataSet3.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet4.xsc">
-      <DependentUpon>efoodDataSet4.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet4.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet4.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet4.xss">
-      <DependentUpon>efoodDataSet4.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet5.xsc">
-      <DependentUpon>efoodDataSet5.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet5.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet5.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet5.xss">
-      <DependentUpon>efoodDataSet5.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet6.xsc">
-      <DependentUpon>efoodDataSet6.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet6.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet6.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet6.xss">
-      <DependentUpon>efoodDataSet6.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet7.xsc">
-      <DependentUpon>efoodDataSet7.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet7.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet7.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet7.xss">
-      <DependentUpon>efoodDataSet7.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet8.xsc">
-      <DependentUpon>efoodDataSet8.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet8.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet8.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet8.xss">
-      <DependentUpon>efoodDataSet8.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet9.xsc">
-      <DependentUpon>efoodDataSet9.xsd</DependentUpon>
-    </None>
-    <None Include="efoodDataSet9.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>efoodDataSet9.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="efoodDataSet9.xss">
-      <DependentUpon>efoodDataSet9.xsd</DependentUpon>
+    <None Include="DataFactura.xss">
+      <DependentUpon>DataFactura.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -635,6 +425,9 @@
     <None Include="Resources\mesa1.png" />
     <None Include="Resources\mesa2.png" />
     <None Include="Resources\mesa3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SqlServerTypes\NewFolder1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
