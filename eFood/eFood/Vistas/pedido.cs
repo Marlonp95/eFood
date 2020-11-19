@@ -105,6 +105,7 @@ namespace eFood
         {
             //TRAER CUENTAS
             dataSeleccionProducto.Rows.Clear();
+
             traerFacturas();
 
             try
@@ -175,6 +176,7 @@ namespace eFood
         private void button14_Click(object sender, EventArgs e)
         {
             existe = false;
+
             if (dataSeleccionProducto.Rows.Count == 0)
             {
                 MessageBox.Show("seleccionar articulos");
@@ -192,7 +194,8 @@ namespace eFood
                         Convert.ToString(txtCantidad.Text),
                         Convert.ToString(Convert.ToDouble(txtCantidad.Text) * Convert.ToDouble(dataSeleccionProducto[3, dataSeleccionProducto.CurrentRow.Index].Value)),
                         Convert.ToString(dataSeleccionProducto[3, dataSeleccionProducto.CurrentRow.Index].Value),
-                        Convert.ToString(dataSeleccionProducto[4, dataSeleccionProducto.CurrentRow.Index].Value)
+                        Convert.ToString(dataSeleccionProducto[4, dataSeleccionProducto.CurrentRow.Index].Value),
+                        Convert.ToString(Convert.ToDouble(dataSeleccionProducto[4, dataSeleccionProducto.CurrentRow.Index].Value) * Convert.ToDouble(dataSeleccionProducto[3, dataSeleccionProducto.CurrentRow.Index].Value))
                    });
 
                     contador++;
@@ -221,13 +224,16 @@ namespace eFood
                         Convert.ToString(txtCantidad.Text),
                         Convert.ToString(Convert.ToDouble(txtCantidad.Text) * Convert.ToDouble(dataSeleccionProducto[3, dataSeleccionProducto.CurrentRow.Index].Value)),
                         Convert.ToString(dataSeleccionProducto[3, dataSeleccionProducto.CurrentRow.Index].Value),
-                        Convert.ToString(dataSeleccionProducto[4, dataSeleccionProducto.CurrentRow.Index].Value)
+                        Convert.ToString(dataSeleccionProducto[4, dataSeleccionProducto.CurrentRow.Index].Value),
+                        Convert.ToString(Convert.ToDouble(dataSeleccionProducto[4, dataSeleccionProducto.CurrentRow.Index].Value) * Convert.ToDouble(dataSeleccionProducto[3, dataSeleccionProducto.CurrentRow.Index].Value))
+
                          );
                         contador++;
                     }
                 }
             }
             total = 0;
+
             foreach (DataGridViewRow Fila in DataPedido.Rows)
             {
                 total += Convert.ToDouble(Fila.Cells[4].Value);
@@ -244,6 +250,7 @@ namespace eFood
             lblTotal.Text = "RD$ " + total.ToString();
 
         }
+
         decimal cantidad;
 
         private void button11_Click(object sender, EventArgs e)
@@ -315,6 +322,8 @@ namespace eFood
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //Guardar Temporales Facturas.
+
             if (dataCuentas.Rows.Count <= 0)
             {
                 dt = new DataTable();
@@ -336,6 +345,32 @@ namespace eFood
                         id_factura = Convert.ToInt32((dt.Rows[0]["id_factura"]));
                         id_factura++;
                         num_fact = id_factura;
+                        MessageBox.Show(num_fact.ToString());
+                        try
+                        {
+                            MessageBox.Show("Factura" + num_fact.ToString());
+
+                            string vSql = $"EXEC actuaiza_temp_enc_fact {num_fact},'{mesatag}','{fecha}','{6}','{login.codigo}','{null}',{itbis.ToString().Replace(',', '.')},{total.ToString().Replace(',', '.')},{porciento_ley.ToString().Replace(',', '.')},{sub_total.ToString().Replace(',', '.')},'{'A'}','{null}'";
+                            DataSet dt = new DataSet();
+                            correcto = dt.ejecuta(vSql);
+
+                            foreach (DataGridViewRow fila in DataPedido.Rows)
+                            {
+                                vSql = $"EXEC actuaiza_temp_det_fact '{num_fact}','{fila.Cells[0].Value}','{fila.Cells[3].Value}','{Convert.ToDouble(fila.Cells[5].Value)}','{Convert.ToDouble(fila.Cells[6].Value)}'";
+                                dt = new DataSet();
+                                correcto = dt.ejecuta(vSql);
+                            }
+
+                            MessageBox.Show("Datos Guardados");
+
+                            traerFacturas();
+
+                        }
+                        catch (Exception error)
+                        {
+                            MessageBox.Show("Error Guardando Datos" + error.ToString());
+                        }
+                       
                     }
                 }
                 else
@@ -343,70 +378,76 @@ namespace eFood
                     id_factura = Convert.ToInt32((dt.Rows[0]["id_factura"]));
                     id_factura++;
                     num_fact = id_factura;
-                    MessageBox.Show(num_fact.ToString());
-                }
-                
-            }
-
-            int rnc;
-            //Guardar Temporales Facturas.
-            dt = new DataTable();
-            vSql = $"SELECT id_factura FROM temp_enc_factura WHERE estado ='A' and id_mesa = {mesatag} ";
-            correcto = dt.ejecuta(vSql);
-
-            if (dt.Rows.Count == 0)
-            {
-                try
-                {
-                    MessageBox.Show("Factura" + num_fact.ToString());
-                    
-                    string vSql = $"EXEC actuaiza_temp_enc_fact {num_fact},'{mesatag}','{fecha}','{6}','{login.codigo}','{null}',{itbis.ToString().Replace(',', '.')},{total.ToString().Replace(',', '.')},{porciento_ley.ToString().Replace(',', '.')},{sub_total.ToString().Replace(',', '.')},'{'A'}','{null}'";
-                    DataSet dt = new DataSet();               
-                    correcto = dt.ejecuta(vSql);
-
-                    foreach (DataGridViewRow fila in DataPedido.Rows)
-                    {  
-                            vSql = $"EXEC actuaiza_temp_det_fact '{num_fact}','{fila.Cells[0].Value}','{fila.Cells[3].Value}','{Convert.ToDouble(fila.Cells[5].Value)}'";
-                            dt = new DataSet();
-                            correcto = dt.ejecuta(vSql);                                           
-                    }
-
-                    MessageBox.Show("Datos Guardados");
-                }
-                catch (Exception error)
-                {
-                    MessageBox.Show("Error Guardando Datos" + error.ToString());
-                }
+                }  
             }
             else
-            {
-                id_factura = Convert.ToInt32((dt.Rows[0]["id_factura"]));
+            {               
+                int rnc;
 
-                foreach (DataGridViewRow fila in DataPedido.Rows)
+                int cuenta = Convert.ToInt32(dataCuentas.CurrentRow.Cells["id_fact"].Value);
+
+                dt = new DataTable();
+                vSql = $"SELECT id_factura FROM temp_enc_factura WHERE estado ='A' and id_mesa = {mesatag} and id_factura = {cuenta} ";
+                correcto = dt.ejecuta(vSql);
+
+                if (dt.Rows.Count == 0)
                 {
                     try
                     {
-                        string vSql = $"EXEC actuaiza_temp_det_fact '{id_factura}','{fila.Cells[0].Value}','{fila.Cells[3].Value}','{Convert.ToDouble(fila.Cells[5].Value)}'";
+                        MessageBox.Show("Factura" + num_fact.ToString());
+
+                        string vSql = $"EXEC actuaiza_temp_enc_fact {num_fact},'{mesatag}','{fecha}','{6}','{login.codigo}','{null}',{itbis.ToString().Replace(',', '.')},{total.ToString().Replace(',', '.')},{porciento_ley.ToString().Replace(',', '.')},{sub_total.ToString().Replace(',', '.')},'{'A'}','{null}'";
                         DataSet dt = new DataSet();
                         correcto = dt.ejecuta(vSql);
+
+                        foreach (DataGridViewRow fila in DataPedido.Rows)
+                        {
+                            vSql = $"EXEC actuaiza_temp_det_fact '{num_fact}','{fila.Cells[0].Value}','{fila.Cells[3].Value}','{Convert.ToDouble(fila.Cells[5].Value)}','{Convert.ToDouble(fila.Cells[6].Value)}'";
+                            dt = new DataSet();
+                            correcto = dt.ejecuta(vSql);
+                        }
+
+                        MessageBox.Show("Datos Guardados");
                     }
                     catch (Exception error)
                     {
-                        MessageBox.Show("Error 2" + error.ToString());
-                    }               
+                        MessageBox.Show("Error Guardando Datos" + error.ToString());
+                    }
+
+                }
+                else
+                {
+                    id_factura = Convert.ToInt32((dt.Rows[0]["id_factura"]));
+
+                    foreach (DataGridViewRow fila in DataPedido.Rows)
+                    {
+                        try
+                        {
+                            string vSql = $"EXEC actuaiza_temp_det_fact '{id_factura}','{fila.Cells[0].Value}','{fila.Cells[3].Value}','{Convert.ToDouble(fila.Cells[5].Value)}','{fila.Cells[6].Value.ToString().Replace(',', '.')}'";
+                            DataSet dt = new DataSet();
+                            correcto = dt.ejecuta(vSql);
+                        }
+                        catch (Exception error)
+                        {
+                            MessageBox.Show("Error 2" + error.ToString());
+                        }
+                    }
+
+                    MessageBox.Show("Datos Guardados");
+
                 }
 
-                MessageBox.Show("Datos Guardados");
+                if (DataPedido.Rows.Count == 0)
+                {
+                    MessageBox.Show("No hay datos para guardar");
+                }
 
+                traerFacturas();
             }
-
-            if (DataPedido.Rows.Count == 0)
-            {
-                MessageBox.Show("No hay datos para guardar");
-            }
-
-            traerFacturas();
+   
         }
+
+
         #region Platos
         private void button10_Click(object sender, EventArgs e)
         {
@@ -478,7 +519,10 @@ namespace eFood
 
                 DataPedido.Rows.Clear();
                 DataTable dt = new DataTable();
-                dt.ejecuta($"select a.id_plato, b.plato, b.descripcion, a.cantidad, a.cantidad * b.precio importe, a.precio from temp_det_factura a inner join platos b on a.id_plato = b.id_plato inner join temp_enc_factura c on a.id_factura = c.id_factura where c.id_factura = {num_fact};");
+                dt.ejecuta($@"select a.id_plato, b.plato, b.descripcion, a.cantidad, a.cantidad * b.precio importe, a.precio, a.itbis, Cast (Round(a.precio*a.itbis,2) as decimal(10,2)) totalitbis  
+                                from temp_det_factura a inner join platos b on a.id_plato = b.id_plato 
+                                                        inner join temp_enc_factura c on a.id_factura = c.id_factura    
+                                where c.id_factura = {num_fact};");
 
                 foreach (DataRow Fila in dt.Rows)
                 {
@@ -489,7 +533,11 @@ namespace eFood
                         Convert.ToString(Fila["descripcion"]),
                         Convert.ToString(Fila["cantidad"]),
                         Convert.ToDecimal(Fila["importe"]).ToString("F"),
-                        Convert.ToString(Fila["precio"])
+                        Convert.ToString(Fila["precio"]),
+                        Convert.ToString(Fila["itbis"]),
+                        Convert.ToString(Fila["totalitbis"])
+
+
                     );
                 }
             }
@@ -499,6 +547,10 @@ namespace eFood
         {
             dividir_cuentas obj = new dividir_cuentas(Convert.ToInt32(mesatag));
             obj.ShowDialog();
+         
+
+            traerFacturas();
+
         }
 
         private void dataCuentas_SelectionChanged(object sender, EventArgs e)
@@ -516,7 +568,10 @@ namespace eFood
                 itbis = 0;
                 porciento_ley = 0;
                 total = 0;
-                dt.ejecuta($"select a.id_plato, b.plato, b.descripcion, a.cantidad, a.cantidad * b.precio importe, a.precio from temp_det_factura a inner join platos b on a.id_plato = b.id_plato inner join temp_enc_factura c on a.id_factura = c.id_factura where c.id_factura = {num_fact};");
+                dt.ejecuta($@"select a.id_plato, b.plato, b.descripcion, a.cantidad, a.cantidad * b.precio importe, a.precio, a.itbis, Cast (Round(a.precio*a.itbis,2) as decimal(10,2)) totalitbis  
+                                from temp_det_factura a inner join platos b on a.id_plato = b.id_plato
+                                                        inner join temp_enc_factura c on a.id_factura = c.id_factura
+                                where c.id_factura = {num_fact};");
 
                 foreach (DataRow Fila in dt.Rows)
                 {
@@ -527,7 +582,9 @@ namespace eFood
                         Convert.ToString(Fila["descripcion"]),
                         Convert.ToString(Fila["cantidad"]),
                         Convert.ToDecimal(Fila["importe"]).ToString("F"),
-                        Convert.ToString(Fila["precio"])
+                        Convert.ToString(Fila["precio"]),
+                        Convert.ToString(Fila["itbis"]),
+                         Convert.ToString(Fila["totalitbis"])
                     );
                 }
 
@@ -545,6 +602,11 @@ namespace eFood
                 total = sub_total + itbis + porciento_ley;
                 lblTotal.Text = "RD$ " + total.ToString();
             }
+        }
+
+        private void txtMask1_TextChanged(object sender, EventArgs e)
+        {
+            var data = txtMask1.OriginalValue;
         }
 
         //  private void dataCuentas_RowEnter(object sender, DataGridViewCellEventArgs e)

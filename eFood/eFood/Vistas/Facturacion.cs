@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using utilidad;
 
@@ -481,6 +476,11 @@ FROM temp_enc_factura INNER JOIN
         private void NumFaact_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Facturacion_Click_1(object sender, EventArgs e)
+        {
+            if (TipoPago.Visible == true) utilidades.Animate(TipoPago, utilidades.Effect.roll, 100, 50);
         }
     }
     

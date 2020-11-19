@@ -5,6 +5,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace utilidad
 {
@@ -157,6 +159,7 @@ namespace utilidad
             return false;
         }
         public enum Effect { roll, Slide, Center, Blend }
+
         public static void Animate(System.Windows.Forms.Control ctl, Effect effect, int msec, int angle)
         {
             try
@@ -235,6 +238,25 @@ namespace utilidad
 
             tex.Text = TextoDescrip;
 
+        }
+
+        public static string Mask(this string data, string mask)
+        {
+            MaskedTextProvider maskedTextProvider = new MaskedTextProvider(mask);
+            maskedTextProvider.Set(data);
+            return maskedTextProvider.ToDisplayString();
+
+        }
+
+        public static string xtract(this string data)
+        {
+            string oString = "";
+            foreach (Match item in Regex.Matches(data, @"[\d+|a-zA-Z]+"))
+            {
+                if (item.Success)
+                    oString += item.Value;
+            }
+            return oString;
         }
 
     }

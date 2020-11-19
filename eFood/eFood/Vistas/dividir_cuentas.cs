@@ -425,10 +425,11 @@ FROM temp_enc_factura INNER JOIN
                 catch (Exception error)
                 {
                     MessageBox.Show("Error " + error.ToString());
-                }
-
-                if (correcto) { MessageBox.Show("Datos Guardados"); }
-                else MessageBox.Show("Error guardando detalle de factura");
+                }             
+            }
+            if (correcto)
+            {
+                MessageBox.Show("Datos Guardados");
             }
 
             int fact_nueva;
@@ -450,9 +451,13 @@ FROM temp_enc_factura INNER JOIN
             {
                 
                 string vSql = $"EXEC actuaiza_temp_enc_fact {fact_nueva},'{IdMesa}','{fecha}','{6}','{login.codigo}','{null}',{itbis.ToString().Replace(',', '.')},{total.ToString().Replace(',', '.')},{porciento_ley.ToString().Replace(',', '.')},{sub_total.ToString().Replace(',', '.')},'{'A'}','{null}'";
-                dt = new DataTable(); dt.ejecuta(vSql);
+                dt = new DataTable(); 
                 correcto = dt.ejecuta(vSql);
-                if (correcto) { MessageBox.Show("Datos Guardados"); }
+
+                if (correcto)
+                {
+                    MessageBox.Show("Datos Guardados");
+                }
                 else MessageBox.Show("Error guardando detalle de encabezado");
 
                 foreach (DataGridViewRow fila in dataPedido.Rows)
@@ -466,7 +471,7 @@ FROM temp_enc_factura INNER JOIN
             catch (Exception error)
             {
 
-                throw;
+                MessageBox.Show("Error Guardando Datos "+ error);
             }
             
 
@@ -476,6 +481,11 @@ FROM temp_enc_factura INNER JOIN
         private void button3_Click(object sender, EventArgs e)
         {
 
+            if (MessageBox.Show("Desea Cerrar ", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            {
+                this.Close();
+            }
+            
         }
     }
 }

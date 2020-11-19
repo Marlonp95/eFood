@@ -143,6 +143,7 @@
             this.txtCodProducto.Name = "txtCodProducto";
             this.txtCodProducto.Size = new System.Drawing.Size(42, 20);
             this.txtCodProducto.TabIndex = 1;
+            this.txtCodProducto.Tag = "required";
             this.txtCodProducto.Validating += new System.ComponentModel.CancelEventHandler(this.txtCodProducto_Validating);
             // 
             // txtDescripcion
@@ -285,6 +286,7 @@
             this.txtComensales.Name = "txtComensales";
             this.txtComensales.Size = new System.Drawing.Size(42, 20);
             this.txtComensales.TabIndex = 21;
+            this.txtComensales.Tag = "required";
             // 
             // txtPreparacion
             // 
@@ -292,6 +294,7 @@
             this.txtPreparacion.Name = "txtPreparacion";
             this.txtPreparacion.Size = new System.Drawing.Size(48, 20);
             this.txtPreparacion.TabIndex = 22;
+            this.txtPreparacion.Tag = "required";
             // 
             // label6
             // 
@@ -385,6 +388,7 @@
             // 
             // comboUnidad
             // 
+            this.comboUnidad.DisplayMember = "id_unidad";
             this.comboUnidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboUnidad.FormattingEnabled = true;
             this.comboUnidad.Location = new System.Drawing.Point(429, 186);
@@ -538,6 +542,8 @@
             this.txtNombreReceta.Name = "txtNombreReceta";
             this.txtNombreReceta.Size = new System.Drawing.Size(332, 20);
             this.txtNombreReceta.TabIndex = 165;
+            this.txtNombreReceta.Tag = "required";
+         
             // 
             // button6
             // 
@@ -580,6 +586,7 @@
             // 
             // ComboBuscaRecet
             // 
+            this.ComboBuscaRecet.DisplayMember = "id_receta";
             this.ComboBuscaRecet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ComboBuscaRecet.FormattingEnabled = true;
             this.ComboBuscaRecet.Location = new System.Drawing.Point(429, 16);

@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using utilidad;
-using System.Data;
-using System.Drawing;
+using eFood.Utils;
 
 namespace eFood
 {
@@ -25,6 +19,8 @@ namespace eFood
         public Recetas()
         {
             InitializeComponent();
+            TextBoxOM om = new TextBoxOM();
+            txtNombreReceta.TextChanged+=  om.TextBoxLetterKeyPress;
         }
        
         private void Recetas_Load(object sender, EventArgs e)
@@ -181,6 +177,8 @@ namespace eFood
 
         private void button6_Click(object sender, EventArgs e)
         {
+
+            if (this.IsValid()) { MessageBox.Show(Metodos.ErrorMessage); return; }
             string categoria_plato ="";
 
             if (radioEntrada.Checked) { categoria_plato = "Entrada";}
@@ -258,5 +256,7 @@ namespace eFood
             txtCodProducto.Clear();
             dataGridView1.Rows.Clear();
         }
+
+
     }
 }

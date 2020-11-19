@@ -35,6 +35,9 @@
     <Reference Include="BarcodeStandard, Version=2.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\BarcodeLib.2.2.3\lib\netstandard2.0\BarcodeStandard.dll</HintPath>
     </Reference>
+    <Reference Include="Ex.OM, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ex.OM.1.0.4\lib\net46\Ex.OM.dll</HintPath>
+    </Reference>
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
     </Reference>
@@ -98,7 +101,14 @@
       <DependentUpon>btnUbicacion.cs</DependentUpon>
     </Compile>
     <Compile Include="CallForm.cs" />
+    <Compile Include="Controles\txtMask.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controles\txtMask.Designer.cs">
+      <DependentUpon>txtMask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Globals.cs" />
+    <Compile Include="Utils\Metodos.cs" />
     <Compile Include="Vistas\Categorias.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +243,9 @@
     <Compile Include="Vistas\Usuarios.Designer.cs">
       <DependentUpon>Usuarios.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Controles\txtMask.resx">
+      <DependentUpon>txtMask.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Categorias.resx">
       <DependentUpon>Categorias.cs</DependentUpon>
     </EmbeddedResource>
