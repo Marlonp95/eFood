@@ -32,6 +32,7 @@
             // 
             // txtMask
             // 
+            this.Click += new System.EventHandler(this.txtMask_Click);
             this.TextChanged += new System.EventHandler(this.txtMask_TextChanged);
             this.ResumeLayout(false);
 

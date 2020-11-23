@@ -185,8 +185,9 @@ namespace eFood
         {
             if (string.IsNullOrEmpty(txtbuscar.Text.Trim()) == false)
             {
-                    DataSet dt = new DataSet();
-                    string vSql = "Select * From productos ";
+                DataSet dt = new DataSet();
+                string vSql = "Select * From productos ";
+
                 if (string.IsNullOrEmpty(txtbuscar.Text.Trim()) == false)
                 {
                     vSql += "Where productos like ('%" + txtbuscar.Text.Trim() + "%')";

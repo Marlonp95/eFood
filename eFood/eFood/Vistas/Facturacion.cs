@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eFood.Utils;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
@@ -481,6 +482,37 @@ FROM temp_enc_factura INNER JOIN
         private void Facturacion_Click_1(object sender, EventArgs e)
         {
             if (TipoPago.Visible == true) utilidades.Animate(TipoPago, utilidades.Effect.roll, 100, 50);
+        }
+
+        private void textBox2_Validating(object sender, CancelEventArgs e)
+        {
+            var rnc = txtRnc.Text;
+            var result = Metodos.ValidarDocumento(rnc);
+            if (result != true)
+            {
+                MessageBox.Show("RNC No Valido");
+                txtRnc.Text = string.Empty;
+            }
+            
+        }
+
+        private void txtCedula_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtCedula.OriginalValue))
+            {
+                return;
+            }
+            else
+            {
+                var documento = txtCedula.OriginalValue;
+                var result = Metodos.ValidarDocumento(documento);
+                if (result != true)
+                {
+                    MessageBox.Show("Cedula No Valida");
+                    txtRnc.Text = string.Empty;
+                }
+            }
+        
         }
     }
     

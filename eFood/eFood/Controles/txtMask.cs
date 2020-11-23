@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Ex.OM.Extentions;
+using System.ComponentModel;
 using System.Windows.Forms;
 using utilidad;
 
@@ -14,7 +15,7 @@ namespace eFood.Controles
         {
             InitializeComponent();
          
-            OriginalValue = this.Text.xtract().Mask(UnMask);
+            OriginalValue = this.Text.UnMask().Digits();
         }
 
 
@@ -23,11 +24,19 @@ namespace eFood.Controles
             container.Add(this);
 
             InitializeComponent();
+            OriginalValue = this.Text.UnMask().Digits();
         }
 
         private void txtMask_TextChanged(object sender, System.EventArgs e)
         {
-            OriginalValue = this.Text.xtract().Mask(UnMask);
+            if (!string.IsNullOrEmpty(this.Text))
+                OriginalValue = this.Text.UnMask().Digits();
+        }
+
+        private void txtMask_Click(object sender, System.EventArgs e)
+        {
+            this.Focus();
+            this.SelectAll();
         }
     }
 }

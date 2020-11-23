@@ -604,10 +604,10 @@ namespace eFood
             }
         }
 
-        private void txtMask1_TextChanged(object sender, EventArgs e)
-        {
-            var data = txtMask1.OriginalValue;
-        }
+        //private void txtMask1_TextChanged(object sender, EventArgs e)
+        //{
+        //    var data = txtMask1.OriginalValue;
+        //}
 
         //  private void dataCuentas_RowEnter(object sender, DataGridViewCellEventArgs e)
         //{
