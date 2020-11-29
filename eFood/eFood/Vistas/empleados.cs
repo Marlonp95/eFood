@@ -120,7 +120,6 @@ namespace eFood
                 codigo++;
                 txtcodigo.Text = Convert.ToString(codigo);
                 txtficha.Text = Convert.ToString(ficha);
-
             }         
                              
             combodepartamento.DataSource = utilidades.ejecuta("Select id_departamento, departamento from departamento");

@@ -509,6 +509,7 @@ namespace eFood
 
         }
 
+
         private void Facturacion_Click_1(object sender, EventArgs e)
         {
             if (TipoPago.Visible == true) utilidades.Animate(TipoPago, utilidades.Effect.roll, 100, 50);

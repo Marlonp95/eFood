@@ -54,6 +54,52 @@ namespace utilidad
             return vEstado;
         }
 
+        public static bool ejecutaTransaccion(this DataSet MiDataset, string sentencia)
+        {
+            //DataSet ds = new DataSet();
+            bool vEstado = false;
+            try
+            {
+                using (SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=efood;Integrated Security=True"))
+                {
+                    con.Open();
+                    SqlCommand cmd = con.CreateCommand() ;
+
+                    using (SqlTransaction tran = con.BeginTransaction("tran->" + DateTime.Now.Hour.ToString()))
+                    {
+                        try
+                        {
+                            cmd.Transaction = tran;
+                            cmd.Connection = con;
+                            cmd.CommandText = sentencia;
+                            cmd.ExecuteNonQuery();
+                            
+                            tran.Commit();
+
+                            SqlDataAdapter da = new SqlDataAdapter(sentencia, con);
+
+                            da.Fill(MiDataset);
+                            con.Close();
+                            con.Dispose();
+                            return true;
+                        }
+                        catch (Exception ex)
+                        {
+                            tran.Rollback();
+                            throw ex;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al Conectar con la Base de Datos : " + ex.ToString());
+                //return null;
+
+            }
+            return vEstado;
+        }
+
 
         public static DataTable ejecuta(string sentencia)
         {
