@@ -345,10 +345,10 @@ namespace eFood
                         id_factura = Convert.ToInt32((dt.Rows[0]["id_factura"]));
                         id_factura++;
                         num_fact = id_factura;
-                        MessageBox.Show(num_fact.ToString());
+                        //MessageBox.Show(num_fact.ToString());
                         try
                         {
-                            MessageBox.Show("Factura" + num_fact.ToString());
+                            //MessageBox.Show("Factura" + num_fact.ToString());
 
                             string vSql = $"EXEC actuaiza_temp_enc_fact {num_fact},'{mesatag}','{fecha}','{6}','{login.codigo}','{null}',{itbis.ToString().Replace(',', '.')},{total.ToString().Replace(',', '.')},{porciento_ley.ToString().Replace(',', '.')},{sub_total.ToString().Replace(',', '.')},'{'A'}','{null}'";
                             DataSet dt = new DataSet();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eFood.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,16 +14,15 @@ namespace eFood
 {
     public partial class Usuarios : Form
     {
+
+
+        int codigopersona;
+        int codigo;
+
         public Usuarios()
         {
             InitializeComponent();
         }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-      
         
         public void traerUsuario()
         {
@@ -41,12 +41,6 @@ namespace eFood
                 this.Close();
             }
         }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-        int codigo;
 
         private void Usuarios_Load(object sender, EventArgs e)
         {
@@ -128,38 +122,15 @@ namespace eFood
         }*/
 
 
-        private void txtficha_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
 
-            bool ValidaFormulario = false;
-            foreach (Control item in panel1.Controls)
+            if (this.IsValid())
             {
-                if (item is TextBox || item is DateTimePicker)
-                {
-                    item.BackColor = Color.White;
-                }
-            }
-            foreach (Control item in panel1.Controls)
-            {
-                if (item is TextBox || item is DateTimePicker)
-                {
-                    if (item.Tag.ToString().ToUpper() == "NO VACIO".ToUpper() && string.IsNullOrEmpty(item.Text.Trim()))
-                    {
-                        item.BackColor = Color.Red;
-                        ValidaFormulario = true;
-                    }
-                }
-            }
-            if (ValidaFormulario)
-            {
-                MessageBox.Show("Por favor Complete los campos");
+                MessageBox.Show(Metodos.ErrorMessage);
                 return;
             }
+
             string vSecuencia = $"SELECT TOP 1 * FROM usuarios ORDER by id_usuario DESC";
             DataSet dts = new DataSet();
             bool correctos = dts.ejecuta(vSecuencia);
@@ -187,39 +158,10 @@ namespace eFood
                 MessageBox.Show("Error" + error.ToString());
             }
         }
-        int codigopersona ;
 
-        private void txtficha_Validating_1(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(txtficha.Text)) return;
-                string vSql = $"select p.id_persona, p.nombre1, CONCAT( p.apellido1,' ',p.apellido2 ) apellidos, e.id_cargo, u.usuario, u.fecha_creacion from persona as p inner join empleado as e on p.id_persona = e.id_persona left join usuarios as u on p.id_persona =u.id_persona ";
-                vSql += " where e.ficha like ('%" + txtficha.Text.Trim() + "%')";       
-                DataSet dt = new DataSet();
-                dt.ejecuta(vSql);
-                if (utilidad.utilidades.DsTieneDatos(dt))
-                {
-                    codigopersona = Convert.ToInt32(dt.Tables[0].Rows[0]["id_persona"]);
-                    MessageBox.Show("codigo_persona" + codigopersona.ToString());
-                    txtapellido.Text = dt.Tables[0].Rows[0]["apellidos"].ToString();
-                    txtnombre.Text = dt.Tables[0].Rows[0]["nombre1"].ToString();
-                    txtcargo.Text = dt.Tables[0].Rows[0]["id_cargo"].ToString();
-                    txtusuario.Text = dt.Tables[0].Rows[0]["usuario"].ToString();
-                    if (string.IsNullOrEmpty(txtusuario.Text)) MessageBox.Show("USUARIO NO ENCONTRADO POR FAVOR CREARLO");
 
-                }
-               
-                
-                
 
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show("Error" + error.Message);
-            }       
-        }
-
+       
         private void button3_Click(object sender, EventArgs e)
         {
 
@@ -254,12 +196,7 @@ namespace eFood
                 traerUsuario();
             }
         }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
+  
         private void button7_Click(object sender, EventArgs e)
         {
             
@@ -270,11 +207,33 @@ namespace eFood
             txtnombre.Clear();
             txtpass.Clear();
             txtusuario.Clear();
-        }
+        }     
 
-        private void fechacreacion_Click(object sender, EventArgs e)
+        private void txtficha_Validating(object sender, CancelEventArgs e)
         {
+            try
+            {
+                if (string.IsNullOrEmpty(txtficha.Text)) return;
+                string vSql = $"select p.id_persona, p.nombre1, CONCAT( p.apellido1,' ',p.apellido2 ) apellidos, e.id_cargo, u.usuario, u.fecha_creacion from persona as p inner join empleado as e on p.id_persona = e.id_persona left join usuarios as u on p.id_persona =u.id_persona ";
+                vSql += " where e.ficha like ('%" + txtficha.Text.Trim() + "%')";
+                DataSet dt = new DataSet();
+                dt.ejecuta(vSql);
+                if (utilidad.utilidades.DsTieneDatos(dt))
+                {
+                    codigopersona = Convert.ToInt32(dt.Tables[0].Rows[0]["id_persona"]);
+                    MessageBox.Show("codigo_persona" + codigopersona.ToString());
+                    txtapellido.Text = dt.Tables[0].Rows[0]["apellidos"].ToString();
+                    txtnombre.Text = dt.Tables[0].Rows[0]["nombre1"].ToString();
+                    txtcargo.Text = dt.Tables[0].Rows[0]["id_cargo"].ToString();
+                    txtusuario.Text = dt.Tables[0].Rows[0]["usuario"].ToString();
+                    if (string.IsNullOrEmpty(txtusuario.Text)) MessageBox.Show("USUARIO NO ENCONTRADO POR FAVOR CREARLO");
 
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Error" + error.Message);
+            }
         }
 
         // private void txtcodigo_Validating(object sender, CancelEventArgs e)

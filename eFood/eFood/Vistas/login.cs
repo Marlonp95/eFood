@@ -100,11 +100,14 @@ namespace eFood
                 string ps = utilidades.A_Encriptar(txtpass.Text);
                 string cmd = string.Format("Select *  FROM usuarios where usuario='{0}' AND pass='{1}'", txtnom.Text.Trim(), ps);
                 DataSet ds = new DataSet();
-                bool esta = ds.CountDataset(cmd);
+                bool correcto = ds.CountDataset(cmd);
                  
-                if (esta)
+                if (correcto)
                 {
+                    int codPersona = Convert.ToInt32(ds.Tables[0].Rows[0]["id_persona"].ToString().Trim());
                     Globals.Usuarios = Convert.ToInt32(ds.Tables[0].Rows[0]["id_usuario"].ToString().Trim());
+                   var data = utilidades.ejecuta($@"select nombre1+' '+ apellido1 nombre from persona where id_persona = {codPersona}");
+                    Globals.NombreUsuario = data.Rows[0]["nombre"].ToString();
                     codigo = ds.Tables[0].Rows[0]["id_persona"].ToString().Trim();         
                     contenedor obj = new contenedor();
                     Hide();

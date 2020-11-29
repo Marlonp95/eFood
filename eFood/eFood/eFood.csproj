@@ -109,11 +109,23 @@
     </Compile>
     <Compile Include="Utils\Globals.cs" />
     <Compile Include="Utils\Metodos.cs" />
+    <Compile Include="Vistas\AperturaCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\AperturaCaja.Designer.cs">
+      <DependentUpon>AperturaCaja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Categorias.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\Categorias.Designer.cs">
       <DependentUpon>Categorias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\CierreCaja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\CierreCaja.Designer.cs">
+      <DependentUpon>CierreCaja.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\clientes.cs">
       <SubType>Form</SubType>
@@ -245,6 +257,9 @@
     </Compile>
     <EmbeddedResource Include="Controles\txtMask.resx">
       <DependentUpon>txtMask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\AperturaCaja.resx">
+      <DependentUpon>AperturaCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Categorias.resx">
       <DependentUpon>Categorias.cs</DependentUpon>

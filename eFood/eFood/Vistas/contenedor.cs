@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eFood.Vistas;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -197,6 +198,11 @@ namespace eFood
         private void button3_Click_1(object sender, EventArgs e)
         {
             AbrirFormulario<platos>();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario<AperturaCaja>();
         }
 
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
