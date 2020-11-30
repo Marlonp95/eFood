@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 using utilidad;
+using System.Linq;
 
 namespace eFood
 {
@@ -77,17 +78,16 @@ namespace eFood
             
  
         }
-        int contador;
-        double total;
+        //int contador;
+       
 
         private void button2_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(NumFaact.Text.Trim()) == false)
             {
                 try
-                {
-                    bool existe = false;
-                    int num_fila = 0;
+                {             
+
                     #region Control Reorden
                     //string vSql = $"Select cantidad, productos, reorden From productos Where id_productos = " + txtcodigo.Text.Trim();
                     //DataSet DS = new DataSet();
@@ -114,74 +114,33 @@ namespace eFood
 
                     if (DataFactura.RowCount <= 0)
                     {
-                        DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtprecio.Text, txtcantidad.Text);
-                        double importe = Convert.ToDouble(DataFactura.Rows[contador].Cells[2].Value) * Convert.ToDouble(DataFactura.Rows[contador].Cells[3].Value);
-                        DataFactura.Rows[contador].Cells[4].Value = importe;
-                        contador++;
+                        var importe = Convert.ToDouble(txtcantidad.Text) * Convert.ToDouble(txtprecio.Text);
+                        DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtprecio.Text, txtcantidad.Text,importe);
+
                     }
                     //PARA DETERMINAR EXISTENCIA Y LA POSICION DE DICHO ARTICULO           
                     else
                     {
-                        foreach (DataGridViewRow Fila in DataFactura.Rows)
-                        {
-                            if (Fila.Cells[0].Value.ToString() == txtcodigo.Text)
-                            {
-                                existe = true;
-                                num_fila = Fila.Index;
-                            }
-                        }
-                        //SI ESTA AGREGADO ACTUALIZO CANTIDAD
+                        var dataRow = DataFactura.Rows.Cast<DataGridViewRow>().Where(x => x.Cells[0].Value.ToString() == txtcodigo.Text);
 
-                        if (existe == true)
+                        //existe = dataRow.Count() > 0;
+                        if (dataRow.Count() > 0) 
                         {
-                            #region Reorden
-                            //string vSql1 = $"Select cantidad, productos, reorden From productos Where id_productos = " + txtcodigo.Text.Trim();
-                            //DataSet Dt = new DataSet();
-                            //Dt.ejecuta(vSql1);
-                            ////DataSet Dt = utilidades.ejecuta("Select Can_existente, Nom_Art, Pan_Reorden From Articulo Where Cod_Art = " + txtcodigo.Text.Trim());
-                            ////CONTROLAR SI HAY SUFICIENTES ARTICULOS PARA LA VENTA 
-
-                            //if (Convert.ToDouble(txtcantidad.Text.Trim()) > Convert.ToDouble(Dt.Tables[0].Rows[0][0]) || Convert.ToDouble(DataFactura.Rows[0].Cells[3].Value) > Convert.ToDouble(Dt.Tables[0].Rows[0][0]))
-                            //{
-                            //    MessageBox.Show("NO HAY INVENTARIO PARA EL SIGUIENTE ARTICULO: " + Dt.Tables[0].Rows[0][1] + "!", "Advertencia", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                            //    return;
-                            //}
-                            //else
-                            //{
-                            //    if (Convert.ToDouble(Dt.Tables[0].Rows[0][0]) - Convert.ToDouble(txtcantidad.Text.Trim()) < 0)
-                            //    {
-                            //        MessageBox.Show("NO HAY INVENTARIO PARA EL SIGUIENTE ARTICULO: " + Dt.Tables[0].Rows[0][1] + "!", "Advertencia", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                            //        return;
-                            //    }
-                            //}
-                            //CONTROLAR EL PUNTO DE REORDEN
-                            //if (Convert.ToDouble(DS.Tables[0].Rows[0][0]) - Convert.ToDouble(txtcantidad.Text.Trim()) <= Convert.ToDouble(DS.Tables[0].Rows[0][2]))
-                            //MessageBox.Show("REALICE UN PEDIDO PARA: " + DS.Tables[0].Rows[0][1], "SE ESTA AGOTANDO EL SIGUIENTE PRODUCTO" + "!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            #endregion
+                            var num_fila = dataRow.FirstOrDefault().Index;
                             DataFactura.Rows[num_fila].Cells[2].Value = (Convert.ToDecimal(txtcantidad.Text) + Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[2].Value)).ToString().Decimals();
                             var importe = Convert.ToString(Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[2].Value) * Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[3].Value)).Decimals();
                             DataFactura.Rows[num_fila].Cells[4].Value = importe;
                         }
-
                         else
                         {
-                            DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtcantidad.Text.Decimals(),txtprecio.Text.Decimals()) ;
-                            var importe = Convert.ToString(Convert.ToDecimal(DataFactura.Rows[contador].Cells[2].Value) * Convert.ToDecimal(DataFactura.Rows[contador].Cells[3].Value)).Decimals();
-                            DataFactura.Rows[contador].Cells[4].Value = importe;
-
-                            contador++;
-
+                            var importe = Convert.ToDecimal(txtcantidad.Text) * Convert.ToDecimal(txtprecio.Text);
+                            DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtcantidad.Text.Decimals(), txtprecio.Text.Decimals(), importe.ToString().Decimals());
+                            //contador++;
                         }
                     }
 
                     //ME REALIZA LA SUMA QUE MUESTRO PARA EL TOTAL QUE VOY A FACTURAR
-                    total = 0;
-                    foreach (DataGridViewRow Fila in DataFactura.Rows)
-                    {
-                        total += Convert.ToDouble(Fila.Cells[4].Value);
-                    }
-
-                    lblTotal.Text = "RD$ " + total.ToString().Decimals();
+                    CalcTotal();
 
                     txtcodigo.Clear();
                     txtdescripcion.Clear();
@@ -200,6 +159,26 @@ namespace eFood
                 MessageBox.Show("Debe cargar Factura");
             }
         } 
+
+        void CalcTotal()
+        {
+           
+            var total = 0m;
+            foreach (DataGridViewRow Fila in DataFactura.Rows)
+            {
+                total += Convert.ToDecimal(Fila.Cells[4].Value);
+            }
+
+            lblTotal.Text = total.ToString().MoneyDecimal("RD$ ");
+
+
+            var subTotal = total + (total * 0.18m) + (total * 0.10m);
+            var itbis = total * 0.18m;
+
+            lblSubTotal.Text = total.ToString().MoneyDecimal("RD$ ");
+            lblItbis.Text = itbis.ToString().MoneyDecimal("RD$ ");
+            lblTotal.Text = subTotal.ToString().MoneyDecimal("RD$ ");
+        }
 
         private void txtcodigo_Validating(object sender, CancelEventArgs e)
         {
@@ -242,13 +221,14 @@ namespace eFood
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (contador > 0)
-            {
-                total = total - (Convert.ToDouble(DataFactura.Rows[DataFactura.CurrentRow.Index].Cells[4].Value));
-                lblTotal.Text = "RD$ " + total.ToString();
-
+          
+            if (DataFactura.Rows.Count > 0)
+            { 
+             
                 DataFactura.Rows.RemoveAt(DataFactura.CurrentRow.Index);
-                contador--;
+                CalcTotal();
+
+                //contador--;
             }
         }
 
@@ -353,13 +333,15 @@ namespace eFood
                     );
                 }
 
-                foreach (DataGridViewRow Rows in DataFactura.Rows)
-                {
-                    total += Convert.ToDouble(Rows.Cells[4].Value);
-                }
+                //foreach (DataGridViewRow Rows in DataFactura.Rows)
+                //{
+                //    total += Convert.ToDouble(Rows.Cells[4].Value);
+                //}
 
-                lblTotal.Text = Convert.ToString(total);
-                total = 0;
+                //lblTotal.Text = Convert.ToString(total);
+                //total = 0;
+                CalcTotal();
+
             }
             catch (NullReferenceException ex)
             {
@@ -429,13 +411,15 @@ namespace eFood
                 }
             }
 
-            foreach (DataGridViewRow Rows in DataFactura.Rows)
-            {
-                total += Convert.ToDouble(Rows.Cells[4].Value);
-            }
+            //foreach (DataGridViewRow Rows in DataFactura.Rows)
+            //{
+            //    total += Convert.ToDouble(Rows.Cells[4].Value);
+            //}
 
-            lblTotal.Text = Convert.ToString(total);
-            total = 0;
+            //lblTotal.Text = Convert.ToString(total);
+            //total = 0;
+            CalcTotal();
+
         }
 
         private void dataCuentas_SelectionChanged(object sender, EventArgs e)
@@ -470,18 +454,19 @@ namespace eFood
                 }
             }
 
-            foreach (DataGridViewRow Rows in DataFactura.Rows)
-            {
-                total += Convert.ToDouble(Rows.Cells[4].Value);
-            }
-            double subTotal = total + (total * 0.18) + (total * 0.10) ;
-            double itbis = total * 0.18;
+            //foreach (DataGridViewRow Rows in DataFactura.Rows)
+            //{
+            //    total += Convert.ToDouble(Rows.Cells[4].Value);
+            //}
+            //double subTotal = total + (total * 0.18) + (total * 0.10) ;
+            //double itbis = total * 0.18;
 
-            lblSubTotal.Text =total.ToString().MoneyDecimal("RD$ ");
-            lblItbis.Text = itbis.ToString().MoneyDecimal("RD$ ");
-            lblTotal.Text = subTotal.ToString().MoneyDecimal("RD$ ");
+            //lblSubTotal.Text =total.ToString().MoneyDecimal("RD$ ");
+            //lblItbis.Text = itbis.ToString().MoneyDecimal("RD$ ");
+            //lblTotal.Text = subTotal.ToString().MoneyDecimal("RD$ ");
 
-            total = 0;
+            //total = 0;
+            CalcTotal();
     }
 
         private void label18_Click(object sender, EventArgs e)

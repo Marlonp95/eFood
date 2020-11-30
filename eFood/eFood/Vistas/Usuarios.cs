@@ -214,7 +214,10 @@ namespace eFood
             try
             {
                 if (string.IsNullOrEmpty(txtficha.Text)) return;
-                string vSql = $"select p.id_persona, p.nombre1, CONCAT( p.apellido1,' ',p.apellido2 ) apellidos, e.id_cargo, u.usuario, u.fecha_creacion from persona as p inner join empleado as e on p.id_persona = e.id_persona left join usuarios as u on p.id_persona =u.id_persona ";
+                string vSql = $@"select p.id_persona, p.nombre1, CONCAT( p.apellido1,' ',p.apellido2 ) apellidos, e.id_cargo,c.cargo, u.usuario, u.fecha_creacion from persona as p inner join empleado as e on p.id_persona = e.id_persona 
+								            left join usuarios as u on p.id_persona =u.id_persona
+								            inner join cargo as c on  e.id_cargo = c.id_cargo";
+
                 vSql += " where e.ficha like ('%" + txtficha.Text.Trim() + "%')";
                 DataSet dt = new DataSet();
                 dt.ejecuta(vSql);
