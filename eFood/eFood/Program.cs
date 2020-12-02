@@ -10,7 +10,7 @@ namespace eFood
     static class Program
     {
         /// <summary>
-        /// The main entry point for the application. lolo lo ma duro
+        /// The main entry point for the application. lolo lo ma duro, cajo
         /// </summary>
         [STAThread]
         static void Main()
