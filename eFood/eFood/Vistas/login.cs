@@ -106,8 +106,9 @@ namespace eFood
                 {
                     int codPersona = Convert.ToInt32(ds.Tables[0].Rows[0]["id_persona"].ToString().Trim());
                     Globals.Usuarios = Convert.ToInt32(ds.Tables[0].Rows[0]["id_usuario"].ToString().Trim());
-                   var data = utilidades.ejecuta($@"select nombre1+' '+ apellido1 nombre from persona where id_persona = {codPersona}");
+                    var data = utilidades.ejecuta($@"select nombre1+' '+ apellido1 nombre from persona where id_persona = {codPersona}");
                     Globals.NombreUsuario = data.Rows[0]["nombre"].ToString();
+                    Globals.IdUsuario =Convert.ToInt32( ds.Tables[0].Rows[0]["id_usuario"].ToString());
                     codigo = ds.Tables[0].Rows[0]["id_persona"].ToString().Trim();         
                     contenedor obj = new contenedor();
                     Hide();
