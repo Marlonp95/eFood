@@ -107,6 +107,12 @@
     <Compile Include="Controles\txtMask.Designer.cs">
       <DependentUpon>txtMask.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListForm\btnForm.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ListForm\btnForm.Designer.cs">
+      <DependentUpon>btnForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Globals.cs" />
     <Compile Include="Utils\Metodos.cs" />
     <Compile Include="Vistas\AperturaCaja.cs">
@@ -263,6 +269,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Categorias.resx">
       <DependentUpon>Categorias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\CierreCaja.resx">
+      <DependentUpon>CierreCaja.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\clientes.resx">
       <DependentUpon>clientes.cs</DependentUpon>

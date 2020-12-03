@@ -58,6 +58,7 @@ namespace eFood
             if (row.Count > 0)
             {
                 txtnomcli.Text = row[0].Field<string>("nombre1");
+                txtcodcli.Text = row[0].Field<int>("id_cliente").ToString();
                 comboCondicionpago.SelectedValue = row[0].Field<int>("id_condicion_pago");
                 comboComprobante.SelectedValue = row[0].Field<int>("id_tipo_ncf");
             }
@@ -248,24 +249,28 @@ namespace eFood
 
         private void button8_Click(object sender, EventArgs e)
         {
-            string vSql = $"EXEC datos_factura {NumFaact.Text}";
+
+
+            string vSql = $@"EXEC actualiza_enc_factura '{comboFactura.SelectedValue}','{txtcodcli.Text.Trim()}', '{1}','{comboTipoFactura.SelectedValue}', '{System.DateTime.Today}', '{txtRnc.Text.Trim()}','{comboComprobante.SelectedValue}'";
             DataSet dt = new DataSet();
             dt.ejecuta(vSql);
 
-            reporte rp = new reporte();
-            rp.reportViewer1.LocalReport.DataSources[0].Value = dt.Tables[0];
-            rp.ShowDialog();
+
+            //string vSql = $"EXEC datos_factura {NumFaact.Text}";
+            //DataSet dt = new DataSet();
+            //dt.ejecuta(vSql);
+
+            //reporte rp = new reporte();
+            //rp.reportViewer1.LocalReport.DataSources[0].Value = dt.Tables[0];
+            //rp.ShowDialog();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-
         }
 
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-
-          
+        {     
         }
 
         private void comboBox1_VisibleChanged(object sender, EventArgs e)
@@ -301,10 +306,8 @@ namespace eFood
         }
 
         private void button4_Click(object sender, EventArgs e)
-        {
-            
+        {      
         }
-
 
         private void comboBox1_SelectedValueChanged_1(object sender, EventArgs e)
         {
@@ -332,23 +335,15 @@ namespace eFood
                         Convert.ToString(Fila["precio"])
                     );
                 }
-
-                //foreach (DataGridViewRow Rows in DataFactura.Rows)
-                //{
-                //    total += Convert.ToDouble(Rows.Cells[4].Value);
-                //}
-
-                //lblTotal.Text = Convert.ToString(total);
-                //total = 0;
                 CalcTotal();
-
             }
             catch (NullReferenceException ex)
             {
-            }
-            catch (Exception ex) {
-                MessageBox.Show(ex.Message.ToString());
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
             }
         }
 
@@ -411,15 +406,7 @@ namespace eFood
                 }
             }
 
-            //foreach (DataGridViewRow Rows in DataFactura.Rows)
-            //{
-            //    total += Convert.ToDouble(Rows.Cells[4].Value);
-            //}
-
-            //lblTotal.Text = Convert.ToString(total);
-            //total = 0;
             CalcTotal();
-
         }
 
         private void dataCuentas_SelectionChanged(object sender, EventArgs e)
@@ -453,19 +440,6 @@ namespace eFood
                     );
                 }
             }
-
-            //foreach (DataGridViewRow Rows in DataFactura.Rows)
-            //{
-            //    total += Convert.ToDouble(Rows.Cells[4].Value);
-            //}
-            //double subTotal = total + (total * 0.18) + (total * 0.10) ;
-            //double itbis = total * 0.18;
-
-            //lblSubTotal.Text =total.ToString().MoneyDecimal("RD$ ");
-            //lblItbis.Text = itbis.ToString().MoneyDecimal("RD$ ");
-            //lblTotal.Text = subTotal.ToString().MoneyDecimal("RD$ ");
-
-            //total = 0;
             CalcTotal();
     }
 
@@ -529,6 +503,11 @@ namespace eFood
                 }
             }
         
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
         }
     }
     
