@@ -6,6 +6,7 @@ using System.Data;
 using System.Windows.Forms;
 using utilidad;
 using System.Linq;
+using eFood.Vistas;
 
 namespace eFood
 {
@@ -249,12 +250,40 @@ namespace eFood
 
         private void button8_Click(object sender, EventArgs e)
         {
+            cobro obj = new cobro();
+            obj.ShowDialog();
 
 
-            string vSql = $@"EXEC actualiza_enc_factura '{comboFactura.SelectedValue}','{txtcodcli.Text.Trim()}', '{1}','{comboTipoFactura.SelectedValue}', '{System.DateTime.Today}', '{txtRnc.Text.Trim()}','{comboComprobante.SelectedValue}'";
-            DataSet dt = new DataSet();
-            dt.ejecuta(vSql);
+            try
+            {
+                string vSql = $@"EXEC SetSecuenciaNCF {comboComprobante.SelectedValue}";
+                DataTable dt = new DataTable();
+                dt.ejecutaTransaccion(vSql);
+                int? secuencia;
 
+                if (dt.Rows.Count > 0)
+                secuencia = dt.Rows[0].Field<int>("secuencia_generada");
+                else
+                {
+                    MessageBox.Show("No hay secuencia para este tipo de comprobante");
+                    return;
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Error Base De Datos " + error);
+            }
+
+            try
+            {
+                string vSql = $@"EXEC actualiza_enc_factura '{comboFactura.SelectedValue}','{txtcodcli.Text.Trim()}', '{1}','{comboTipoFactura.SelectedValue}', '{System.DateTime.Today}', '{txtRnc.Text.Trim()}','{comboComprobante.SelectedValue}'";
+                DataSet dt = new DataSet();
+                dt.ejecuta(vSql);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
             //string vSql = $"EXEC datos_factura {NumFaact.Text}";
             //DataSet dt = new DataSet();

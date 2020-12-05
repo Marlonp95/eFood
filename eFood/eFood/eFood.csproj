@@ -139,6 +139,12 @@
     <Compile Include="Vistas\clientes.Designer.cs">
       <DependentUpon>clientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\cobro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\cobro.Designer.cs">
+      <DependentUpon>cobro.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\contenedor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -275,6 +281,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\clientes.resx">
       <DependentUpon>clientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\cobro.resx">
+      <DependentUpon>cobro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\contenedor.resx">
       <DependentUpon>contenedor.cs</DependentUpon>
