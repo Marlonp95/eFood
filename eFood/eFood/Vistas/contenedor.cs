@@ -71,6 +71,7 @@ namespace eFood
         {
             Application.Exit();
         }
+
         int lx, ly;
         int sw, sh;
 
@@ -111,7 +112,7 @@ namespace eFood
             WindowState = FormWindowState.Minimized;
         }
 
-        //METODO PARA ARRASTRAR EL FORMULARIO---------------------------------------------------------------------
+      //////////////////////////////////////////////////////////METODO PARA ARRASTRAR EL FORMULARIO/////////////////////////////////////////
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
 
