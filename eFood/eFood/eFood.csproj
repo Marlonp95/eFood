@@ -420,6 +420,8 @@
     <Content Include="Resources\383079-48.png" />
     <None Include="Resources\905644-32.png" />
     <None Include="Resources\905644-321.png" />
+    <None Include="Resources\eliminar1.png" />
+    <None Include="Resources\eliminar2.png" />
     <Content Include="Resources\iconfinder_07-prawn_4885264.png" />
     <Content Include="Resources\iconfinder_161_Bar_barcode_code_shopping_4308531.png" />
     <Content Include="Resources\iconfinder_1_1845739 %281%29.png" />

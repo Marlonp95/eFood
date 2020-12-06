@@ -250,9 +250,14 @@ namespace eFood
 
         private void button8_Click(object sender, EventArgs e)
         {
-            cobro obj = new cobro();
-            obj.ShowDialog();
+            if (DataFactura.Rows.Count == 0 || NumFaact.Text == string.Empty)
+            {
+                MessageBox.Show("Debe Cargar o Crear factura para procesar el cobro.");
+                return;
+            }
 
+            cobro obj = new cobro(Convert.ToInt32(NumFaact.Text), Convert.ToInt32(comboFactura.SelectedValue));
+            obj.ShowDialog();
 
             try
             {

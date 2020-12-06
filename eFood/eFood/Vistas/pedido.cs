@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eFood.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -350,13 +351,13 @@ namespace eFood
                         {
                             //MessageBox.Show("Factura" + num_fact.ToString());
 
-                            string vSql = $"EXEC actuaiza_temp_enc_fact {num_fact},'{mesatag}','{fecha}','{6}','{login.codigo}','{null}',{itbis.ToString().Replace(',', '.')},{total.ToString().Replace(',', '.')},{porciento_ley.ToString().Replace(',', '.')},{sub_total.ToString().Replace(',', '.')},'{'A'}','{null}'";
+                            string vSql = $"EXEC actuaiza_temp_enc_fact {num_fact},{mesatag},'{fecha}',{6} ,{Globals.IdUsuario},'{null}',{itbis.ToString().Replace(',', '.')}, {total.ToString().Replace(',', '.')}, {porciento_ley.ToString().Replace(',', '.')}, {sub_total.ToString().Replace(',', '.')},'{'A'}','{null}'";
                             DataSet dt = new DataSet();
                             correcto = dt.ejecuta(vSql);
 
                             foreach (DataGridViewRow fila in DataPedido.Rows)
                             {
-                                vSql = $"EXEC actuaiza_temp_det_fact '{num_fact}','{fila.Cells[0].Value}','{fila.Cells[3].Value}','{Convert.ToDouble(fila.Cells[5].Value)}','{Convert.ToDouble(fila.Cells[6].Value)}'";
+                                vSql = $"EXEC actuaiza_temp_det_fact {num_fact}, {fila.Cells[0].Value}, {fila.Cells[3].Value}, {Convert.ToDouble(fila.Cells[5].Value)} ,{Convert.ToDouble(fila.Cells[6].Value)}";
                                 dt = new DataSet();
                                 correcto = dt.ejecuta(vSql);
                             }
