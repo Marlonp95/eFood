@@ -85,38 +85,13 @@ namespace eFood
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(NumFaact.Text.Trim()) == false)
-            {
-                try
-                {             
-                    #region Control Reorden
-                    //string vSql = $"Select cantidad, productos, reorden From productos Where id_productos = " + txtcodigo.Text.Trim();
-                    //DataSet DS = new DataSet();
-                    //DS.ejecuta(vSql);
-                    ////CONTROLAR SI HAY SUFICIENTES ARTICULOS PARA LA VENTA 
-                    //if (Convert.ToDouble(txtcantidad.Text.Trim()) > Convert.ToDouble(DS.Tables[0].Rows[0][0]))
-                    //{
-                    //    MessageBox.Show("NO HAY INVENTARIO PARA EL SIGUIENTE ARTICULO: " + DS.Tables[0].Rows[0][1] + "!", "Advertencia", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                    //    return;
-                    //}
-                    //else
-                    //{
-                    //    if (Convert.ToDouble(DS.Tables[0].Rows[0][0]) - Convert.ToDouble(txtcantidad.Text.Trim()) < 0)
-                    //    {
-                    //        MessageBox.Show("NO HAY INVENTARIO PARA EL SIGUIENTE ARTICULO: " + DS.Tables[0].Rows[0][1] + "!", "Advertencia", MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning);
-                    //        return;
-                    //    }
-                    //}
-                    ////CONTROLAR EL PUNTO DE REORDEN
-                    //if (Convert.ToDouble(DS.Tables[0].Rows[0][0]) - Convert.ToDouble(txtcantidad.Text.Trim()) <= Convert.ToDouble(DS.Tables[0].Rows[0][2]))
-                    //    MessageBox.Show("REALICE UN PEDIDO PARA: " + DS.Tables[0].Rows[0][1], "SE ESTA AGOTANDO EL SIGUIENTE PRODUCTO" + "!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    ////AGREGO EL ARTICULO
-                    #endregion
-
+              try
+                {                     
                     if (DataFactura.RowCount <= 0)
                     {
-                        var importe = Convert.ToDouble(txtcantidad.Text) * Convert.ToDouble(txtprecio.Text);
-                        DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtprecio.Text, txtcantidad.Text,importe);
+                        var importe = Convert.ToDecimal(txtcantidad.Text) * Convert.ToDecimal(txtprecio.Text);
+                        var itbis = Convert.ToDecimal(importe) * Convert.ToDecimal(txtItbis.Text);
+                        DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtprecio.Text, txtcantidad.Text, importe.ToString().Decimals(), itbis.ToString().Decimals());
 
                     }
                     //PARA DETERMINAR EXISTENCIA Y LA POSICION DE DICHO ARTICULO           
@@ -124,11 +99,10 @@ namespace eFood
                     {
                         var dataRow = DataFactura.Rows.Cast<DataGridViewRow>().Where(x => x.Cells[0].Value.ToString() == txtcodigo.Text);
 
-                        //existe = dataRow.Count() > 0;
                         if (dataRow.Count() > 0) 
                         {
                             var num_fila = dataRow.FirstOrDefault().Index;
-                            DataFactura.Rows[num_fila].Cells[2].Value = (Convert.ToDecimal(txtcantidad.Text) + Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[2].Value)).ToString().Decimals();
+                            DataFactura.Rows[num_fila].Cells[3].Value = (Convert.ToDecimal(txtcantidad.Text) + Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[3].Value)).ToString().Decimals();
                             var importe = Convert.ToString(Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[2].Value) * Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[3].Value)).Decimals();
                             DataFactura.Rows[num_fila].Cells[4].Value = importe;
                             var itbis = Convert.ToString(Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[4].Value) * Convert.ToDecimal(txtItbis.Text)).Decimals();
@@ -137,9 +111,8 @@ namespace eFood
                         else
                         {
                             var importe = Convert.ToDecimal(txtcantidad.Text) * Convert.ToDecimal(txtprecio.Text);
-                            var itbis = Convert.ToDecimal(txtprecio.Text) * Convert.ToDecimal(txtItbis.Text);
+                            var itbis = Convert.ToDecimal(importe) * Convert.ToDecimal(txtItbis.Text);
                             DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtcantidad.Text.Decimals(), txtprecio.Text.Decimals(), importe.ToString().Decimals(), itbis.ToString().Decimals());
-                            //contador++;
                         }
                     }
 
@@ -157,12 +130,7 @@ namespace eFood
                 {
                     MessageBox.Show("Error");
                 }
-
-            }
-            else
-            {
-                MessageBox.Show("Debe cargar Factura");
-            }
+ 
         } 
 
         void CalcTotal()
@@ -550,7 +518,14 @@ namespace eFood
 
         private void button11_Click(object sender, EventArgs e)
         {
+            if (DataFactura.Rows.Count <= 0)
+            {
+                MessageBox.Show("Debe selecionar articulos a facturar", "Mensaje");
+                return;
+            }
 
+            var data = utilidades.ejecuta($@"select top 1 id_factura  from enc_factura order by id_factura desc").Rows;
+            int idFactura = data[0].Field<int>("id_factura");
         }
 
         private void button9_Click(object sender, EventArgs e)
