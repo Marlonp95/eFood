@@ -99,11 +99,16 @@ namespace utilidad
             }
             return vEstado;
         }
+
         static SqlTransaction tran_ex;
-        static SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=efood;Integrated Security=True");
+        static SqlConnection conn;
+
         public static SqlTransaction BeginTransation()
         {
+
+            conn = new SqlConnection("Data Source=.;Initial Catalog=efood;Integrated Security=True");
             conn.Open();
+
             tran_ex = conn.BeginTransaction("tran->" + DateTime.Now.Hour.ToString());
             return tran_ex;
         }
@@ -132,34 +137,84 @@ namespace utilidad
         //    tran_ex.Dispose();
         //}
 
-        public static bool ExecuteTransaction(this DataTable MiDataset, string sentencia)
+        public static int GetIdentity(this DataTable data)
+        {
+            try
+            { 
+                return Convert.ToInt32(data.Rows[0][0]);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public static DataTable ExecuteSQL(string sentencia)
         {
             bool vEstado = false;
+            DataTable MiDataset = new DataTable();
             try
             {
+                if (conn == null) conn = new SqlConnection("Data Source=.;Initial Catalog=efood;Integrated Security=True");
+                if (conn.State == ConnectionState.Closed) conn.Open();
+
                 SqlCommand cmd;
 
                 if (tran_ex != null)
-                    cmd = new SqlCommand (sentencia, conn,tran_ex);
+                    cmd = new SqlCommand(sentencia, conn, tran_ex);
                 else
                     cmd = new SqlCommand(sentencia, conn);
                 try
                 {
-                  
+
                     using (SqlDataAdapter dr = new SqlDataAdapter(cmd))
                     {
                         dr.Fill(MiDataset);
                     }
 
-                    //SqlDataAdapter da = new SqlDataAdapter(sentencia, conn);
-                    //da.Fill(MiDataset);
+
+                    return MiDataset;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            catch (Exception ex)
+            {
+                // MessageBox.Show("Error al Conectar con la Base de Datos : " + ex.ToString());
+                throw ex;
+            }
+        }
+
+        public static bool ExecuteSQL(this DataTable MiDataset, string sentencia)
+        {
+            bool vEstado = false;
+            try
+            {
+                if (conn == null) conn = new SqlConnection("Data Source=.;Initial Catalog=efood;Integrated Security=True");
+                if (conn.State == ConnectionState.Closed) conn.Open();
+
+                SqlCommand cmd;
+
+                if (tran_ex != null)
+                    cmd = new SqlCommand(sentencia, conn, tran_ex);
+                else
+                    cmd = new SqlCommand(sentencia, conn);
+                try
+                {
+
+                    using (SqlDataAdapter dr = new SqlDataAdapter(cmd))
+                    {
+                        dr.Fill(MiDataset);
+                    }
+
+
                     return true;
                 }
                 catch (Exception ex)
                 {
-                    //tran_ex.Rollback();
-                    //tran_ex.Dispose();
-
                     throw ex;
                 }
             }

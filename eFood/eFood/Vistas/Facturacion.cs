@@ -89,7 +89,6 @@ namespace eFood
             {
                 try
                 {             
-
                     #region Control Reorden
                     //string vSql = $"Select cantidad, productos, reorden From productos Where id_productos = " + txtcodigo.Text.Trim();
                     //DataSet DS = new DataSet();
@@ -132,11 +131,14 @@ namespace eFood
                             DataFactura.Rows[num_fila].Cells[2].Value = (Convert.ToDecimal(txtcantidad.Text) + Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[2].Value)).ToString().Decimals();
                             var importe = Convert.ToString(Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[2].Value) * Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[3].Value)).Decimals();
                             DataFactura.Rows[num_fila].Cells[4].Value = importe;
+                            var itbis = Convert.ToString(Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[4].Value) * Convert.ToDecimal(txtItbis.Text)).Decimals();
+                            DataFactura.Rows[num_fila].Cells[5].Value = itbis;
                         }
                         else
                         {
                             var importe = Convert.ToDecimal(txtcantidad.Text) * Convert.ToDecimal(txtprecio.Text);
-                            DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtcantidad.Text.Decimals(), txtprecio.Text.Decimals(), importe.ToString().Decimals());
+                            var itbis = Convert.ToDecimal(txtprecio.Text) * Convert.ToDecimal(txtItbis.Text);
+                            DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtcantidad.Text.Decimals(), txtprecio.Text.Decimals(), importe.ToString().Decimals(), itbis.ToString().Decimals());
                             //contador++;
                         }
                     }
@@ -148,6 +150,7 @@ namespace eFood
                     txtdescripcion.Clear();
                     txtprecio.Clear();
                     txtcantidad.Clear();
+                    txtItbis.Clear();
                     txtcodigo.Focus();
                 }
                 catch
@@ -197,6 +200,7 @@ namespace eFood
                     txtcodigo.Text = dt.Tables[0].Rows[0]["id_plato"].ToString();
                     txtdescripcion.Text = dt.Tables[0].Rows[0]["plato"].ToString();
                     txtprecio.Text = dt.Tables[0].Rows[0]["precio"].ToString();
+                    txtItbis.Text = dt.Tables[0].Rows[0]["itbis"].ToString();
                     txtcantidad.Focus();
                 }
                 else
@@ -423,7 +427,7 @@ namespace eFood
                 DataTable dt = new DataTable();
                 var a = dataCuentas;
 
-                string Vsql = $@"SELECT    temp_det_factura.id_plato, platos.plato, temp_det_factura.cantidad, temp_det_factura.precio
+                string Vsql = $@"SELECT    temp_det_factura.id_plato, platos.plato, temp_det_factura.cantidad, temp_det_factura.precio, platos.itbis 
                                     FROM   temp_det_factura INNER JOIN
                              platos ON temp_det_factura.id_plato = platos.id_plato where id_factura ={dataCuentas.CurrentRow.Cells["id_factura"].Value}";
                 dt.ejecuta(Vsql);
@@ -435,7 +439,8 @@ namespace eFood
                         Convert.ToString(Fila["plato"]),
                         Convert.ToString(Fila["cantidad"]),
                         Convert.ToString(Fila["precio"]),
-                        (Convert.ToInt32(Fila["precio"]) * Convert.ToInt32(Fila["cantidad"])).ToString("F")
+                        (Convert.ToInt32(Fila["precio"]) * Convert.ToInt32(Fila["cantidad"])).ToString("F"),
+                        (Convert.ToInt32(Fila["precio"]) * Convert.ToInt32(Fila["itbis"])).ToString("F")
                     );
                 }
             }
@@ -450,17 +455,16 @@ namespace eFood
             {
                 if (dataCuentas.CurrentRow == null) return;
                 lblTotal.Text = "RD$0.00";
-                DataFactura.Rows.Clear();
+                DataFactura.Rows.Clear();var a = dataCuentas;
 
                 DataTable dt = new DataTable();
-                var a = dataCuentas;
-
-                string Vsql = $@"SELECT  temp_det_factura.id_plato, platos.plato, temp_det_factura.cantidad, temp_det_factura.precio
+                string Vsql = $@"SELECT  temp_det_factura.id_plato, platos.plato, temp_det_factura.cantidad, temp_det_factura.precio, platos.itbis 
                                     FROM temp_det_factura INNER JOIN
                                platos ON temp_det_factura.id_plato = platos.id_plato where id_factura = {dataCuentas.CurrentRow.Cells["id_factura"].Value}";
+
                 dt.ejecuta(Vsql);
 
-                    NumFaact.Text = dataCuentas.CurrentRow.Cells["id_factura"].Value.ToString();
+                NumFaact.Text = dataCuentas.CurrentRow.Cells["id_factura"].Value.ToString();
 
                 foreach (DataRow Fila in dt.Rows)
                 {
@@ -470,7 +474,8 @@ namespace eFood
                         Convert.ToString(Fila["plato"]),
                         Convert.ToString(Fila["cantidad"]),
                         Convert.ToString(Fila["precio"]),
-                        (Convert.ToInt32(Fila["precio"]) * Convert.ToInt32(Fila["cantidad"])).ToString("F")
+                       (Convert.ToInt32(Fila["precio"]) * Convert.ToInt32(Fila["cantidad"])).ToString("F"),
+                       (Convert.ToDecimal(Fila["precio"]) *Convert.ToDecimal(Fila["itbis"])).ToString("F")
                     );
                 }
             }
@@ -510,6 +515,10 @@ namespace eFood
 
         private void textBox2_Validating(object sender, CancelEventArgs e)
         {
+            if (txtRnc.Text == string.Empty)
+            {
+                return;
+            }
             var rnc = txtRnc.Text;
             var result = Metodos.ValidarDocumento(rnc);
             if (result != true)
@@ -542,6 +551,68 @@ namespace eFood
         private void button11_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtcodigo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Para obligar a que sólo se introduzcan números
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+              if (Char.IsControl(e.KeyChar)) //permitir teclas de control como retroceso
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                //el resto de teclas pulsadas se desactivan
+                e.Handled = true;
+            }
+        }
+
+        private void txtcantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Para obligar a que sólo se introduzcan números
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+              if (Char.IsControl(e.KeyChar)) //permitir teclas de control como retroceso
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                //el resto de teclas pulsadas se desactivan
+                e.Handled = true;
+            }
+        }
+
+        private void txtRnc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Para obligar a que sólo se introduzcan números
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+              if (Char.IsControl(e.KeyChar)) //permitir teclas de control como retroceso
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                //el resto de teclas pulsadas se desactivan
+                e.Handled = true;
+            }
         }
     }
     
