@@ -121,22 +121,6 @@ namespace utilidad
             }
         }
 
-        //public static void Commit(this SqlTransaction pTran)
-        //{
-        //    pTran.Commit();
-        //    conn.Close();
-        //    conn.Dispose();
-        //    tran_ex.Dispose();
-        //}
-
-        //public static void Rollback()
-        //{
-        //    tran_ex.Rollback();
-        //    conn.Close();
-        //    conn.Dispose();
-        //    tran_ex.Dispose();
-        //}
-
         public static int GetIdentity(this DataTable data)
         {
             try
@@ -148,7 +132,6 @@ namespace utilidad
                 throw ex;
             }
         }
-
 
         public static DataTable ExecuteSQL(string sentencia)
         {
@@ -476,6 +459,23 @@ namespace utilidad
                     oString += item.Value;
             }
             return oString;
+        }
+
+        public static T Nvl<T>(this T obj, object value)
+        {
+            if (obj == null)
+            {
+                return (T)value;
+            }
+            else if((obj is string))
+            {
+                return string.IsNullOrEmpty(obj.ToString()) ? (T)value : obj;
+            }
+            else
+            {
+                return obj;
+            }
+
         }
 
     }

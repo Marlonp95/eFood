@@ -30,7 +30,11 @@ namespace eFood.Vistas
             comboTipoNcf.DataSource = utilidades.ejecuta("select tipo, convert(varchar(max),tipo)+' - '+descripcion descripcion from tipo_ncf");
             comboTipoNcf.DisplayMember = "descripcion";
             comboTipoNcf.ValueMember = "tipo";
+            trarSecuencias();
+        }
 
+        public void trarSecuencias()
+        {
             DataTable dt = new DataTable();
             dt.ejecuta($@"select  convert(varchar(max),d.tipo)+'-'+d.descripcion tipo_ncf, a.letra, a.secuencia_inicial, a.secuencia_final, a.ultimo_generado,
 	                           a.fecha_creacion, fecha_vencimiento, c.nombre1+' '+c.apellido1+' '+c.apellido2 usuario
@@ -38,7 +42,6 @@ namespace eFood.Vistas
 						                         inner join persona c on b.id_persona = c.id_persona
 						                         inner join tipo_ncf d on a.id_tipo_ncf = d.tipo");
             dataSecuecia.DataSource = dt;
-
         }
 
         private void DateTimePicker_KeyUp(object sender, KeyEventArgs e)
@@ -89,10 +92,14 @@ namespace eFood.Vistas
                     {
                         var time = dateTimePicker.CustomFormat == " "? "NULL": $"'{dateTimePicker.Value}'";
                         
-                        string vSql = $"EXEC [actualiza_secuencia_ncf] '{comboTipoNcf.SelectedValue}','{txtletra.Text.Trim()}','{txtSecuenciaInicial.Text.Trim()}','{txtSecuenciaFinal.Text.Trim()}',{time},'{Globals.Usuarios}'";
+                        string vSql = $"EXEC [actualiza_secuencia_ncf] {comboTipoNcf.SelectedValue},'{txtletra.Text.Trim()}',{txtSecuenciaInicial.Text.Trim()},{txtSecuenciaFinal.Text.Trim()},{time},{Globals.Usuarios}";
                         DataSet dt = new DataSet();
                         bool correcto = dt.ejecuta(vSql);
-                        if (correcto) { MessageBox.Show("Secuencia NCF guardada "); }
+                        if (correcto)
+                        {
+                            MessageBox.Show("Secuencia NCF guardada ");
+                            trarSecuencias();
+                        }
                         else MessageBox.Show("Error guardando Secuencia NCF ");
                     }
                 }
