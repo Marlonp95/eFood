@@ -114,8 +114,15 @@ namespace eFood
                     Hide();
                     obj.Show();
 
+                    var row = utilidades.ejecuta($@"select id from enc_apertura_caja where id_usuario ={Globals.IdUsuario} and estado ='A'").Rows;
+
+                    Globals.idAperturaCaja = row[0].Field<int>("id");
+
                 }
-                else { MessageBox.Show(" USUARIO O CONTRASEÑA INCORRECTOS"); }
+                else
+                {
+                    MessageBox.Show(" USUARIO O CONTRASEÑA INCORRECTOS");
+                }
             }
 
             catch (Exception error)

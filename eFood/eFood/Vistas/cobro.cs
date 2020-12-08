@@ -49,7 +49,7 @@ namespace eFood.Vistas
             lblTotal.Text = totalFactura.ToString().MoneyDecimal();
             NumFact.Text = facturaNo.ToString();
 
-           txtMonto.Focus();
+            txtMonto.Focus();
         }
 
 
@@ -126,68 +126,63 @@ namespace eFood.Vistas
         //APLICAR COBROS
         private void button4_Click(object sender, EventArgs e)
         {
-            if (dataPago.Rows.Count <= 0)
-            {
-                MessageBox.Show("No hay datos para realizar pago.");
-                return;
-            }
-
             try
             {
-                var data = utilidades.ejecuta($@"select id 
-	                                            from enc_apertura_caja 
-                                            where id_usuario = 1 
-                                                and Cast(fecha_inicio as date) = cast(SYSDATETIME() as date)
-                                                and fecha_final is null").Rows;
+                if (dataPago.Rows.Count <= 0)
+                {
+                    MessageBox.Show("No hay datos para realizar pago.");
+                    return;
+                }
 
-                idApertura = data[0].Field<int>("id");
+                var row = utilidades.ejecuta($@"select a.id_factura, a.total, b.monto
+                                             from temp_enc_factura a inner join enc_cobros b on a.id_factura = b.id_factura 
+                                            where a.id_factura = {NumFact.Text.Trim()}
+                                              and a.total = b.monto
+                                              and a.id_tipo_factura = 1");
 
+                if (row != null) throw new Exception("Esta factura ya fue cobrada");
+              
+                string vSql = $"EXEC actualiza_enc_cobro {Globals.idAperturaCaja},{facturaNo},{totalFactura},{0},{devolver},{0},'{System.DateTime.Now}','{null}',{Globals.IdUsuario}";
+
+                using (var tran = utilidades.BeginTransation())
+                {
+                    try
+                    {
+
+
+                        var data = utilidades.ExecuteSQL(vSql);
+                        var id = data.GetIdentity();
+
+                        foreach (DataGridViewRow fila in dataPago.Rows)
+                        {
+                            string vSql2 = $"EXEC actualiza_det_cobros {id},{fila.Cells[0].Value},{fila.Cells[4].Value},'{null}','{null}','{null}','{null}','{null}',{fila.Cells[5].Value},{fila.Cells[3].Value},{Globals.IdUsuario},'{'N'}','{System.DateTime.Now}','{null}'";
+                            utilidades.ExecuteSQL(vSql2);
+                        }
+
+                        tran.Commit();
+                        MessageBox.Show("Cobro efectuado correctamente.", "Mensaje.");
+
+                        dataPago.Rows.Clear();
+                        txtMonto.Text = string.Empty;
+
+                        lblDevolver.Text = "RD$  00.00";
+                        lblPagado.Text = "RD$  00.00";
+                        lblTotal.Text = "RD$  00.00";
+
+                    }
+                    catch (Exception ex)
+                    {
+                        tran.Rollback();
+                        MessageBox.Show(ex.Message);
+                    }
+                    tran.ConectionClose();
+                }
             }
             catch (Exception ex)
             {
-                _ = ex.Message;
+                MessageBox.Show(ex.Message);
 
             }
-
-            string vSql = $"EXEC actualiza_enc_cobro {idApertura},{facturaNo},{totalFactura},{0},{devolver},{0},'{System.DateTime.Now}','{null}',{Globals.IdUsuario}";
-
-            using (var tran = utilidades.BeginTransation())
-            {
-                try
-                {
-                 
-
-                    var data =  utilidades.ExecuteSQL(vSql);
-                    var id = data.GetIdentity();
-
-                    foreach (DataGridViewRow fila in dataPago.Rows)
-                    {
-                        string vSql2 = $"EXEC actualiza_det_cobros {id},{fila.Cells[0].Value},{fila.Cells[4].Value},'{null}','{null}','{null}','{null}','{null}',{fila.Cells[5].Value},{fila.Cells[3].Value},{Globals.IdUsuario},'{'N'}','{System.DateTime.Now}','{null}'";
-                        utilidades.ExecuteSQL(vSql2);
-                    }
-
-                    tran.Commit();
-                    MessageBox.Show("Cobro efectuado correctamente.", "Mensaje.");
-
-                    dataPago.Rows.Clear();
-                    txtMonto.Text = string.Empty;
-             
-                    lblDevolver.Text = "RD$  00.00";
-                    lblPagado.Text = "RD$  00.00";
-                    lblTotal.Text = "RD$  00.00";
-
-                }
-                catch (Exception ex)
-                {
-                    tran.Rollback();
-                    MessageBox.Show(ex.Message);
-                }
-
-                tran.ConectionClose();
-            }
-
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)

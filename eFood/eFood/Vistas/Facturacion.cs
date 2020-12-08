@@ -13,6 +13,7 @@ namespace eFood
     public partial class Facturacion : Form
     {
 
+
         public string mesatag { get; set; }
 
         public Facturacion()
@@ -67,76 +68,78 @@ namespace eFood
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             if (string.IsNullOrEmpty(txtnomcli.Text.Trim()) == false)
             {
 
             }
-            
+
             if (string.IsNullOrEmpty(txtcodcli.Text.Trim()) == false)
             {
 
             }
-            
- 
         }
-        //int contador;
-       
 
         private void button2_Click(object sender, EventArgs e)
         {
-              try
-                {                     
-                    if (DataFactura.RowCount <= 0)
+            if (string.IsNullOrEmpty(txtcodigo.Text))
+            {
+                MessageBox.Show("Seleccione articulo a facturar.");
+                txtcodigo.Focus();
+                return;
+            }
+
+            try
+            {
+                if (DataFactura.RowCount <= 0)
+                {
+                    var importe = Convert.ToDecimal(txtcantidad.Text) * Convert.ToDecimal(txtprecio.Text);
+                    var itbis = Convert.ToDecimal(importe) * Convert.ToDecimal(txtItbis.Text);
+                    DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtprecio.Text, txtcantidad.Text, importe.ToString().Decimals(), itbis.ToString().Decimals());
+
+                }
+                //PARA DETERMINAR EXISTENCIA Y LA POSICION DE DICHO ARTICULO           
+                else
+                {
+                    var dataRow = DataFactura.Rows.Cast<DataGridViewRow>().Where(x => x.Cells[0].Value.ToString() == txtcodigo.Text);
+
+                    if (dataRow.Count() > 0)
+                    {
+                        var num_fila = dataRow.FirstOrDefault().Index;
+                        DataFactura.Rows[num_fila].Cells[3].Value = (Convert.ToDecimal(txtcantidad.Text) + Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[3].Value)).ToString().Decimals();
+                        var importe = Convert.ToString(Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[2].Value) * Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[3].Value)).Decimals();
+                        DataFactura.Rows[num_fila].Cells[4].Value = importe;
+                        var itbis = Convert.ToString(Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[4].Value) * Convert.ToDecimal(txtItbis.Text)).Decimals();
+                        DataFactura.Rows[num_fila].Cells[5].Value = itbis;
+                    }
+                    else
                     {
                         var importe = Convert.ToDecimal(txtcantidad.Text) * Convert.ToDecimal(txtprecio.Text);
                         var itbis = Convert.ToDecimal(importe) * Convert.ToDecimal(txtItbis.Text);
-                        DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtprecio.Text, txtcantidad.Text, importe.ToString().Decimals(), itbis.ToString().Decimals());
-
+                        DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtcantidad.Text.Decimals(), txtprecio.Text.Decimals(), importe.ToString().Decimals(), itbis.ToString().Decimals());
                     }
-                    //PARA DETERMINAR EXISTENCIA Y LA POSICION DE DICHO ARTICULO           
-                    else
-                    {
-                        var dataRow = DataFactura.Rows.Cast<DataGridViewRow>().Where(x => x.Cells[0].Value.ToString() == txtcodigo.Text);
-
-                        if (dataRow.Count() > 0) 
-                        {
-                            var num_fila = dataRow.FirstOrDefault().Index;
-                            DataFactura.Rows[num_fila].Cells[3].Value = (Convert.ToDecimal(txtcantidad.Text) + Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[3].Value)).ToString().Decimals();
-                            var importe = Convert.ToString(Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[2].Value) * Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[3].Value)).Decimals();
-                            DataFactura.Rows[num_fila].Cells[4].Value = importe;
-                            var itbis = Convert.ToString(Convert.ToDecimal(DataFactura.Rows[num_fila].Cells[4].Value) * Convert.ToDecimal(txtItbis.Text)).Decimals();
-                            DataFactura.Rows[num_fila].Cells[5].Value = itbis;
-                        }
-                        else
-                        {
-                            var importe = Convert.ToDecimal(txtcantidad.Text) * Convert.ToDecimal(txtprecio.Text);
-                            var itbis = Convert.ToDecimal(importe) * Convert.ToDecimal(txtItbis.Text);
-                            DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtcantidad.Text.Decimals(), txtprecio.Text.Decimals(), importe.ToString().Decimals(), itbis.ToString().Decimals());
-                        }
-                    }
-
-                    //ME REALIZA LA SUMA QUE MUESTRO PARA EL TOTAL QUE VOY A FACTURAR
-                    CalcTotal();
-
-                    txtcodigo.Clear();
-                    txtdescripcion.Clear();
-                    txtprecio.Clear();
-                    txtcantidad.Clear();
-                    txtItbis.Clear();
-                    txtcodigo.Focus();
                 }
-                catch
-                {
-                    MessageBox.Show("Error");
-                }
- 
-        } 
+
+                //ME REALIZA LA SUMA QUE MUESTRO PARA EL TOTAL QUE VOY A FACTURAR
+                CalcTotal();
+
+                txtcodigo.Clear();
+                txtdescripcion.Clear();
+                txtprecio.Clear();
+                txtcantidad.Clear();
+                txtItbis.Clear();
+                txtcodigo.Focus();
+            }
+            catch
+            {
+                MessageBox.Show("Error");
+            }
+
+        }
 
         void CalcTotal()
         {
-           
             var total = 0m;
+
             foreach (DataGridViewRow Fila in DataFactura.Rows)
             {
                 total += Convert.ToDecimal(Fila.Cells[4].Value);
@@ -147,7 +150,9 @@ namespace eFood
 
             var subTotal = total + (total * 0.18m) + (total * 0.10m);
             var itbis = total * 0.18m;
+            var ley = total * 0.10m;
 
+            lblLey.Text = ley.ToString().MoneyDecimal("RD$ ");
             lblSubTotal.Text = total.ToString().MoneyDecimal("RD$ ");
             lblItbis.Text = itbis.ToString().MoneyDecimal("RD$ ");
             lblTotal.Text = subTotal.ToString().MoneyDecimal("RD$ ");
@@ -195,10 +200,10 @@ namespace eFood
 
         private void button3_Click(object sender, EventArgs e)
         {
-          
+
             if (DataFactura.Rows.Count > 0)
-            { 
-             
+            {
+
                 DataFactura.Rows.RemoveAt(DataFactura.CurrentRow.Index);
                 CalcTotal();
 
@@ -222,53 +227,64 @@ namespace eFood
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (DataFactura.Rows.Count == 0 || NumFaact.Text == string.Empty)
-            {
-                MessageBox.Show("Debe Cargar o Crear factura para procesar el cobro.");
-                return;
-            }
-
-            cobro obj = new cobro(Convert.ToInt32(NumFaact.Text), Convert.ToInt32(comboFactura.SelectedValue));
-            obj.ShowDialog();
-
+            int? idCobro;
             try
             {
-                string vSql = $@"EXEC SetSecuenciaNCF {comboComprobante.SelectedValue}";
-                DataTable dt = new DataTable();
-                dt.ejecutaTransaccion(vSql);
-                int? secuencia;
+                if (DataFactura.Rows.Count == 0 || NumFaact.Text == string.Empty) throw new Exception("Debe Cargar o Crear factura para procesar el cobro");
 
-                if (dt.Rows.Count > 0)
-                secuencia = dt.Rows[0].Field<int>("secuencia_generada");
-                else
+
+                cobro obj = new cobro(Convert.ToInt32(NumFaact.Text), Convert.ToInt32(comboFactura.SelectedValue));
+                obj.ShowDialog();
+
+                var data = utilidades.ejecuta($@"select b.id
+                                             from temp_enc_factura a inner join enc_cobros b on a.id_factura = b.id_factura 
+                                            where a.id_factura = {NumFaact.Text}
+                                              and a.total = b.monto
+                                              and a.id_tipo_factura = 1");
+                
+                if (data != null)
                 {
-                    MessageBox.Show("No hay secuencia para este tipo de comprobante");
-                    return;
+                    var row = data.Rows[0];
+                    idCobro = row.Field<int>("id");
+
+                    string vSql = $@"EXEC SetSecuenciaNCF {comboComprobante.SelectedValue}";
+                    DataTable dt = new DataTable();
+                    dt.ejecutaTransaccion(vSql);
+
+                   string secuencia;
+                    DateTime? vencimientoNCF = null;
+
+                    if (dt.Rows.Count > 0)
+                        secuencia = dt.Rows[0].Field<string>("secuencia_generada");
+
+                    else throw new Exception("No hay secuencia para este tipo de comprobante");
+
+                    vSql = $@"Select * from GetSecuenciaNCF ({comboComprobante.SelectedValue})";
+
+                     var d = utilidades.ExecuteSQL(vSql);
+                    if(d !=null)vencimientoNCF = d.Rows[0].Field<DateTime?>("fecha_vencimiento");
+
+
+                    vSql = $@"EXEC actualiza_enc_factura  {comboFactura.SelectedValue},{txtcodcli.Text.Trim()}, {1},{1}, '{System.DateTime.Today}', '{txtRnc.Text.Trim()}',{comboComprobante.SelectedValue},'{secuencia}',{lblItbis.Text.Decimals()},
+                                                          {lblTotal.Text.Decimals()},{lblLey.Text.Decimals()}, {lblSubTotal.Text.Decimals()}, {0}, {Globals.IdUsuario},'{txtnomcli.Text}','{txtDireccion.Text}',{txttelefoo.Text.Nvl<string>("NULL")}, {0} ,'{vencimientoNCF}','{System.DateTime.Now}','{null}'";
+                    DataSet ds = new DataSet();
+                    ds.ejecuta(vSql);
                 }
-            }
-            catch (Exception error)
-            {
-                MessageBox.Show("Error Base De Datos " + error);
-            }
 
-            try
-            {
-                string vSql = $@"EXEC actualiza_enc_factura '{comboFactura.SelectedValue}','{txtcodcli.Text.Trim()}', '{1}','{comboTipoFactura.SelectedValue}', '{System.DateTime.Today}', '{txtRnc.Text.Trim()}','{comboComprobante.SelectedValue}'";
-                DataSet dt = new DataSet();
-                dt.ejecuta(vSql);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                else throw new Exception("Error Aplicando Cobro");
 
-            //string vSql = $"EXEC datos_factura {NumFaact.Text}";
-            //DataSet dt = new DataSet();
-            //dt.ejecuta(vSql);
+                //string vSql = $"EXEC datos_factura {NumFaact.Text}";
+                //DataSet dt = new DataSet();
+                //dt.ejecuta(vSql);
 
-            //reporte rp = new reporte();
-            //rp.reportViewer1.LocalReport.DataSources[0].Value = dt.Tables[0];
-            //rp.ShowDialog();
+                //reporte rp = new reporte();
+                //rp.reportViewer1.LocalReport.DataSources[0].Value = dt.Tables[0];
+                //rp.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -276,7 +292,7 @@ namespace eFood
         }
 
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
-        {     
+        {
         }
 
         private void comboBox1_VisibleChanged(object sender, EventArgs e)
@@ -286,7 +302,7 @@ namespace eFood
 
             //DataTable dt = new DataTable();
 
-         
+
             //dt.ejecuta($"SELECT a.id_usuario, CONCAT( d.nombre1,' ',d.apellido1,' ',d.apellido2 ) as Nombre, a.id_cliente ,b.id_plato ,c.plato, c.precio, b.cantidad, b.cantidad * c.precio importe FROM temp_enc_factura a INNER JOIN temp_det_factura b on a.id_factura = b.id_factura INNER JOIN platos c on b.id_plato = c.id_plato INNER JOIN persona d on a.id_usuario = d.id_persona WHERE a.id_mesa  = {comboBox1.SelectedValue.ToString()}");
 
 
@@ -312,7 +328,7 @@ namespace eFood
         }
 
         private void button4_Click(object sender, EventArgs e)
-        {      
+        {
         }
 
         private void comboBox1_SelectedValueChanged_1(object sender, EventArgs e)
@@ -360,7 +376,7 @@ namespace eFood
                 dataCuentas.Rows.Clear();
 
                 DataTable dt = new DataTable();
-                string vSQL2= $@"SELECT  temp_enc_factura.id_factura, persona.nombre1, persona.apellido1, temp_enc_factura.fecha_factura
+                string vSQL2 = $@"SELECT  temp_enc_factura.id_factura, persona.nombre1, persona.apellido1, temp_enc_factura.fecha_factura
                                   FROM temp_enc_factura INNER JOIN
                                      cliente ON temp_enc_factura.id_cliente = cliente.id_cliente INNER JOIN
                                      persona ON cliente.id_persona = persona.id_persona
@@ -377,7 +393,7 @@ namespace eFood
                     );
                 }
             }
-            
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
@@ -423,7 +439,7 @@ namespace eFood
             {
                 if (dataCuentas.CurrentRow == null) return;
                 lblTotal.Text = "RD$0.00";
-                DataFactura.Rows.Clear();var a = dataCuentas;
+                DataFactura.Rows.Clear(); var a = dataCuentas;
 
                 DataTable dt = new DataTable();
                 string Vsql = $@"SELECT  temp_det_factura.id_plato, platos.plato, temp_det_factura.cantidad, temp_det_factura.precio, platos.itbis 
@@ -443,12 +459,12 @@ namespace eFood
                         Convert.ToString(Fila["cantidad"]),
                         Convert.ToString(Fila["precio"]),
                        (Convert.ToInt32(Fila["precio"]) * Convert.ToInt32(Fila["cantidad"])).ToString("F"),
-                       (Convert.ToDecimal(Fila["precio"]) *Convert.ToDecimal(Fila["itbis"])).ToString("F")
+                       (Convert.ToDecimal(Fila["precio"]) * Convert.ToDecimal(Fila["itbis"])).ToString("F")
                     );
                 }
             }
             CalcTotal();
-    }
+        }
 
         private void label18_Click(object sender, EventArgs e)
         {
@@ -494,7 +510,7 @@ namespace eFood
                 MessageBox.Show("RNC No Valido");
                 txtRnc.Text = string.Empty;
             }
-            
+
         }
 
         private void txtCedula_Validating(object sender, CancelEventArgs e)
@@ -513,7 +529,7 @@ namespace eFood
                     txtRnc.Text = string.Empty;
                 }
             }
-        
+
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -590,5 +606,5 @@ namespace eFood
             }
         }
     }
-    
+
 }

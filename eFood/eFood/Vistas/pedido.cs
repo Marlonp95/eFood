@@ -323,8 +323,6 @@ namespace eFood
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //Guardar Temporales Facturas.
-
             if (dataCuentas.Rows.Count <= 0)
             {
                 dt = new DataTable();
@@ -340,18 +338,10 @@ namespace eFood
                     {
                         id_factura = 1;
                         num_fact = id_factura;
-                    }
-                    else
-                    {
-                        id_factura = Convert.ToInt32((dt.Rows[0]["id_factura"]));
-                        id_factura++;
-                        num_fact = id_factura;
-                        //MessageBox.Show(num_fact.ToString());
+
                         try
                         {
-                            //MessageBox.Show("Factura" + num_fact.ToString());
-
-                            string vSql = $"EXEC actuaiza_temp_enc_fact {num_fact},{mesatag},'{fecha}',{6} ,{Globals.IdUsuario},'{null}',{itbis.ToString().Replace(',', '.')}, {total.ToString().Replace(',', '.')}, {porciento_ley.ToString().Replace(',', '.')}, {sub_total.ToString().Replace(',', '.')},'{'A'}','{null}'";
+                            string vSql = $"EXEC actuaiza_temp_enc_fact {num_fact},{mesatag},'{fecha}',{6} ,{Globals.IdUsuario},'{null}',{itbis.ToString().Replace(',', '.')}, {total.ToString().Replace(',', '.')}, {porciento_ley.ToString().Replace(',', '.')}, {sub_total.ToString().Replace(',', '.')},'{'A'}','{null}', {1}";
                             DataSet dt = new DataSet();
                             correcto = dt.ejecuta(vSql);
 
@@ -365,13 +355,39 @@ namespace eFood
                             MessageBox.Show("Datos Guardados");
 
                             traerFacturas();
-
                         }
                         catch (Exception error)
                         {
                             MessageBox.Show("Error Guardando Datos" + error.ToString());
                         }
-                       
+                    }
+                    else
+                    {
+                        id_factura = Convert.ToInt32((dt.Rows[0]["id_factura"]));
+                        id_factura++;
+                        num_fact = id_factura;
+    
+                        try
+                        {
+                            string vSql = $"EXEC actuaiza_temp_enc_fact {num_fact},{mesatag},'{fecha}',{6} ,{Globals.IdUsuario},'{null}',{itbis.ToString().Replace(',', '.')}, {total.ToString().Replace(',', '.')}, {porciento_ley.ToString().Replace(',', '.')}, {sub_total.ToString().Replace(',', '.')},'{'A'}','{null}', {1}";
+                            DataSet dt = new DataSet();
+                            correcto = dt.ejecuta(vSql);
+
+                            foreach (DataGridViewRow fila in DataPedido.Rows)
+                            {
+                                vSql = $"EXEC actuaiza_temp_det_fact {num_fact}, {fila.Cells[0].Value}, {fila.Cells[3].Value}, {Convert.ToDouble(fila.Cells[5].Value)} ,{Convert.ToDouble(fila.Cells[6].Value)}";
+                                dt = new DataSet();
+                                correcto = dt.ejecuta(vSql);
+                            }
+
+                            MessageBox.Show("Datos Guardados");
+
+                            traerFacturas();
+                        }
+                        catch (Exception error)
+                        {
+                            MessageBox.Show("Error Guardando Datos" + error.ToString());
+                        }                    
                     }
                 }
                 else
