@@ -140,7 +140,10 @@ namespace eFood.Vistas
                                               and a.total = b.monto
                                               and a.id_tipo_factura = 1");
 
-                if (row != null) throw new Exception("Esta factura ya fue cobrada");
+                if (row.Rows.Count>0)
+                {
+                    throw new Exception("Esta factura ya fue cobrada");
+                }
               
                 string vSql = $"EXEC actualiza_enc_cobro {Globals.idAperturaCaja},{facturaNo},{totalFactura},{0},{devolver},{0},'{System.DateTime.Now}','{null}',{Globals.IdUsuario}";
 
@@ -148,8 +151,6 @@ namespace eFood.Vistas
                 {
                     try
                     {
-
-
                         var data = utilidades.ExecuteSQL(vSql);
                         var id = data.GetIdentity();
 

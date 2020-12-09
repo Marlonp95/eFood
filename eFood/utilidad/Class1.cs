@@ -7,12 +7,30 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace utilidad
 {
     public static class utilidades
 
     {
+
+
+        public static object GetCellValueFromColumnHeader(this DataGridViewCellCollection CellCollection, string HeaderText)
+        {
+            return CellCollection.Cast<DataGridViewCell>().First(c => c.OwningColumn.HeaderText == HeaderText).Value;
+        }
+        //public static string GetCellValueFromColumnHeader(this DataGridViewCellCollection CellCollection, string HeaderText)
+        //{
+        //    return CellCollection.Cast<DataGridViewCell>().First(c => c.OwningColumn.HeaderText == HeaderText).Value.ToString();
+
+        //}
+
+        public static void SetCellValueFromColumnHeader(this DataGridViewCellCollection CellCollection, string HeaderText, object value)
+        {
+             CellCollection.Cast<DataGridViewCell>().First(c => c.OwningColumn.HeaderText == HeaderText).Value = value;
+        }
+
         public static string A_Encriptar(string cad)
         {
             string pal = " ";
@@ -124,7 +142,7 @@ namespace utilidad
         public static int GetIdentity(this DataTable data)
         {
             try
-            { 
+            {
                 return Convert.ToInt32(data.Rows[0][0]);
             }
             catch (Exception ex)
@@ -140,7 +158,7 @@ namespace utilidad
             try
             {
                 if (conn == null) conn = new SqlConnection("Data Source=.;Initial Catalog=efood;Integrated Security=True");
-                if (conn.State == ConnectionState.Closed) conn.Open();
+                if (conn.State == ConnectionState.Closed) { conn = new SqlConnection("Data Source=.;Initial Catalog=efood;Integrated Security=True"); conn.Open(); }
 
                 SqlCommand cmd;
 
@@ -258,10 +276,11 @@ namespace utilidad
 
         public static DataTable ejecuta(string sentencia)
         {
-            DataTable dt = new DataTable();
+            DataTable dt;
 
             try
             {
+               dt = new DataTable();
                 SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=efood;Integrated Security=True");
                 con.Open();
 
@@ -276,11 +295,9 @@ namespace utilidad
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al Conectar con la Base de Datos : " + ex.ToString());
-                dt = null;
-
+                throw new Exception("Error al Conectar con la Base de Datos : " + ex.ToString());
             }
-            return dt;
+    
         }
         /// <summary>
         /// Para los data table
@@ -467,7 +484,7 @@ namespace utilidad
             {
                 return (T)value;
             }
-            else if((obj is string))
+            else if ((obj is string))
             {
                 return string.IsNullOrEmpty(obj.ToString()) ? (T)value : obj;
             }

@@ -30,6 +30,7 @@ namespace eFood.Vistas
             comboTipoNcf.DataSource = utilidades.ejecuta("select tipo, convert(varchar(max),tipo)+' - '+descripcion descripcion from tipo_ncf");
             comboTipoNcf.DisplayMember = "descripcion";
             comboTipoNcf.ValueMember = "tipo";
+
             trarSecuencias();
         }
 
@@ -43,6 +44,8 @@ namespace eFood.Vistas
 						                         inner join tipo_ncf d on a.id_tipo_ncf = d.tipo");
             dataSecuecia.DataSource = dt;
         }
+
+       
 
         private void DateTimePicker_KeyUp(object sender, KeyEventArgs e)
         {

@@ -115,8 +115,11 @@ namespace eFood
                     obj.Show();
 
                     var row = utilidades.ejecuta($@"select id from enc_apertura_caja where id_usuario ={Globals.IdUsuario} and estado ='A'").Rows;
-
-                    Globals.idAperturaCaja = row[0].Field<int>("id");
+                    if (row.Count > 0)
+                    {
+                        Globals.idAperturaCaja = row[0].Field<int>("id");
+                    }
+                   
 
                 }
                 else
