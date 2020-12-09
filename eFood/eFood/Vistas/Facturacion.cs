@@ -237,11 +237,11 @@ namespace eFood
                 obj.ShowDialog();
 
                 var data = utilidades.ejecuta($@"select b.id
-                                             from temp_enc_factura a inner join enc_cobros b on a.id_factura = b.id_factura 
-                                            where a.id_factura = {NumFaact.Text}
-                                              and a.total = b.monto
-                                              and a.id_tipo_factura = 1");
-                
+                                                 from temp_enc_factura a inner join enc_cobros b on a.id_factura = b.id_factura 
+                                                where a.id_factura = {NumFaact.Text}
+                                                  and a.total = b.monto
+                                                  and a.id_tipo_factura = 1");
+
                 if (data != null)
                 {
                     var row = data.Rows[0];
@@ -251,24 +251,57 @@ namespace eFood
                     DataTable dt = new DataTable();
                     dt.ejecutaTransaccion(vSql);
 
-                   string secuencia;
+                    string secuencia;
                     DateTime? vencimientoNCF = null;
 
                     if (dt.Rows.Count > 0)
+                    {
                         secuencia = dt.Rows[0].Field<string>("secuencia_generada");
-
+                    }
                     else throw new Exception("No hay secuencia para este tipo de comprobante");
 
                     vSql = $@"Select * from GetSecuenciaNCF ({comboComprobante.SelectedValue})";
 
-                     var d = utilidades.ExecuteSQL(vSql);
-                    if(d !=null)vencimientoNCF = d.Rows[0].Field<DateTime?>("fecha_vencimiento");
+                    var d = utilidades.ExecuteSQL(vSql);
+                    if (d != null) vencimientoNCF = d.Rows[0].Field<DateTime?>("fecha_vencimiento");
 
+                    using (var tran = utilidades.BeginTransation())
+                    {
+                        try
+                        {
+                            vSql = $@"EXEC actualiza_enc_factura  {comboFactura.SelectedValue},{txtcodcli.Text.Trim()}, {1},{1}, '{System.DateTime.Today}', '{txtRnc.Text.Trim()}',{comboComprobante.SelectedValue},'{secuencia}',{lblItbis.Text.Decimals()},
+                                                                  {lblTotal.Text.Decimals()},{lblLey.Text.Decimals()}, {lblSubTotal.Text.Decimals()}, {0}, {Globals.IdUsuario},'{txtnomcli.Text}','{txtDireccion.Text}',{txttelefoo.Text.Nvl<string>("NULL")}, {0} ,'{vencimientoNCF}','{System.DateTime.Now}','{null}'";
+                            var x = utilidades.ExecuteSQL(vSql);
+                            var id = x.GetIdentity();
 
-                    vSql = $@"EXEC actualiza_enc_factura  {comboFactura.SelectedValue},{txtcodcli.Text.Trim()}, {1},{1}, '{System.DateTime.Today}', '{txtRnc.Text.Trim()}',{comboComprobante.SelectedValue},'{secuencia}',{lblItbis.Text.Decimals()},
-                                                          {lblTotal.Text.Decimals()},{lblLey.Text.Decimals()}, {lblSubTotal.Text.Decimals()}, {0}, {Globals.IdUsuario},'{txtnomcli.Text}','{txtDireccion.Text}',{txttelefoo.Text.Nvl<string>("NULL")}, {0} ,'{vencimientoNCF}','{System.DateTime.Now}','{null}'";
-                    DataSet ds = new DataSet();
-                    ds.ejecuta(vSql);
+                            foreach (DataGridViewRow fila in DataFactura.Rows)
+                            {
+                                string vSql2 = $"EXEC actualiza_det_factura {fila.Cells[0].Value},{2},{fila.Cells[2].Value},{fila.Cells[3].Value},{fila.Cells[4].Value},{1},{1},{0.18},{fila.Cells[5].Value},{Globals.IdUsuario},'{null}','{0}'";
+                                utilidades.ExecuteSQL(vSql2);
+                            }
+
+                            string vSql3 = $"EXEC cerrar_factura_temporal {NumFaact.Text.Trim()},'{'C'}'";
+                            utilidades.ExecuteSQL(vSql3);
+
+                            tran.Commit();
+                            MessageBox.Show("Cobro efectuado correctamente.", "Mensaje.");
+                        }
+                        catch (Exception ex)
+                        {
+                            tran.Rollback();
+                            MessageBox.Show(ex.Message);
+                        }
+
+                        tran.ConectionClose();
+
+                        dataCuentas.Rows.Clear();
+                        DataFactura.Rows.Clear();
+                        comboFactura.Focus();
+                        lblItbis.Text = "RD$ 0.00";
+                        lblLey.Text = "RD$ 0.00";
+                        lblTotal.Text = "RD$ 0.00";
+                        lblSubTotal.Text = "RD$ 0.00";
+                    }
                 }
 
                 else throw new Exception("Error Aplicando Cobro");
@@ -281,6 +314,7 @@ namespace eFood
                 //rp.reportViewer1.LocalReport.DataSources[0].Value = dt.Tables[0];
                 //rp.ShowDialog();
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -295,37 +329,6 @@ namespace eFood
         {
         }
 
-        private void comboBox1_VisibleChanged(object sender, EventArgs e)
-        {
-            //lblTotal.Text = "RD$0.00";
-            //DataPedido.Rows.Clear();
-
-            //DataTable dt = new DataTable();
-
-
-            //dt.ejecuta($"SELECT a.id_usuario, CONCAT( d.nombre1,' ',d.apellido1,' ',d.apellido2 ) as Nombre, a.id_cliente ,b.id_plato ,c.plato, c.precio, b.cantidad, b.cantidad * c.precio importe FROM temp_enc_factura a INNER JOIN temp_det_factura b on a.id_factura = b.id_factura INNER JOIN platos c on b.id_plato = c.id_plato INNER JOIN persona d on a.id_usuario = d.id_persona WHERE a.id_mesa  = {comboBox1.SelectedValue.ToString()}");
-
-
-            //foreach (DataRow Fila in dt.Rows)
-            //{
-            //    DataPedido.Rows.Add
-            //    (
-            //        Convert.ToString(Fila["id_plato"]),
-            //        Convert.ToString(Fila["plato"]),
-            //        Convert.ToString(Fila["precio"]),
-            //        Convert.ToString(Fila["cantidad"]),
-            //        Convert.ToDecimal(Fila["importe"]).ToString("F"),
-            //        Convert.ToString(Fila["precio"])
-            //    );
-            //}
-
-            //foreach (DataGridViewRow Rows in DataPedido.Rows)
-            //{
-            //    total += Convert.ToDouble(Rows.Cells[4].Value);
-            //}
-
-            //lblTotal.Text = Convert.ToString(total);
-        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -380,7 +383,8 @@ namespace eFood
                                   FROM temp_enc_factura INNER JOIN
                                      cliente ON temp_enc_factura.id_cliente = cliente.id_cliente INNER JOIN
                                      persona ON cliente.id_persona = persona.id_persona
-                                     where id_mesa = {comboFactura.SelectedValue}";
+                                     where id_mesa = {comboFactura.SelectedValue}
+                                       and temp_enc_factura.estado = 'A'";
 
                 dt.ejecuta(vSQL2);
                 foreach (DataRow Fila in dt.Rows)

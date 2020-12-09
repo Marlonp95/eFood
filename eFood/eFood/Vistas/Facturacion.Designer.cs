@@ -629,7 +629,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button3.Image = global::eFood.Properties.Resources._1167984_32;
+            this.button3.Image = global::eFood.Properties.Resources.eliminar2;
             this.button3.Location = new System.Drawing.Point(954, 461);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(67, 41);
@@ -680,7 +680,6 @@
             this.NumFaact.Name = "NumFaact";
             this.NumFaact.Size = new System.Drawing.Size(41, 21);
             this.NumFaact.TabIndex = 124;
-            this.NumFaact.Visible = false;
             this.NumFaact.TextChanged += new System.EventHandler(this.NumFaact_TextChanged);
             // 
             // label13
@@ -694,7 +693,6 @@
             this.label13.TabIndex = 125;
             this.label13.Text = "Factura No.";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label13.Visible = false;
             // 
             // label14
             // 
