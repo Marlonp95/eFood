@@ -83,7 +83,8 @@ namespace eFood
                                        FROM temp_enc_factura INNER JOIN
                                  cliente ON temp_enc_factura.id_cliente = cliente.id_cliente INNER JOIN
                                  persona ON cliente.id_persona = persona.id_persona
-                                 where id_mesa = {mesatag}";
+                                 where id_mesa = {mesatag}
+                                   and temp_enc_factura.estado = 'A'";
 
                 dt.ejecuta(vSQL2);
                 foreach (DataRow Fila in dt.Rows)
@@ -123,7 +124,6 @@ namespace eFood
 
             dt = new DataTable();
             vSql = $"SELECT id_factura FROM temp_enc_factura WHERE estado ='A' and id_mesa = {mesatag} ";
-            dt.ejecuta(vSql);
             correcto = dt.ejecuta(vSql);
 
             if (dt.Rows.Count == 0)
@@ -521,6 +521,7 @@ namespace eFood
         {
             DataTable dt = new DataTable();
             dt.ejecuta($"UPDATE mesa SET estado = 'S' WHERE id_mesa  = {mesatag} ");
+            dt.ejecuta($@"update  temp_enc_factura set estado ='S' where id_mesa = {mesatag} and estado = 'A'");
             MessageBox.Show("Pasar por caja");
         }
         int num_fact;

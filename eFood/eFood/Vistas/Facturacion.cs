@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using utilidad;
 using System.Linq;
 using eFood.Vistas;
+using eFood.Reportes;
 
 namespace eFood
 {
@@ -228,6 +229,7 @@ namespace eFood
         private void button8_Click(object sender, EventArgs e)
         {
             int? idCobro;
+            int idfact = 0;
             try
             {
                 if (DataFactura.Rows.Count == 0 || NumFaact.Text == string.Empty) throw new Exception("Debe Cargar o Crear factura para procesar el cobro");
@@ -242,7 +244,7 @@ namespace eFood
                                                   and a.total = b.monto
                                                   and a.id_tipo_factura = 1");
 
-                if (data != null)
+                if (data.Rows.Count > 0)
                 {
                     var row = data.Rows[0];
                     idCobro = row.Field<int>("id");
@@ -273,15 +275,29 @@ namespace eFood
                                                                   {lblTotal.Text.Decimals()},{lblLey.Text.Decimals()}, {lblSubTotal.Text.Decimals()}, {0}, {Globals.IdUsuario},'{txtnomcli.Text}','{txtDireccion.Text}',{txttelefoo.Text.Nvl<string>("NULL")}, {0} ,'{vencimientoNCF}','{System.DateTime.Now}','{null}'";
                             var x = utilidades.ExecuteSQL(vSql);
                             var id = x.GetIdentity();
+                            idfact = id;
 
                             foreach (DataGridViewRow fila in DataFactura.Rows)
                             {
-                                string vSql2 = $"EXEC actualiza_det_factura {fila.Cells[0].Value},{2},{fila.Cells[2].Value},{fila.Cells[3].Value},{fila.Cells[4].Value},{1},{1},{0.18},{fila.Cells[5].Value},{Globals.IdUsuario},'{null}','{0}'";
+                                string vSql2 = $"EXEC actualiza_det_factura {id}, {fila.Cells[0].Value},{2},{fila.Cells[2].Value},{fila.Cells[3].Value},{fila.Cells[4].Value},{1},{1},{0.18},{fila.Cells[5].Value},{Globals.IdUsuario},'{null}','{0}'";
                                 utilidades.ExecuteSQL(vSql2);
                             }
 
                             string vSql3 = $"EXEC cerrar_factura_temporal {NumFaact.Text.Trim()},'{'C'}'";
                             utilidades.ExecuteSQL(vSql3);
+
+
+                            var estadoMesa = utilidades.ExecuteSQL($@"select * from temp_enc_factura a inner join mesa b on a.id_mesa = b.id_mesa where a.estado IN('A', 'S') and a.id_mesa = {comboFactura.SelectedValue}");
+
+                            if (estadoMesa.Rows.Count > 0)
+                            {
+                                MessageBox.Show("Esta mesa tiene facturas pendientes", "Mensaje");
+
+                            }
+                            else
+                            {
+                                utilidades.ExecuteSQL($@"update mesa set estado = 'D' where id_mesa = {comboFactura.SelectedValue}");
+                            }
 
                             tran.Commit();
                             MessageBox.Show("Cobro efectuado correctamente.", "Mensaje.");
@@ -292,6 +308,7 @@ namespace eFood
                             MessageBox.Show(ex.Message);
                         }
 
+
                         tran.ConectionClose();
 
                         dataCuentas.Rows.Clear();
@@ -301,18 +318,22 @@ namespace eFood
                         lblLey.Text = "RD$ 0.00";
                         lblTotal.Text = "RD$ 0.00";
                         lblSubTotal.Text = "RD$ 0.00";
+
+                      
                     }
                 }
 
-                else throw new Exception("Error Aplicando Cobro");
+                else throw new Exception("Cobro cancelado o no aplicado.");
 
-                //string vSql = $"EXEC datos_factura {NumFaact.Text}";
-                //DataSet dt = new DataSet();
-                //dt.ejecuta(vSql);
 
-                //reporte rp = new reporte();
-                //rp.reportViewer1.LocalReport.DataSources[0].Value = dt.Tables[0];
-                //rp.ShowDialog();
+                string vSqlFactura = $"EXEC datos_factura {idfact}";
+                DataSet ds = new DataSet();
+                ds.ejecuta(vSqlFactura);
+
+                ReporteFactura reporte = new ReporteFactura();
+                reporte.reportViewer1.LocalReport.DataSources[0].Value = ds.Tables[0];
+                reporte.ShowDialog();
+
             }
 
             catch (Exception ex)
@@ -384,7 +405,7 @@ namespace eFood
                                      cliente ON temp_enc_factura.id_cliente = cliente.id_cliente INNER JOIN
                                      persona ON cliente.id_persona = persona.id_persona
                                      where id_mesa = {comboFactura.SelectedValue}
-                                       and temp_enc_factura.estado = 'A'";
+                                       and temp_enc_factura.estado = 'S'";
 
                 dt.ejecuta(vSQL2);
                 foreach (DataRow Fila in dt.Rows)
