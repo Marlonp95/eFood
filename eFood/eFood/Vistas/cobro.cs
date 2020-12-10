@@ -140,7 +140,7 @@ namespace eFood.Vistas
                                               and a.total = b.monto
                                               and a.id_tipo_factura = 1");
 
-                if (row.Rows.Count>0)
+                if (row.Rows.Count > 0)
                 {
                     throw new Exception("Esta factura ya fue cobrada");
                 }
@@ -161,7 +161,7 @@ namespace eFood.Vistas
                         }
 
                         tran.Commit();
-                        MessageBox.Show("Cobro efectuado correctamente.", "Mensaje.");
+                        //MessageBox.Show("Cobro efectuado correctamente.", "Mensaje.");
 
                         dataPago.Rows.Clear();
                         txtMonto.Text = string.Empty;
@@ -176,7 +176,9 @@ namespace eFood.Vistas
                         tran.Rollback();
                         MessageBox.Show(ex.Message);
                     }
+
                     tran.ConectionClose();
+                    this.Close();
                 }
             }
             catch (Exception ex)

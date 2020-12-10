@@ -113,6 +113,17 @@
     <Compile Include="ListForm\btnForm.Designer.cs">
       <DependentUpon>btnForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\DataSetFactura.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetFactura.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ReporteFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteFactura.Designer.cs">
+      <DependentUpon>ReporteFactura.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\Globals.cs" />
     <Compile Include="Utils\Metodos.cs" />
     <Compile Include="Vistas\AperturaCaja.cs">
@@ -242,12 +253,6 @@
     <Compile Include="Vistas\reporte.Designer.cs">
       <DependentUpon>reporte.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reportes\Reporte.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reportes\Reporte.Designer.cs">
-      <DependentUpon>Reporte.cs</DependentUpon>
-    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Vistas\secuencia_ncf.cs">
       <SubType>Form</SubType>
@@ -269,6 +274,10 @@
     </Compile>
     <EmbeddedResource Include="Controles\txtMask.resx">
       <DependentUpon>txtMask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Factura.rdlc" />
+    <EmbeddedResource Include="Reportes\ReporteFactura.resx">
+      <DependentUpon>ReporteFactura.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\AperturaCaja.resx">
       <DependentUpon>AperturaCaja.cs</DependentUpon>
@@ -337,11 +346,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Reportes\Factura.rdlc" />
     <EmbeddedResource Include="Vistas\reporte.resx">
       <DependentUpon>reporte.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\Report1.rdlc" />
     <EmbeddedResource Include="Vistas\secuencia_ncf.resx">
       <DependentUpon>secuencia_ncf.cs</DependentUpon>
     </EmbeddedResource>
@@ -377,6 +384,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Reportes\DataSetFactura.xsc">
+      <DependentUpon>DataSetFactura.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DataSetFactura.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetFactura.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reportes\DataSetFactura.xss">
+      <DependentUpon>DataSetFactura.xsd</DependentUpon>
+    </None>
     <None Include="Resources\Close_Icon.png" />
   </ItemGroup>
   <ItemGroup>
