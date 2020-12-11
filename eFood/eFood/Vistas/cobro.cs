@@ -22,11 +22,13 @@ namespace eFood.Vistas
         decimal tasa;
         decimal totalFactura;
         decimal devolver;
+        int tipoFactura;
 
-        public cobro(int pFctura, int pMesa)
+        public cobro(int pFctura, int pMesa, int ptipoFactura)
         {
             facturaNo = pFctura;
             mesaNo = pMesa;
+            tipoFactura = ptipoFactura;
             InitializeComponent();
         }
 
@@ -128,6 +130,12 @@ namespace eFood.Vistas
         {
             try
             {
+                if (Globals.idAperturaCaja == 0)
+                {
+                    MessageBox.Show("La caja no esta aperturada para este usuario", "Alerta!");
+                    return;
+                }
+
                 if (dataPago.Rows.Count <= 0)
                 {
                     MessageBox.Show("No hay datos para realizar pago.");
@@ -143,6 +151,15 @@ namespace eFood.Vistas
                 if (row.Rows.Count > 0)
                 {
                     throw new Exception("Esta factura ya fue cobrada");
+                }
+
+                if (tipoFactura == 1)
+                {
+                    if (totalFactura > Convert.ToDecimal(lblPagado.Text.Decimals()))
+                    {
+                        MessageBox.Show("El monto pagado es menor al monto total de la factura","Factura Contado");
+                        return;
+                    }
                 }
               
                 string vSql = $"EXEC actualiza_enc_cobro {Globals.idAperturaCaja},{facturaNo},{totalFactura},{0},{devolver},{0},'{System.DateTime.Now}','{null}',{Globals.IdUsuario}";

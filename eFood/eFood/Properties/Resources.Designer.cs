@@ -133,6 +133,26 @@ namespace eFood.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Caja {
+            get {
+                object obj = ResourceManager.GetObject("Caja", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CierreCaja {
+            get {
+                object obj = ResourceManager.GetObject("CierreCaja", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Close {
             get {
                 object obj = ResourceManager.GetObject("Close", resourceCulture);
@@ -226,6 +246,16 @@ namespace eFood.Properties {
         internal static System.Drawing.Bitmap eliminar2 {
             get {
                 object obj = ResourceManager.GetObject("eliminar2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Herramientas {
+            get {
+                object obj = ResourceManager.GetObject("Herramientas", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

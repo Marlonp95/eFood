@@ -108,8 +108,11 @@ namespace eFood.Vistas
 
                     foreach (DataGridViewRow fila in dataDenominaciones.Rows)
                     {
-                        string vSql2 = $"EXEC actualiza_det_apertura_caja {id},{dataDenominaciones.CurrentRow.Cells.GetCellValueFromColumnHeader("id")},{dataDenominaciones.CurrentRow.Cells.GetCellValueFromColumnHeader("valor")},{dataDenominaciones.CurrentRow.Cells.GetCellValueFromColumnHeader("cantidad")}";
-                        utilidades.ExecuteSQL(vSql2);
+                        if (fila.Cells[0].Value != null)
+                        {
+                            string vSql2 = $"EXEC actualiza_det_apertura_caja {id},{fila.Cells.GetCellValueFromColumnHeader("id")},{fila.Cells.GetCellValueFromColumnHeader("valor")},{fila.Cells[0].Value}";
+                            utilidades.ExecuteSQL(vSql2);
+                        }
                     }
 
                     tran.Commit();
@@ -118,11 +121,19 @@ namespace eFood.Vistas
                 catch (Exception ex)
                 {
                     tran.Rollback();
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Error aperturando caja " + ex.Message, "Alerta ");
                 }
 
                 tran.ConectionClose();
                 traerAperturas();
+            }
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Desea Cerrar ", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            {
+                this.Close();
             }
         }
     }

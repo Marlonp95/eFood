@@ -203,7 +203,12 @@ namespace eFood
 
         private void button9_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<AperturaCaja>();
+            AbrirFormulario<RegistrosTesoreria>();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
         }
 
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
@@ -216,7 +221,7 @@ namespace eFood
                     formulario = panelFormulario.Controls.OfType<MiForm>().FirstOrDefault();
 
             if (formulario == null)
-                {
+            {
                 formulario = new MiForm();
                 formulario.TopLevel = false;
                 panelFormulario.Controls.Add(formulario);
@@ -224,13 +229,12 @@ namespace eFood
                 formulario.FormBorderStyle = FormBorderStyle.None;
                 formulario.Dock = DockStyle.Fill;
                 formulario.Show();
-                formulario.BringToFront();
-                
-                 }
+                formulario.BringToFront();              
+            }
             else
-                 {
+            {
                 formulario.BringToFront();
-                 }
+            }
             #endregion
         }
 
