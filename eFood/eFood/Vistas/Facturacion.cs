@@ -32,6 +32,11 @@ namespace eFood
 
         private void Facturacion_Load(object sender, EventArgs e)
         {
+            if (Globals.idAperturaCaja == 0)
+            {
+                MessageBox.Show("Debe tener caja aperturada para poder cobrar.", "Recordatorio");
+            }
+
             comboComprobante.DataSource = utilidades.ejecuta("select tipo, convert(varchar(max),tipo)+' - '+descripcion descripcion from tipo_ncf");
             comboComprobante.DisplayMember = "descripcion";
             comboComprobante.ValueMember = "tipo";
@@ -235,7 +240,7 @@ namespace eFood
                 if (DataFactura.Rows.Count == 0 || NumFaact.Text == string.Empty) throw new Exception("Debe Cargar o Crear factura para procesar el cobro");
 
 
-                cobro obj = new cobro(Convert.ToInt32(NumFaact.Text), Convert.ToInt32(comboFactura.SelectedValue));
+                cobro obj = new cobro(Convert.ToInt32(NumFaact.Text), Convert.ToInt32(comboFactura.SelectedValue), 1);
                 obj.ShowDialog();
 
                 var data = utilidades.ejecuta($@"select b.id
@@ -318,8 +323,7 @@ namespace eFood
                         lblLey.Text = "RD$ 0.00";
                         lblTotal.Text = "RD$ 0.00";
                         lblSubTotal.Text = "RD$ 0.00";
-
-                      
+               
                     }
                 }
 

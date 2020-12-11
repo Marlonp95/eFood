@@ -10,11 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace eFood
+
+
+namespace eFood.Vistas
 {
-    public partial class Mantenimientos : Form
+    public partial class RegistrosTesoreria : Form
     {
-        public Mantenimientos()
+        public RegistrosTesoreria()
         {
             InitializeComponent();
         }
@@ -41,6 +43,15 @@ namespace eFood
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario<AperturaCaja>();
+        }
+
+        private void RegistrosTesoreria_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -50,49 +61,9 @@ namespace eFood
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario<Usuarios>();
-        }
-
-        private void Mantenimientos_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panelFormulario_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            AbrirFormulario<Productos>();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario<Suplidores>();
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario<empleados>();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario<Categorias>();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario<clientes>();
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            AbrirFormulario<secuencia_ncf>();
+            AbrirFormulario<CierreCaja>();
         }
     }
 }
