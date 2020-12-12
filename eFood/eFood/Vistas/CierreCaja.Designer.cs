@@ -78,16 +78,17 @@
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.txtNota = new System.Windows.Forms.RichTextBox();
-            this.denominaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataDenomina = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id_denominacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.denominaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.totales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataDenominaciones)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataApertura)).BeginInit();
@@ -113,6 +114,7 @@
             this.dataDenominaciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataDenominaciones.ColumnHeadersVisible = false;
             this.dataDenominaciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id_denominacion,
             this.denominaciones,
             this.valor,
             this.cantidad,
@@ -563,32 +565,6 @@
             this.txtNota.TabIndex = 201;
             this.txtNota.Text = "";
             // 
-            // denominaciones
-            // 
-            this.denominaciones.DataPropertyName = "descripcion";
-            this.denominaciones.HeaderText = "denominaciones";
-            this.denominaciones.Name = "denominaciones";
-            this.denominaciones.ReadOnly = true;
-            // 
-            // valor
-            // 
-            this.valor.DataPropertyName = "valor";
-            this.valor.HeaderText = "valor";
-            this.valor.Name = "valor";
-            this.valor.ReadOnly = true;
-            this.valor.Visible = false;
-            // 
-            // cantidad
-            // 
-            this.cantidad.HeaderText = "cantidad";
-            this.cantidad.Name = "cantidad";
-            // 
-            // totales
-            // 
-            this.totales.HeaderText = "totales";
-            this.totales.Name = "totales";
-            this.totales.Visible = false;
-            // 
             // dataDenomina
             // 
             this.dataDenomina.AllowUserToAddRows = false;
@@ -668,6 +644,38 @@
             this.dataGridViewTextBoxColumn4.HeaderText = "totales";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.Visible = false;
+            // 
+            // id_denominacion
+            // 
+            this.id_denominacion.DataPropertyName = "id";
+            this.id_denominacion.HeaderText = "id_denominacion";
+            this.id_denominacion.Name = "id_denominacion";
+            // 
+            // denominaciones
+            // 
+            this.denominaciones.DataPropertyName = "descripcion";
+            this.denominaciones.HeaderText = "denominaciones";
+            this.denominaciones.Name = "denominaciones";
+            this.denominaciones.ReadOnly = true;
+            // 
+            // valor
+            // 
+            this.valor.DataPropertyName = "valor";
+            this.valor.HeaderText = "valor";
+            this.valor.Name = "valor";
+            this.valor.ReadOnly = true;
+            this.valor.Visible = false;
+            // 
+            // cantidad
+            // 
+            this.cantidad.HeaderText = "cantidad";
+            this.cantidad.Name = "cantidad";
+            // 
+            // totales
+            // 
+            this.totales.HeaderText = "totales";
+            this.totales.Name = "totales";
+            this.totales.Visible = false;
             // 
             // CierreCaja
             // 
@@ -763,15 +771,16 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.RichTextBox txtNota;
-        private System.Windows.Forms.DataGridViewTextBoxColumn denominaciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn valor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totales;
         private System.Windows.Forms.DataGridView dataDenomina;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id_denominacion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn denominaciones;
+        private System.Windows.Forms.DataGridViewTextBoxColumn valor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cantidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn totales;
     }
 }

@@ -148,6 +148,7 @@ namespace eFood
             lblmesa.Text = mesatag;
             txtCantidad.Text = "1";
         }
+        public bool mesaHabilitada = false;
 
         private void button13_Click(object sender, EventArgs e)
         {
@@ -563,12 +564,16 @@ namespace eFood
 
         private void button17_Click(object sender, EventArgs e)
         {
+            if (dataCuentas.Rows.Count <= 0)
+            {
+                MessageBox.Show("Esta mesa no tiene factura abierta.", "Mensaje");
+                return;
+            }
+
+
             dividir_cuentas obj = new dividir_cuentas(Convert.ToInt32(mesatag));
             obj.ShowDialog();
-         
-
             traerFacturas();
-
         }
 
         private void dataCuentas_SelectionChanged(object sender, EventArgs e)
@@ -619,6 +624,39 @@ namespace eFood
                 lblLey.Text = porciento_ley.ToString();
                 total = sub_total + itbis + porciento_ley;
                 lblTotal.Text = "RD$ " + total.ToString();
+            }
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataCuentas.Rows.Count > 0) throw new Exception("No puede habilitar mesa mientra tenga facturas pendientes de cobro.");
+
+                vSql = $"UPDATE mesa SET estado = 'D'  WHERE  id_mesa = {mesatag}";
+                utilidades.ExecuteSQL(vSql);
+                mesaHabilitada = true;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+              if (Char.IsControl(e.KeyChar)) 
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
             }
         }
 

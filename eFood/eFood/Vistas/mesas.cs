@@ -34,11 +34,9 @@ namespace eFood
                     
                     if (MessageBox.Show("Desea Abrir Mesa " + btn.IdMesa.ToString(), "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                     {
-                        vSql = $"UPDATE mesa SET estado = 'O'  WHERE  id_mesa = " +btn.IdMesa.ToString(); ;
+                        vSql = $"UPDATE mesa SET estado = 'O'  WHERE  id_mesa = " +btn.IdMesa.ToString(); ; 
                         dt = new DataSet();
                         dt.ejecuta(vSql);
-                     
-               
                     }
             }
         }
@@ -175,6 +173,11 @@ namespace eFood
                     dt.ejecuta(vSql);
                 }
             }
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
         }
 
         //private void button3_Click(object sender, EventArgs e)

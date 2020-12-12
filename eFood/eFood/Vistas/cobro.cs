@@ -128,6 +128,12 @@ namespace eFood.Vistas
         //APLICAR COBROS
         private void button4_Click(object sender, EventArgs e)
         {
+            var apertura = utilidades.ejecuta($@"select id from enc_apertura_caja where id_usuario ={Globals.IdUsuario} and estado ='A'").Rows;
+            if (apertura.Count > 0)
+            {
+                Globals.idAperturaCaja = apertura[0].Field<int>("id");
+            }
+
             try
             {
                 if (Globals.idAperturaCaja == 0)

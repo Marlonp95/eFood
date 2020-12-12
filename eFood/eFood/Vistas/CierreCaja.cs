@@ -19,11 +19,12 @@ namespace eFood.Vistas
         {
             InitializeComponent();
         }
+
         decimal total = 0;
 
         private void CierreCaja_Load(object sender, EventArgs e)
         {
-            var data = utilidades.ejecuta($@"select descripcion, valor from denominaciones where desactivado ='N' AND moneda = 'S'");
+            var data = utilidades.ejecuta($@"select id, descripcion, valor from denominaciones where desactivado ='N' AND moneda = 'S'");
             dataDenominaciones.DataSource = data;
 
             var data1 = utilidades.ejecuta($@"select id, descripcion, valor from denominaciones where desactivado ='N' AND moneda = 'N'");
@@ -31,13 +32,8 @@ namespace eFood.Vistas
 
             traerAperturas();
 
-            txtTarjeta.Text = "0.00";
-            txtCheques.Text = "0.00";
-            txtNotaCredito.Text = "0.00";
-            txtDeposito.Text = "0.00";
-            txtEfectivo.Text = "0.00";
-            txtDolares.Text = "0.00";
-            txtDiferenciaDolar.Text = "0.00";
+           
+
         }
 
         void traerAperturas()
@@ -52,7 +48,24 @@ namespace eFood.Vistas
 
             dataApertura.DataSource = dt;
 
-            txtEfectivoSistema.Text = dataApertura.CurrentRow.Cells[4].Value.ToString();
+            if (dataApertura.Rows.Count > 0)
+            {
+                txtEfectivoSistema.Text = dataApertura.CurrentRow.Cells[4].Value.ToString();
+            }
+           
+        }
+
+        void limpiarFormulario()
+        {
+            txtTarjeta.Text = "0.00";
+            txtCheques.Text = "0.00";
+            txtNotaCredito.Text = "0.00";
+            txtDeposito.Text = "0.00";
+            txtEfectivo.Text = "0.00";
+            txtDolares.Text = "0.00";
+            txtDiferenciaDolar.Text = "0.00";
+            txtEfectivoSistema.Text = "0.00";
+            txtDiferenciaDOP.Text = "0.00";
         }
 
         private void dataDenominaciones_CellLeave(object sender, DataGridViewCellEventArgs e)
@@ -142,7 +155,7 @@ namespace eFood.Vistas
                     {
                         if (fila.Cells[0].Value != null)
                         {
-                            string vSql2 = $"EXEC actualiza_det_cierre_caja {fila.Cells.GetCellValueFromColumnHeader("id")}, {id} , {fila.Cells[0].Value.ToString()}, {fila.Cells.GetCellValueFromColumnHeader("valor")} ";
+                            string vSql2 = $"EXEC actualiza_det_cierre_caja {fila.Cells["id_denominacion"].Value.ToString()}, {id} , {fila.Cells[0].Value.ToString()}, {fila.Cells[1].Value.ToString()}, '{System.DateTime.Now}'";
                             utilidades.ExecuteSQL(vSql2);
                         }
                     }
@@ -150,8 +163,10 @@ namespace eFood.Vistas
                     utilidades.ExecuteSQL($@"update enc_apertura_caja set estado = 'C' where id = {dataApertura.CurrentRow.Cells[0].Value.ToString()} and estado = 'A'");
 
                     tran.Commit();
-                    MessageBox.Show("Cierre de caja realizado.", "Mensaje.");
 
+                    MessageBox.Show("Cierre de caja realizado.", "Mensaje.");
+                    limpiarFormulario();
+                    traerAperturas();
 
                 }
                 catch (Exception ex)
