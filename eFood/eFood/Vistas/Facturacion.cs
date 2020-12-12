@@ -276,7 +276,7 @@ namespace eFood
                     {
                         try
                         {
-                            vSql = $@"EXEC actualiza_enc_factura  {comboFactura.SelectedValue},{txtcodcli.Text.Trim()}, {1},{1}, '{System.DateTime.Today}', '{txtRnc.Text.Trim()}',{comboComprobante.SelectedValue},'{secuencia}',{lblItbis.Text.Decimals()},
+                            vSql = $@"EXEC actualiza_enc_factura  {comboFactura.SelectedValue}, {txtcodcli.Text.Trim()}, {1}, {1}, '{System.DateTime.Today}', '{txtRnc.Text.Trim()}',{comboComprobante.SelectedValue},'{secuencia}',{lblItbis.Text.Decimals()},
                                                                   {lblTotal.Text.Decimals()},{lblLey.Text.Decimals()}, {lblSubTotal.Text.Decimals()}, {0}, {Globals.IdUsuario},'{txtnomcli.Text}','{txtDireccion.Text}',{txttelefoo.Text.Nvl<string>("NULL")}, {0} ,'{vencimientoNCF}','{System.DateTime.Now}','{null}'";
                             var x = utilidades.ExecuteSQL(vSql);
                             var id = x.GetIdentity();

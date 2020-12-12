@@ -117,6 +117,7 @@
             // 
             // comboDestino
             // 
+            this.comboDestino.DisplayMember = "id_mesa";
             this.comboDestino.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboDestino.FormattingEnabled = true;
             this.comboDestino.Location = new System.Drawing.Point(553, 31);
@@ -127,6 +128,7 @@
             // 
             // comboOrigen
             // 
+            this.comboOrigen.DisplayMember = "id_mesa";
             this.comboOrigen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboOrigen.FormattingEnabled = true;
             this.comboOrigen.Location = new System.Drawing.Point(391, 31);
@@ -149,6 +151,7 @@
             this.button18.TabIndex = 19;
             this.button18.Text = "Resevaciones";
             this.button18.UseVisualStyleBackColor = false;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // button16
             // 
@@ -227,9 +230,6 @@
             this.ContenedorUbicaciones.Size = new System.Drawing.Size(315, 449);
             this.ContenedorUbicaciones.TabIndex = 11;
             // 
-            // efoodDataSet
-            // 
-        
             // mesas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
