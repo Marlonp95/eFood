@@ -19,7 +19,9 @@ namespace eFood
             dataGridView1.Rows.Clear();
             
             DataTable dt = new DataTable();
-            dt.ejecuta("select a.id_plato, a.plato, a.descripcion, a.precio, a.itbis, b.receta, c.DESCRIPCION from platos a inner join recetas b on a.id_receta = b.id_receta inner join categoria c on a.id_categoria = c.ID_CATEGORIA");
+            dt.ejecuta($@"select a.id_plato, a.plato, a.descripcion, a.precio, a.itbis, b.receta, c.DESCRIPCION categoria
+                            from platos a inner join recetas b on a.id_receta = b.id_receta 
+                                          inner join categoria c on a.id_categoria = c.ID_CATEGORIA");
             foreach (DataRow Fila in dt.Rows)
             {
                 dataGridView1.Rows.Add
@@ -30,7 +32,7 @@ namespace eFood
                     Convert.ToString(Fila["precio"]),
                     Convert.ToString(Fila["itbis"]),
                     Convert.ToString(Fila["receta"]),
-                    Convert.ToString(Fila["DESCRIPCION"])
+                    Convert.ToString(Fila["categoria"])
                 );
             }
         }
@@ -62,14 +64,26 @@ namespace eFood
 
         private void platos_Load(object sender, EventArgs e)
         {
+            try
+            {
+                comboCategoria.DataSource = utilidades.ejecuta("select id_categoria, descripcion from categoria");
+                comboCategoria.DisplayMember = "descripcion";
+                comboCategoria.ValueMember = "id_categoria";
 
-            comboCategoria.DataSource = utilidades.ejecuta("select id_categoria, descripcion from categoria");
-            comboCategoria.DisplayMember = "descripcion";
-            comboCategoria.ValueMember = "id_categoria";
+                comboitbis.DataSource = utilidades.ejecuta($@"select id_itbis ,convert(varchar(max),id_itbis)+' - '+ convert(varchar(max),itbis) descripcion from itbis");
+                comboitbis.DisplayMember = "descripcion";
+                comboitbis.ValueMember = "id_itbis";
 
-            comboReceta.DataSource = utilidades.ejecuta("Select id_receta, receta from recetas");
-            comboReceta.DisplayMember = "receta";
-            comboReceta.ValueMember = "id_receta";
+                comboReceta.DataSource = utilidades.ejecuta("Select id_receta, receta from recetas");
+                comboReceta.DisplayMember = "receta";
+                comboReceta.ValueMember = "id_receta";
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+           
 
             traerPlatos();                   
 
@@ -141,6 +155,20 @@ namespace eFood
                     Convert.ToString(Fila["DESCRIPCION"])
                 );
             }
+        }
+
+        private void comboItbis_SelectedValueChanged(object sender, EventArgs e)
+        {
+            var data = utilidades.ejecuta($"select itbis from itbis where id_itbis = {comboitbis.SelectedValue}").Rows;
+            txtitbis.Text = string.Empty;
+            txtitbis.Text = data[0].Field<decimal>("itbis").ToString();
+        }
+
+        private void comboitbis_ValueMemberChanged(object sender, EventArgs e)
+        {
+            var data = utilidades.ejecuta($"select itbis from itbis where id_itbis = {comboitbis.SelectedValue}").Rows;
+            txtitbis.Text = string.Empty;
+            txtitbis.Text = data[0].Field<decimal>("itbis").ToString();
         }
     }
 }
