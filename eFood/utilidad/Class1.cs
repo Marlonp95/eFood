@@ -284,7 +284,7 @@ namespace utilidad
                 SqlConnection con = new SqlConnection("Data Source=.;Initial Catalog=efood;Integrated Security=True");
                 con.Open();
 
-                SqlCommand cmd = new SqlCommand(sentencia, con);
+               // SqlCommand cmd = new SqlCommand(sentencia, con);
                 //cmd.ExecuteNonQuery();
 
                 SqlDataAdapter da = new SqlDataAdapter(sentencia, con);

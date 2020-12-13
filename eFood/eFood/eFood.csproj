@@ -156,11 +156,29 @@
     <Compile Include="Vistas\cobro.Designer.cs">
       <DependentUpon>cobro.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\ConsultaClientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\ConsultaClientes.Designer.cs">
+      <DependentUpon>ConsultaClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\ConsultaPlatos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\ConsultaPlatos.Designer.cs">
+      <DependentUpon>ConsultaPlatos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\contenedor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\contenedor.Designer.cs">
       <DependentUpon>contenedor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\CuentasPorCobrar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\CuentasPorCobrar.Designer.cs">
+      <DependentUpon>CuentasPorCobrar.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\dashboard.cs">
       <SubType>Form</SubType>
@@ -300,8 +318,17 @@
     <EmbeddedResource Include="Vistas\cobro.resx">
       <DependentUpon>cobro.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\ConsultaClientes.resx">
+      <DependentUpon>ConsultaClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\ConsultaPlatos.resx">
+      <DependentUpon>ConsultaPlatos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\contenedor.resx">
       <DependentUpon>contenedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\CuentasPorCobrar.resx">
+      <DependentUpon>CuentasPorCobrar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\dashboard.resx">
       <DependentUpon>dashboard.cs</DependentUpon>
@@ -452,6 +479,7 @@
     <None Include="Resources\Caja.png" />
     <None Include="Resources\CierreCaja.png" />
     <None Include="Resources\Herramientas.png" />
+    <None Include="Resources\calc.png" />
     <Content Include="Resources\iconfinder_07-prawn_4885264.png" />
     <Content Include="Resources\iconfinder_161_Bar_barcode_code_shopping_4308531.png" />
     <Content Include="Resources\iconfinder_1_1845739 %281%29.png" />

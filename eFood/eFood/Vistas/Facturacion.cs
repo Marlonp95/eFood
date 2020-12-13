@@ -74,15 +74,16 @@ namespace eFood
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtnomcli.Text.Trim()) == false)
+            ConsultaClientes obj = new ConsultaClientes();
+            if (obj.ShowDialog() == DialogResult.OK)
             {
-
+                int pos = Convert.ToInt16(obj.dataCliente.CurrentCell.RowIndex);
+                txtcodcli.Text = string.Empty;
+                txtcodcli.Text = obj.dataCliente.Rows[pos].Cells[0].Value.ToString();
+                txtcodcli.Focus();
+                SendKeys.Send("{TAB}");
             }
 
-            if (string.IsNullOrEmpty(txtcodcli.Text.Trim()) == false)
-            {
-
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -632,6 +633,52 @@ namespace eFood
             {
                 //el resto de teclas pulsadas se desactivan
                 e.Handled = true;
+            }
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            ConsultaPlatos obj = new ConsultaPlatos();
+            if (obj.ShowDialog() == DialogResult.OK)
+            {
+                int pos = Convert.ToInt16(obj.dataGridView1.CurrentCell.RowIndex);
+                txtcodigo.Text = string.Empty;
+                txtcodigo.Text = obj.dataGridView1.Rows[pos].Cells[0].Value.ToString();               
+                txtcodigo.Focus();
+                SendKeys.Send("{TAB}");
+            }
+        }
+
+        private void txtcodcli_Validating(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(txtcodcli.Text)) return;
+
+                string vSql = $@"SELECT dbo.cliente.id_cliente ,dbo.persona.nombre1+' '+dbo.persona.apellido1+' '+dbo.persona.apellido2 nombre, dbo.cliente.rnc, dbo.tipo_ncf.id ,dbo.tipo_ncf.descripcion, dbo.cliente.excento_itbis, dbo.condiciones_pago.id_condicion_pago ,dbo.condiciones_pago.descripcion AS Condicion_pago, dbo.cliente.limite_credito, 
+                                    dbo.cliente.porcentaje_mora, dbo.cliente.porcentaje_descuento
+                                    FROM dbo.cliente left JOIN  dbo.condiciones_pago ON dbo.cliente.id_condicion = dbo.condiciones_pago.id_condicion_pago
+		                                    left JOIN  dbo.tipo_ncf ON dbo.cliente.id_tipo_ncf = dbo.tipo_ncf.tipo
+		                                    left JOIN  dbo.persona ON dbo.cliente.id_persona = dbo.persona.id_persona 
+                                where dbo.cliente.id_cliente = {txtcodcli.Text}";
+
+                DataSet dt = new DataSet();
+                bool correcto = dt.ejecuta(vSql);
+                if (utilidades.DsTieneDatos(dt))
+                {
+                    txtnomcli.Text = dt.Tables[0].Rows[0]["nombre"].ToString();
+                    txtRnc.Text = dt.Tables[0].Rows[0]["rnc"].ToString();
+                    comboComprobante.SelectedValue = dt.Tables[0].Rows[0]["id"].ToString();
+                    comboCondicionpago.SelectedValue = dt.Tables[0].Rows[0]["id_condicion_pago"].ToString();
+                }
+                else
+                {
+                    MessageBox.Show("PRODUCTO NO ENCONTRADO");
+                }
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show("Error" + error.Message);
             }
         }
     }

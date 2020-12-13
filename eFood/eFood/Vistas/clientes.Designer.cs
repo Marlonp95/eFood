@@ -608,7 +608,7 @@
             // 
             this.txtbuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtbuscar.ForeColor = System.Drawing.Color.Black;
-            this.txtbuscar.Location = new System.Drawing.Point(89, 336);
+            this.txtbuscar.Location = new System.Drawing.Point(42, 336);
             this.txtbuscar.Name = "txtbuscar";
             this.txtbuscar.Size = new System.Drawing.Size(205, 29);
             this.txtbuscar.TabIndex = 187;
@@ -621,7 +621,7 @@
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(91)))), ((int)(((byte)(140)))));
             this.button1.FlatAppearance.BorderSize = 2;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(300, 330);
+            this.button1.Location = new System.Drawing.Point(253, 330);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(34, 35);
             this.button1.TabIndex = 196;
