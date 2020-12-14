@@ -211,6 +211,11 @@ namespace eFood
 
         }
 
+        private void button10_Click(object sender, EventArgs e)
+        {
+            AbrirFormulario<CuentasPorCobrar>();
+        }
+
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
         #endregion

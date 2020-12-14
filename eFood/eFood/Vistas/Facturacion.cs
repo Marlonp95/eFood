@@ -101,8 +101,7 @@ namespace eFood
                 {
                     var importe = Convert.ToDecimal(txtcantidad.Text) * Convert.ToDecimal(txtprecio.Text);
                     var itbis = Convert.ToDecimal(importe) * Convert.ToDecimal(txtItbis.Text);
-                    DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtprecio.Text, txtcantidad.Text, importe.ToString().Decimals(), itbis.ToString().Decimals());
-
+                    DataFactura.Rows.Add(txtcodigo.Text, txtdescripcion.Text, txtcantidad.Text,  txtprecio.Text,  importe.ToString().Decimals(), itbis.ToString().Decimals());
                 }
                 //PARA DETERMINAR EXISTENCIA Y LA POSICION DE DICHO ARTICULO           
                 else
@@ -329,7 +328,6 @@ namespace eFood
                 }
 
                 else throw new Exception("Cobro cancelado o no aplicado.");
-
 
                 string vSqlFactura = $"EXEC datos_factura {idfact}";
                 DataSet ds = new DataSet();
@@ -564,14 +562,90 @@ namespace eFood
 
         private void button11_Click(object sender, EventArgs e)
         {
+        
+            int idfact = 0;
+
             if (DataFactura.Rows.Count <= 0)
             {
                 MessageBox.Show("Debe selecionar articulos a facturar", "Mensaje");
                 return;
             }
 
-            var data = utilidades.ejecuta($@"select top 1 id_factura  from enc_factura order by id_factura desc").Rows;
-            int idFactura = data[0].Field<int>("id_factura");
+            if (Convert.ToInt16(comboCondicionpago.SelectedValue) == 1)
+            {
+                MessageBox.Show("Debe especificar dias de condicion de pago.", "Mensaje");
+                return;
+            }
+
+
+            string vSql = $@"EXEC SetSecuenciaNCF {comboComprobante.SelectedValue}";
+            DataTable dt = new DataTable();
+            dt.ejecutaTransaccion(vSql);
+
+            string secuencia;
+            DateTime? vencimientoNCF = null;
+
+            if (dt.Rows.Count > 0)
+            {
+                secuencia = dt.Rows[0].Field<string>("secuencia_generada");
+            }
+            else throw new Exception("No hay secuencia para este tipo de comprobante");
+
+
+            var vencimientoFact = utilidades.ejecuta($"select dias from condiciones_pago where id_condicion_pago ={comboCondicionpago.SelectedValue}").Rows;
+            int dias = vencimientoFact[0].Field<int>("dias");
+
+            DateTime vencimientoFactura  = DateTime.Now.AddDays(dias);
+
+            using (var tran = utilidades.BeginTransation())
+            {
+                try
+                {
+                    vSql = $@"Select * from GetSecuenciaNCF ({comboComprobante.SelectedValue})";
+
+                    var d = utilidades.ExecuteSQL(vSql);
+                    if (d != null) vencimientoNCF = d.Rows[0].Field<DateTime?>("fecha_vencimiento");
+
+                    vSql = $@"EXEC actualiza_enc_factura  NULL ,  {txtcodcli.Text.Trim()}, {1}, {2}, '{System.DateTime.Today}', '{txtRnc.Text.Trim()}',{comboComprobante.SelectedValue},'{secuencia}',{lblItbis.Text.Decimals()},
+                                                                  {lblTotal.Text.Decimals()},{lblLey.Text.Decimals()}, {lblSubTotal.Text.Decimals()}, {0}, {Globals.IdUsuario},'{txtnomcli.Text}','{txtDireccion.Text}',{txttelefoo.Text.Nvl<string>("NULL")}, {dias} ,'{vencimientoNCF}','{vencimientoFactura}','{null}'";
+                    var x = utilidades.ExecuteSQL(vSql);
+                    var id = x.GetIdentity();
+                    idfact = id;
+
+                    foreach (DataGridViewRow fila in DataFactura.Rows)
+                    {
+                        string vSql2 = $"EXEC actualiza_det_factura {id}, {fila.Cells[0].Value},{2},{fila.Cells[2].Value},{fila.Cells[3].Value},{fila.Cells[4].Value},{1},{1},{0.18},{fila.Cells[5].Value},{Globals.IdUsuario},'{null}','{0}'";
+                        utilidades.ExecuteSQL(vSql2);
+                    }
+                    tran.Commit();
+                    MessageBox.Show("Factura Generada.", "Mensaje.");
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    MessageBox.Show(ex.Message);
+                }
+
+                tran.ConectionClose();
+
+                dataCuentas.Rows.Clear();
+                DataFactura.Rows.Clear();
+                comboFactura.Focus();
+                lblItbis.Text = "RD$ 0.00";
+                lblLey.Text = "RD$ 0.00";
+                lblTotal.Text = "RD$ 0.00";
+                lblSubTotal.Text = "RD$ 0.00";
+            }
+
+            string vSqlFactura = $"EXEC datos_factura {idfact}";
+            DataSet ds = new DataSet();
+            ds.ejecuta(vSqlFactura);
+
+            ReportefacturaCredito reporte = new ReportefacturaCredito();
+            reporte.reportViewer1.LocalReport.DataSources[0].Value = ds.Tables[0];
+            reporte.ShowDialog();
+
+
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -655,12 +729,12 @@ namespace eFood
             {
                 if (string.IsNullOrEmpty(txtcodcli.Text)) return;
 
-                string vSql = $@"SELECT dbo.cliente.id_cliente ,dbo.persona.nombre1+' '+dbo.persona.apellido1+' '+dbo.persona.apellido2 nombre, dbo.cliente.rnc, dbo.tipo_ncf.id ,dbo.tipo_ncf.descripcion, dbo.cliente.excento_itbis, dbo.condiciones_pago.id_condicion_pago ,dbo.condiciones_pago.descripcion AS Condicion_pago, dbo.cliente.limite_credito, 
+                string vSql = $@"SELECT dbo.cliente.id_cliente ,dbo.persona.nombre1+' '+dbo.persona.apellido1+' '+dbo.persona.apellido2 nombre,dbo.persona.telefono, dbo.persona.documento ,dbo.cliente.rnc, dbo.tipo_ncf.id ,dbo.tipo_ncf.descripcion, dbo.cliente.excento_itbis, dbo.condiciones_pago.id_condicion_pago ,dbo.condiciones_pago.descripcion AS Condicion_pago, dbo.cliente.limite_credito, 
                                     dbo.cliente.porcentaje_mora, dbo.cliente.porcentaje_descuento
-                                    FROM dbo.cliente left JOIN  dbo.condiciones_pago ON dbo.cliente.id_condicion = dbo.condiciones_pago.id_condicion_pago
+                           FROM dbo.cliente left JOIN  dbo.condiciones_pago ON dbo.cliente.id_condicion = dbo.condiciones_pago.id_condicion_pago
 		                                    left JOIN  dbo.tipo_ncf ON dbo.cliente.id_tipo_ncf = dbo.tipo_ncf.tipo
 		                                    left JOIN  dbo.persona ON dbo.cliente.id_persona = dbo.persona.id_persona 
-                                where dbo.cliente.id_cliente = {txtcodcli.Text}";
+                            where dbo.cliente.id_cliente = {txtcodcli.Text}";
 
                 DataSet dt = new DataSet();
                 bool correcto = dt.ejecuta(vSql);
@@ -668,12 +742,14 @@ namespace eFood
                 {
                     txtnomcli.Text = dt.Tables[0].Rows[0]["nombre"].ToString();
                     txtRnc.Text = dt.Tables[0].Rows[0]["rnc"].ToString();
-                    comboComprobante.SelectedValue = dt.Tables[0].Rows[0]["id"].ToString();
+                    if(dt.Tables[0].Rows[0]["id"].ToString() != string.Empty) comboComprobante.SelectedValue = dt.Tables[0].Rows[0]["id"].ToString();
                     comboCondicionpago.SelectedValue = dt.Tables[0].Rows[0]["id_condicion_pago"].ToString();
+                    txttelefoo.Text = dt.Tables[0].Rows[0]["telefono"].ToString();
+                    txtCedula.Text = dt.Tables[0].Rows[0]["documento"].ToString();
                 }
                 else
                 {
-                    MessageBox.Show("PRODUCTO NO ENCONTRADO");
+                    MessageBox.Show("Cliente no existe, favor registrar", "Mensaje");
                 }
             }
             catch (Exception error)
