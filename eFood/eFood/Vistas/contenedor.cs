@@ -209,11 +209,14 @@ namespace eFood
         private void button8_Click(object sender, EventArgs e)
         {
 
+<<<<<<< HEAD
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
             AbrirFormulario<CuentasPorCobrar>();
+=======
+>>>>>>> master
         }
 
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
