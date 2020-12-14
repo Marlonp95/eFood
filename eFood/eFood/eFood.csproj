@@ -124,12 +124,15 @@
     <Compile Include="Reportes\ReporteFactura.Designer.cs">
       <DependentUpon>ReporteFactura.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="Reportes\ReportefacturaCredito.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reportes\ReportefacturaCredito.Designer.cs">
       <DependentUpon>ReportefacturaCredito.cs</DependentUpon>
     </Compile>
+=======
+>>>>>>> master
     <Compile Include="Utils\Globals.cs" />
     <Compile Include="Utils\Metodos.cs" />
     <Compile Include="Vistas\AperturaCaja.cs">
@@ -304,6 +307,7 @@
       <DependentUpon>txtMask.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Factura.rdlc" />
+<<<<<<< HEAD
     <EmbeddedResource Include="Reportes\FacturaCredito.rdlc" />
     <EmbeddedResource Include="Reportes\ReporteFactura.resx">
       <DependentUpon>ReporteFactura.cs</DependentUpon>
@@ -311,6 +315,11 @@
     <EmbeddedResource Include="Reportes\ReportefacturaCredito.resx">
       <DependentUpon>ReportefacturaCredito.cs</DependentUpon>
     </EmbeddedResource>
+=======
+    <EmbeddedResource Include="Reportes\ReporteFactura.resx">
+      <DependentUpon>ReporteFactura.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> master
     <EmbeddedResource Include="Vistas\AperturaCaja.resx">
       <DependentUpon>AperturaCaja.cs</DependentUpon>
     </EmbeddedResource>

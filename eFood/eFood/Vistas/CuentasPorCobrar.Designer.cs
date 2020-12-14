@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+<<<<<<< HEAD
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -452,10 +453,15 @@
             this.textBox1.Size = new System.Drawing.Size(39, 26);
             this.textBox1.TabIndex = 220;
             // 
+=======
+            this.SuspendLayout();
+            // 
+>>>>>>> master
             // CuentasPorCobrar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(816, 618);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.lblTotal);
@@ -489,10 +495,17 @@
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
+=======
+            this.ClientSize = new System.Drawing.Size(940, 479);
+            this.Name = "CuentasPorCobrar";
+            this.Text = "CuentasPorCobrar";
+            this.ResumeLayout(false);
+>>>>>>> master
 
         }
 
         #endregion
+<<<<<<< HEAD
 
         private System.Windows.Forms.TextBox txtcodCli;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -525,5 +538,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.TextBox textBox1;
+=======
+>>>>>>> master
     }
 }
